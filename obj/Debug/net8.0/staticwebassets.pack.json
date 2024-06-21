@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\cvs\\50555f87-62c6-41a7-ae56-aac5aed34721_Rafaa_Belhedi_CV.pdf",
+      "PackagePath": "staticwebassets\\cvs\\50555f87-62c6-41a7-ae56-aac5aed34721_Rafaa_Belhedi_CV.pdf"
+    },
+    {
+      "Id": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\cvs\\901da52e-6954-4b8c-9338-a1cf2ca6e356_Rafaa_Belhedi_CV.pdf",
+      "PackagePath": "staticwebassets\\cvs\\901da52e-6954-4b8c-9338-a1cf2ca6e356_Rafaa_Belhedi_CV.pdf"
+    },
+    {
+      "Id": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\profile_images\\6009528a-29c1-4fe7-a522-83cc0bc06fb6_9.jpg",
+      "PackagePath": "staticwebassets\\profile_images\\6009528a-29c1-4fe7-a522-83cc0bc06fb6_9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\profile_images\\6449dc12-a5f1-461f-9be9-b31754834012_6.jpg",
+      "PackagePath": "staticwebassets\\profile_images\\6449dc12-a5f1-461f-9be9-b31754834012_6.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Horizon_HR.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Horizon_HR.props",
+      "PackagePath": "build\\Horizon_HR.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Horizon_HR.props",
+      "PackagePath": "buildMultiTargeting\\Horizon_HR.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Horizon_HR.props",
+      "PackagePath": "buildTransitive\\Horizon_HR.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
