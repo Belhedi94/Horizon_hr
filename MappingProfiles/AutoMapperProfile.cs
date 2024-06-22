@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Horizon_HR.Contracts.EmploymentDetails;
 using Horizon_HR.Contracts.Users;
 using Horizon_HR.Models;
 
@@ -25,7 +26,9 @@ namespace Horizon_HR.MappingProfiles
                 .ForMember(dest => dest.ProfileImage, opt => opt.Ignore())
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-           
+            CreateMap<EmploymentDetailsCreationDto, EmploymentDetails>();
+
+
         }
     }
 }

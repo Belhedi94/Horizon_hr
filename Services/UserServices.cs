@@ -128,7 +128,5 @@ namespace Horizon_HR.Services
             await _context.SaveChangesAsync();
 
         }
-
-
     }
 }

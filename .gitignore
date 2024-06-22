@@ -3,6 +3,23 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Ignore build output directories
+bin/
+obj/
+
+# Ignore user-uploaded files
+wwwroot/cvs/**
+wwwroot/profile_images/**
+
+# Include specific directories or files within wwwroot
+!wwwroot/css/**
+!wwwroot/js/**
+!wwwroot/images/**
+!wwwroot/lib/**
+
+# Ignore logs
+logs/
+
 # dotenv files
 .env
 

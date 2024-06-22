@@ -87,5 +87,17 @@
         <member name="M:Horizon_HR.Migrations.FourthMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Horizon_HR.Migrations.EmploymentDetailsMigration_1">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.EmploymentDetailsMigration_1.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.EmploymentDetailsMigration_1.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.EmploymentDetailsMigration_1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

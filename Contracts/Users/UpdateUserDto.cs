@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Horizon_HR.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Horizon_HR.Contracts.Users
 {
@@ -45,5 +46,7 @@ namespace Horizon_HR.Contracts.Users
         public IFormFile? Cv { get; set; }
 
         public IFormFile? ProfileImage { get; set; }
+
+        //public EmploymentDetails EmploymentDetails { get; set; }
     }
 }

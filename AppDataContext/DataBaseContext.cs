@@ -16,6 +16,7 @@ namespace Horizon_HR.AppDataContext
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<EmploymentDetails> EmploymentDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,7 +27,16 @@ namespace Horizon_HR.AppDataContext
         {
             modelBuilder.Entity<User>()
                 .ToTable("users")
-                .HasKey(x => x.Id);
+                .HasKey(u => u.Id);
+
+            modelBuilder.Entity<EmploymentDetails>()
+                .ToTable("employment_details")
+                .HasKey(e => e.Id);
+
+            modelBuilder.Entity<User>()
+                .HasOne(e => e.EmploymentDetails)
+                .WithOne(u => u.User)
+                .HasForeignKey<EmploymentDetails>(e => e.UserId);
         }
 
     }
