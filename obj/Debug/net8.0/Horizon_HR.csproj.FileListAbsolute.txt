@@ -149,3 +149,4 @@ C:\Users\rafaa\Desktop\PFE SESAME\Projet\Horizon_HR\bin\Debug\net8.0\Serilog.Sin
 C:\Users\rafaa\Desktop\PFE SESAME\Projet\Horizon_HR\bin\Debug\net8.0\Serilog.Sinks.File.dll
 C:\Users\rafaa\Desktop\PFE SESAME\Projet\Horizon_HR\bin\Debug\net8.0\Serilog.Sinks.RollingFile.dll
 C:\Users\rafaa\Desktop\PFE SESAME\Projet\Horizon_HR\bin\Debug\net8.0\docs.xml
+C:\Users\rafaa\Desktop\PFE SESAME\Projet\Horizon_HR\obj\Debug\net8.0\Horizon_HR.sourcelink.json

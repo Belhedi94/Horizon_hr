@@ -4,6 +4,41 @@
         <name>Horizon_HR</name>
     </assembly>
     <members>
+        <member name="M:Horizon_HR.Controllers.UsersController.CreateUserAsync(Horizon_HR.Contracts.Users.CreateUserDto)">
+            <summary>
+            Creates a new user.
+            </summary>
+            <param name="createUserDto">The data transfer object containing user information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.UsersController.GetAllUsersAsync">
+            <summary>
+            Retrieves all users.
+            </summary>
+            <returns>A list of all users.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.UsersController.UpdateUserAsync(System.Guid,Horizon_HR.Contracts.Users.UpdateUserDto)">
+            <summary>
+            Updates an existing user.
+            </summary>
+            <param name="id">The ID of the user to update.</param>
+            <param name="updateUserDto">The data transfer object containing updated user information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.UsersController.GetUserByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a user by ID.
+            </summary>
+            <param name="id">The ID of the user to retrieve.</param>
+            <returns>The user data.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.UsersController.DeleteUserAsync(System.Guid)">
+            <summary>
+            Deletes a user by ID.
+            </summary>
+            <param name="id">The ID of the user to delete.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
         <member name="T:Horizon_HR.Migrations.InitialCreate">
             <inheritdoc />
         </member>

@@ -93,17 +93,42 @@ namespace Horizon_HR.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<UserDto> GetUserByIdAsync(Guid id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                _logger.LogWarning($"User with ID {id} not found.");
+                throw new Exception("User not found");
+            }
+
+            return _mapper.Map<UserDto>(user);
+                
+        }
+
         public async Task DeleteUserAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                _logger.LogWarning($"User with ID {id} not found.");
+                throw new Exception("User not found");
+            }
+
+            var cv = user.Cv;
+            if (!string.IsNullOrEmpty(cv))
+                _fileStorageService.DeleteFile(cv);
+
+            var profileImage = user.ProfileImage;
+            if (!string.IsNullOrEmpty(profileImage))
+                _fileStorageService.DeleteFile(profileImage);
+
+            _context.Users.Remove(user);
+
+            await _context.SaveChangesAsync();
+
         }
 
 
-        public async Task<User> GetUserByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
     }
 }

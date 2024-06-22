@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\interfaces\\iuserservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:interfaces\\iuserservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\mappingprofiles\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:mappingprofiles\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\contracts\\users\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:contracts\\users\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,28 +46,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAABAAAA",
+              "DocumentIndex": 2,
+              "Title": "IUserServices.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Interfaces\\IUserServices.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IUserServices.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Interfaces\\IUserServices.cs",
+              "RelativeToolTip": "Interfaces\\IUserServices.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T07:07:36.092Z",
+              "WhenOpened": "2024-06-22T12:49:37.18Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Contracts\\Users\\UserDto.cs",
+              "RelativeDocumentMoniker": "Contracts\\Users\\UserDto.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Contracts\\Users\\UserDto.cs",
+              "RelativeToolTip": "Contracts\\Users\\UserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-22T12:28:13.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "AutoMapperProfile.cs",
               "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\MappingProfiles\\AutoMapperProfile.cs",
               "RelativeDocumentMoniker": "MappingProfiles\\AutoMapperProfile.cs",
               "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\MappingProfiles\\AutoMapperProfile.cs",
               "RelativeToolTip": "MappingProfiles\\AutoMapperProfile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAA0AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T19:50:31.401Z"
+              "WhenOpened": "2024-06-22T12:27:22.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Controllers\\UsersController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFIAAABXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-22T12:14:26.011Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -69,9 +104,10 @@
               "RelativeDocumentMoniker": "Services\\UserServices.cs",
               "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Services\\UserServices.cs",
               "RelativeToolTip": "Services\\UserServices.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAAAAQAAAAYAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAAH8AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T07:36:37.195Z"
+              "WhenOpened": "2024-06-14T07:36:37.195Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -15,6 +15,11 @@ namespace Horizon_HR.Controllers
             _userServices = userServices;
         }
 
+        /// <summary>
+        /// Creates a new user.
+        /// </summary>
+        /// <param name="createUserDto">The data transfer object containing user information.</param>
+        /// <returns>A status message indicating the result of the operation.</returns>
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync(CreateUserDto createUserDto)
         {
@@ -27,6 +32,10 @@ namespace Horizon_HR.Controllers
             
         }
 
+        /// <summary>
+        /// Retrieves all users.
+        /// </summary>
+        /// <returns>A list of all users.</returns>
         [HttpGet]
         public async Task<IActionResult> GetAllUsersAsync()
         {
@@ -38,6 +47,12 @@ namespace Horizon_HR.Controllers
           
         }
 
+        /// <summary>
+        /// Updates an existing user.
+        /// </summary>
+        /// <param name="id">The ID of the user to update.</param>
+        /// <param name="updateUserDto">The data transfer object containing updated user information.</param>
+        /// <returns>A status message indicating the result of the operation.</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
         {
@@ -47,6 +62,30 @@ namespace Horizon_HR.Controllers
             await _userServices.UpdateUserAsync(id, updateUserDto);
 
             return Ok(new { message = "User updated successfully." });
+        }
+
+        /// <summary>
+        /// Retrieves a user by ID.
+        /// </summary>
+        /// <param name="id">The ID of the user to retrieve.</param>
+        /// <returns>The user data.</returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserByIdAsync(Guid id)
+        {
+            var user = await _userServices.GetUserByIdAsync(id);
+            return Ok(new { message = "User retrieved successfully.", data = user });
+        }
+
+        /// <summary>
+        /// Deletes a user by ID.
+        /// </summary>
+        /// <param name="id">The ID of the user to delete.</param>
+        /// <returns>A status message indicating the result of the operation.</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUserAsync(Guid id)
+        {
+            await _userServices.DeleteUserAsync(id);
+            return Ok(new { message = "User deleted successfully." });
         }
     }
 }
