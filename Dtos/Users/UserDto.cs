@@ -1,4 +1,4 @@
-﻿namespace Horizon_HR.Contracts.Users
+﻿namespace Horizon_HR.Dtos.Users
 {
     public class UserDto
     {

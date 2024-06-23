@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Horizon_HR.AppDataContext;
-using Horizon_HR.Contracts.Users;
-using Horizon_HR.Interfaces;
+using Horizon_HR.Dtos.Users;
 using Horizon_HR.Models;
+using Horizon_HR.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 
 
-namespace Horizon_HR.Services
+namespace Horizon_HR.Repositories.Implementations
 {
 
     public class UserServices : IUserServices
@@ -30,11 +30,11 @@ namespace Horizon_HR.Services
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             var users = await _context.Users.ToListAsync();
-            return _mapper.Map<IEnumerable<UserDto>>(users);   
+            return _mapper.Map<IEnumerable<UserDto>>(users);
         }
 
         public async Task CreateUserAsync(CreateUserDto createUserDto)
-        {   
+        {
             var user = _mapper.Map<User>(createUserDto);
             using (var hmac = new HMACSHA512())
             {
@@ -80,8 +80,8 @@ namespace Horizon_HR.Services
             }
 
             var newProfileImage = updateUserDto.ProfileImage;
-            if (newProfileImage != null) 
-            { 
+            if (newProfileImage != null)
+            {
                 var currentProfileImage = user.ProfileImage;
                 if (!string.IsNullOrEmpty(currentProfileImage))
                     _fileStorageService.DeleteFile(currentProfileImage);
@@ -89,7 +89,7 @@ namespace Horizon_HR.Services
             }
 
             user.UpdatedAt = DateTime.UtcNow;
-            
+
             await _context.SaveChangesAsync();
         }
 
@@ -103,7 +103,7 @@ namespace Horizon_HR.Services
             }
 
             return _mapper.Map<UserDto>(user);
-                
+
         }
 
         public async Task DeleteUserAsync(Guid id)

@@ -1,6 +1,6 @@
-﻿using Horizon_HR.Interfaces;
+﻿using Horizon_HR.Repositories.Interfaces;
 
-namespace Horizon_HR.Services
+namespace Horizon_HR.Repositories.Implementations
 {
     public class FileStorageService : IFileStorageService
     {

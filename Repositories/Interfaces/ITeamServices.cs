@@ -1,6 +1,6 @@
-﻿using Horizon_HR.Contracts.Teams;
+﻿using Horizon_HR.Dtos.Teams;
 
-namespace Horizon_HR.Interfaces
+namespace Horizon_HR.Repositories.Interfaces
 {
     public interface ITeamServices
     {

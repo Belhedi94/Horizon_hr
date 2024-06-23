@@ -1,6 +1,6 @@
-﻿namespace Horizon_HR.Contracts.Departments
+﻿namespace Horizon_HR.Dtos.Teams
 {
-    public class DepartmentDto
+    public class TeamDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

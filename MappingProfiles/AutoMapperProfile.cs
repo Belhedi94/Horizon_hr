@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Horizon_HR.Contracts.EmploymentDetails;
-using Horizon_HR.Contracts.Users;
-using Horizon_HR.Contracts.Teams;
+using Horizon_HR.Dtos.EmploymentDetails;
+using Horizon_HR.Dtos.Users;
+using Horizon_HR.Dtos.Teams;
 using Horizon_HR.Models;
-using Horizon_HR.Contracts.Departments;
-using Horizon_HR.Contracts.Positions;
+using Horizon_HR.Dtos.Departments;
+using Horizon_HR.Dtos.Positions;
 
 namespace Horizon_HR.MappingProfiles
 {

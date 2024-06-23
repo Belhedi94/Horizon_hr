@@ -1,6 +1,6 @@
-﻿using Horizon_HR.Contracts.Departments;
+﻿using Horizon_HR.Dtos.Departments;
 
-namespace Horizon_HR.Interfaces
+namespace Horizon_HR.Repositories.Interfaces
 {
     public interface IDepartmentServices
     {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Horizon_HR.Contracts.Teams
+namespace Horizon_HR.Dtos.Teams
 {
-    public class CreateTeamDto
+    public class UpdateTeamDto
     {
         [Required]
         [StringLength(50)]

@@ -1,5 +1,5 @@
-﻿using Horizon_HR.Contracts.Users;
-using Horizon_HR.Interfaces;
+﻿using Horizon_HR.Dtos.Users;
+using Horizon_HR.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Horizon_HR.Controllers

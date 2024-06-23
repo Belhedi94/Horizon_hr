@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Horizon_HR.Contracts.EmploymentDetails
+namespace Horizon_HR.Dtos.EmploymentDetails
 {
     public class EmploymentDetailsCreationDto
     {

@@ -1,4 +1,4 @@
-﻿namespace Horizon_HR.Contracts.Positions
+﻿namespace Horizon_HR.Dtos.Positions
 {
     public class PositionDto
     {

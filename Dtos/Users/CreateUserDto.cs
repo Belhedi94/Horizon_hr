@@ -1,45 +1,54 @@
-﻿using Horizon_HR.Models;
+﻿using Horizon_HR.Dtos.EmploymentDetails;
 using System.ComponentModel.DataAnnotations;
 
-namespace Horizon_HR.Contracts.Users
+namespace Horizon_HR.Dtos.Users
 {
-    public class UpdateUserDto
+    public class CreateUserDto
     {
         [Required]
-        public Guid Id { get; set; }
-
         [StringLength(50)]
         public string FirstName { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string LastName { get; set; }
 
+        [Required]
         [EmailAddress]
         public string PersonalEmail { get; set; }
 
+        [Required]
         [EmailAddress]
         public string ProfessionalEmail { get; set; }
 
+        [Required]
+        [StringLength(100, MinimumLength = 8)]
+        public string Password { get; set; }
+
+        [Required]
         [Phone]
         public string PersonalPhone { get; set; }
 
-        [StringLength(100, MinimumLength =8)]
-        public string Password { get; set; }
-
+        [Required]
         [StringLength(20)]
         public string Cin { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Role { get; set; }
 
+        [Required]
         public DateTime DateOfBirth { get; set; }
 
+        [Required]
         [StringLength(200)]
         public string Address { get; set; }
 
+        [Required]
         [StringLength(10)]
         public string Gender { get; set; }
 
+        [Required]
         [StringLength(20)]
         public string MaritalStatus { get; set; }
 
@@ -47,6 +56,6 @@ namespace Horizon_HR.Contracts.Users
 
         public IFormFile? ProfileImage { get; set; }
 
-        //public EmploymentDetails EmploymentDetails { get; set; }
+        public EmploymentDetailsCreationDto EmploymentDetails { get; set; }
     }
 }

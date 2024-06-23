@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Horizon_HR.AppDataContext;
-using Horizon_HR.Contracts.Teams;
-using Horizon_HR.Interfaces;
+using Horizon_HR.Dtos.Teams;
 using Horizon_HR.Models;
+using Horizon_HR.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Horizon_HR.Services
+namespace Horizon_HR.Repositories.Implementations
 {
     public class TeamServices : ITeamServices
     {

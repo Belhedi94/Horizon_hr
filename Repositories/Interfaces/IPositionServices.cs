@@ -1,6 +1,6 @@
-﻿using Horizon_HR.Contracts.Positions;
+﻿using Horizon_HR.Dtos.Positions;
 
-namespace Horizon_HR.Interfaces
+namespace Horizon_HR.Repositories.Interfaces
 {
     public interface IPositionServices
     {

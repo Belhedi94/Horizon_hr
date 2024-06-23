@@ -1,6 +1,6 @@
-﻿using Horizon_HR.Contracts.Users;
+﻿using Horizon_HR.Dtos.Users;
 
-namespace Horizon_HR.Interfaces
+namespace Horizon_HR.Repositories.Interfaces
 {
     public interface IUserServices
     {

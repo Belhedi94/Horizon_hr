@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Horizon_HR.Contracts.Positions
+namespace Horizon_HR.Dtos.Positions
 {
     public class UpdatePositionDto
     {

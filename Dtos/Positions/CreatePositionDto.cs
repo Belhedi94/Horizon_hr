@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Horizon_HR.Contracts.Departments
+namespace Horizon_HR.Dtos.Positions
 {
-    public class CreateDepartmentDto
+    public class CreatePositionDto
     {
         [Required]
         [StringLength(50)]

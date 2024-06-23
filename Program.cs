@@ -1,8 +1,8 @@
 using Horizon_HR.AppDataContext;
-using Horizon_HR.Interfaces;
 using Horizon_HR.Middleware;
 using Horizon_HR.Models;
-using Horizon_HR.Services;
+using Horizon_HR.Repositories.Implementations;
+using Horizon_HR.Repositories.Interfaces;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
