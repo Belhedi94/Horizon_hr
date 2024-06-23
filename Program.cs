@@ -6,8 +6,8 @@ using Horizon_HR.Services;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
-            .WriteTo.Console()  // Log to console
-            .WriteTo.File("logs/log_.txt", rollingInterval: RollingInterval.Day)  // Log to file, daily rolling
+            .WriteTo.Console()
+            .WriteTo.File("logs/log_.txt", rollingInterval: RollingInterval.Day)
             .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +25,9 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddLogging();
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<ITeamServices, TeamServices>();
+builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
+builder.Services.AddScoped<IPositionServices, PositionServices>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 builder.Host.UseSerilog();
 

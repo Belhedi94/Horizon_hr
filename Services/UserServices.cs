@@ -34,7 +34,7 @@ namespace Horizon_HR.Services
         }
 
         public async Task CreateUserAsync(CreateUserDto createUserDto)
-        {
+        {   
             var user = _mapper.Map<User>(createUserDto);
             using (var hmac = new HMACSHA512())
             {

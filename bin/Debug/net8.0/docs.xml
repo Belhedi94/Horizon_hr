@@ -4,6 +4,111 @@
         <name>Horizon_HR</name>
     </assembly>
     <members>
+        <member name="M:Horizon_HR.Controllers.DepartmentsController.CreateDepartmentAsync(Horizon_HR.Contracts.Departments.CreateDepartmentDto)">
+            <summary>
+            Creates a new department.
+            </summary>
+            <param name="createDepartmentDto">The data transfer object containing department information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.DepartmentsController.UpdateDepartmentAsync(System.Guid,Horizon_HR.Contracts.Departments.UpdateDepartmentDto)">
+            <summary>
+            Updates an existing department.
+            </summary>
+            <param name="id">The ID of the department to update.</param>
+            <param name="updateDepartmentDto">The data transfer object containing updated department information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.DepartmentsController.GetAllDepartmentsAsync">
+            <summary>
+            Retrieves all departments.
+            </summary>
+            <returns>A list of all departments.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.DepartmentsController.GetDepartmentByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a department by ID.
+            </summary>
+            <param name="id">The ID of the department to retrieve.</param>
+            <returns>The department data.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.DepartmentsController.DeleteDepartmentAsync(System.Guid)">
+            <summary>
+            Deletes a department by ID.
+            </summary>
+            <param name="id">The ID of the department to delete.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.PositionsController.CreatePositionAsync(Horizon_HR.Contracts.Positions.CreatePositionDto)">
+            <summary>
+            Creates a new position.
+            </summary>
+            <param name="createPositionDto">The data transfer object containing position information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.PositionsController.UpdatePositionAsync(System.Guid,Horizon_HR.Contracts.Positions.UpdatePositionDto)">
+            <summary>
+            Updates an existing position.
+            </summary>
+            <param name="id">The ID of the position to update.</param>
+            <param name="updatePositionDto">The data transfer object containing updated position information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.PositionsController.GetAllPositionsAsync">
+            <summary>
+            Retrieves all positions.
+            </summary>
+            <returns>A list of all positions.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.PositionsController.GetPositionByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a position by ID.
+            </summary>
+            <param name="id">The ID of the position to retrieve.</param>
+            <returns>The position data.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.PositionsController.DeletePositionAsync(System.Guid)">
+            <summary>
+            Deletes a position by ID.
+            </summary>
+            <param name="id">The ID of the position to delete.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.TeamsController.CreateTeamAsync(Horizon_HR.Contracts.Teams.CreateTeamDto)">
+            <summary>
+            Creates a new team.
+            </summary>
+            <param name="createTeamDto">The data transfer object containing team information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.TeamsController.UpdateTeamAsync(System.Guid,Horizon_HR.Contracts.Teams.UpdateTeamDto)">
+            <summary>
+            Updates an existing team.
+            </summary>
+            <param name="id">The ID of the team to update.</param>
+            <param name="updateTeamDto">The data transfer object containing updated team information.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.TeamsController.GetAllTeamsAsync">
+            <summary>
+            Retrieves all teams.
+            </summary>
+            <returns>A list of all teams.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.TeamsController.GetTeamByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a team by ID.
+            </summary>
+            <param name="id">The ID of the team to retrieve.</param>
+            <returns>The team data.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.TeamsController.DeleteTeamAsync(System.Guid)">
+            <summary>
+            Deletes a team by ID.
+            </summary>
+            <param name="id">The ID of the team to delete.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
         <member name="M:Horizon_HR.Controllers.UsersController.CreateUserAsync(Horizon_HR.Contracts.Users.CreateUserDto)">
             <summary>
             Creates a new user.
@@ -97,6 +202,42 @@
             <inheritdoc />
         </member>
         <member name="M:Horizon_HR.Migrations.EmploymentDetailsMigration_1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.Teams_Migration">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Teams_Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Teams_Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Teams_Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.Department_Migration">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Department_Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Department_Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Department_Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.Position_Migration">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Position_Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Position_Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Position_Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

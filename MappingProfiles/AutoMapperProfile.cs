@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Horizon_HR.Contracts.EmploymentDetails;
 using Horizon_HR.Contracts.Users;
+using Horizon_HR.Contracts.Teams;
 using Horizon_HR.Models;
+using Horizon_HR.Contracts.Departments;
+using Horizon_HR.Contracts.Positions;
 
 namespace Horizon_HR.MappingProfiles
 {
@@ -27,6 +30,18 @@ namespace Horizon_HR.MappingProfiles
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<EmploymentDetailsCreationDto, EmploymentDetails>();
+
+            CreateMap<Team, TeamDto>();
+            CreateMap<CreateTeamDto, Team>();
+            CreateMap<UpdateTeamDto, Team>();
+
+            CreateMap<Department, DepartmentDto>();
+            CreateMap<CreateDepartmentDto, Department>();
+            CreateMap<UpdateDepartmentDto, Department>();
+
+            CreateMap<Position, PositionDto>();
+            CreateMap<CreatePositionDto, Position>();
+            CreateMap<UpdatePositionDto, Position>();
 
 
         }

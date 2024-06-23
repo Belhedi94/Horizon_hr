@@ -6,10 +6,8 @@ namespace Horizon_HR.AppDataContext
 {
     public class DataBaseContext : DbContext
     {
-        // DbSettings field to store the connection string
         private readonly DbSettings _dbSettings;
 
-        // Constructor to inject the DbSettings model
         public DataBaseContext(IOptions<DbSettings> dbSettings)
         {
             _dbSettings = dbSettings.Value;
@@ -17,6 +15,9 @@ namespace Horizon_HR.AppDataContext
 
         public DbSet<User> Users { get; set; }
         public DbSet<EmploymentDetails> EmploymentDetails { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,9 +34,21 @@ namespace Horizon_HR.AppDataContext
                 .ToTable("employment_details")
                 .HasKey(e => e.Id);
 
+            modelBuilder.Entity<Team>()
+                .ToTable("teams")
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<Department>()
+               .ToTable("departments")
+               .HasKey(d => d.Id);
+
+            modelBuilder.Entity<Position>()
+               .ToTable("positions")
+               .HasKey(p => p.Id);
+
             modelBuilder.Entity<User>()
-                .HasOne(e => e.EmploymentDetails)
-                .WithOne(u => u.User)
+                .HasOne(u => u.EmploymentDetails)
+                .WithOne(e => e.User)
                 .HasForeignKey<EmploymentDetails>(e => e.UserId);
         }
 
