@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Horizon_HR.Dtos.Departments;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Horizon_HR.Models
@@ -18,5 +19,8 @@ namespace Horizon_HR.Models
         [Required]
         [StringLength(50)]
         public string Description { get; set; }
+
+        public Guid DepartmentId { get; set; }
+        public DepartmentDto Department { get; set; }
     }
 }
