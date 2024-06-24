@@ -2,7 +2,7 @@
 
 namespace Horizon_HR.Repositories.Interfaces
 {
-    public interface ITeamServices
+    public interface ITeamRepository
     {
         Task<IEnumerable<TeamDto>> GetAllTeamsAsync();
         Task CreateTeamAsync(CreateTeamDto createTeamDto);

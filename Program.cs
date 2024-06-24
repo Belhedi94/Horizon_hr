@@ -24,11 +24,11 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddLogging();
-builder.Services.AddScoped<IUserServices, UserServices>();
-builder.Services.AddScoped<ITeamServices, TeamServices>();
-builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
-builder.Services.AddScoped<IPositionServices, PositionServices>();
-builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IPositionRepository, PositionRepository>();
+builder.Services.AddScoped<IFileStorageRepository, FileStorageRepository>();
 builder.Host.UseSerilog();
 
 var app = builder.Build();

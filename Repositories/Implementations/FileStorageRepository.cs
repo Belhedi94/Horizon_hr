@@ -2,11 +2,11 @@
 
 namespace Horizon_HR.Repositories.Implementations
 {
-    public class FileStorageService : IFileStorageService
+    public class FileStorageRepository : IFileStorageRepository
     {
         private readonly IWebHostEnvironment _environment;
 
-        public FileStorageService(IWebHostEnvironment environment)
+        public FileStorageRepository(IWebHostEnvironment environment)
         {
             _environment = environment;
         }

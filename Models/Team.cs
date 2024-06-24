@@ -20,7 +20,11 @@ namespace Horizon_HR.Models
         [StringLength(50)]
         public string Description { get; set; }
 
+        [Column("department_id")]
         public Guid DepartmentId { get; set; }
-        public DepartmentDto Department { get; set; }
+
+        public Department Department { get; set; }
+
+        public ICollection<EmploymentDetails> EmploymentsDetails { get; set; }
     }
 }

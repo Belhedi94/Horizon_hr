@@ -2,7 +2,7 @@
 
 namespace Horizon_HR.Repositories.Interfaces
 {
-    public interface IPositionServices
+    public interface IPositionRepository
     {
         Task<IEnumerable<PositionDto>> GetAllPositionsAsync();
         Task CreatePositionAsync(CreatePositionDto createPositionDto);

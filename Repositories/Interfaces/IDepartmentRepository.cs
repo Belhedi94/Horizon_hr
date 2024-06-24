@@ -2,7 +2,7 @@
 
 namespace Horizon_HR.Repositories.Interfaces
 {
-    public interface IDepartmentServices
+    public interface IDepartmentRepository
     {
         Task<IEnumerable<DepartmentDto>> GetAllDepartmentsAsync();
         Task CreateDepartmentAsync(CreateDepartmentDto createDepartmentDto);

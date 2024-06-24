@@ -4,6 +4,7 @@ using Horizon_HR.AppDataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Horizon_HR.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240624200542_Add_Team_Department_relationship")]
+    partial class Add_Team_Department_relationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,56 +59,36 @@ namespace Horizon_HR.Migrations
                     b.Property<string>("ContractType")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("contract_type");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("EmployeeType")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("employee_type");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("EmploymentStatus")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("employment_status");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("end_date");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("JoiningDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("joining_date");
-
-                    b.Property<Guid>("PositionId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("position_id");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ProbationPeriod")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("probation_period");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("salary");
-
-                    b.Property<Guid>("TeamId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("team_id");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PositionId");
-
-                    b.HasIndex("TeamId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -272,27 +255,11 @@ namespace Horizon_HR.Migrations
 
             modelBuilder.Entity("Horizon_HR.Models.EmploymentDetails", b =>
                 {
-                    b.HasOne("Horizon_HR.Models.Position", "Position")
-                        .WithMany("EmploymentsDetails")
-                        .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Horizon_HR.Models.Team", "Team")
-                        .WithMany("EmploymentsDetails")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Horizon_HR.Models.User", "User")
                         .WithOne("EmploymentDetails")
                         .HasForeignKey("Horizon_HR.Models.EmploymentDetails", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Position");
-
-                    b.Navigation("Team");
 
                     b.Navigation("User");
                 });
@@ -311,16 +278,6 @@ namespace Horizon_HR.Migrations
             modelBuilder.Entity("Horizon_HR.Models.Department", b =>
                 {
                     b.Navigation("Teams");
-                });
-
-            modelBuilder.Entity("Horizon_HR.Models.Position", b =>
-                {
-                    b.Navigation("EmploymentsDetails");
-                });
-
-            modelBuilder.Entity("Horizon_HR.Models.Team", b =>
-                {
-                    b.Navigation("EmploymentsDetails");
                 });
 
             modelBuilder.Entity("Horizon_HR.Models.User", b =>

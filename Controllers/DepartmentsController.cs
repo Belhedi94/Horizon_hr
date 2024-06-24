@@ -8,9 +8,9 @@ namespace Horizon_HR.Controllers
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
-        private readonly IDepartmentServices _departmentServices;
+        private readonly IDepartmentRepository _departmentServices;
 
-        public DepartmentsController(IDepartmentServices departmentServices)
+        public DepartmentsController(IDepartmentRepository departmentServices)
         {
             _departmentServices = departmentServices;
         }

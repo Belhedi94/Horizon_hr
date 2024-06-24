@@ -2,7 +2,7 @@
 
 namespace Horizon_HR.Repositories.Interfaces
 {
-    public interface IUserServices
+    public interface IUserRepository
     {
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
         Task CreateUserAsync(CreateUserDto createUserDto);

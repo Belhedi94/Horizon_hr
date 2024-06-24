@@ -8,9 +8,9 @@ namespace Horizon_HR.Controllers
     [ApiController]
     public class TeamsController : ControllerBase
     {
-        private readonly ITeamServices _teamServices;
+        private readonly ITeamRepository _teamServices;
 
-        public TeamsController(ITeamServices teamServices)
+        public TeamsController(ITeamRepository teamServices)
         {
             _teamServices = teamServices;
         }

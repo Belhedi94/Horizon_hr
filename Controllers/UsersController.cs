@@ -8,11 +8,11 @@ namespace Horizon_HR.Controllers
     [Route("api/users/")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserServices _userServices;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(IUserServices userServices)
+        public UsersController(IUserRepository userRepository)
         {
-            _userServices = userServices;
+            _userRepository = userRepository;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Horizon_HR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _userServices.CreateUserAsync(createUserDto);
+            await _userRepository.CreateUserAsync(createUserDto);
             return Ok(new {message = "User created successfully."});
             
             
@@ -39,7 +39,7 @@ namespace Horizon_HR.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllUsersAsync()
         {
-            var users = await _userServices.GetAllUsersAsync();
+            var users = await _userRepository.GetAllUsersAsync();
             if (!users.Any())
                 return Ok(new { message = "No users found", data = Enumerable.Empty<UserDto>()} );
 
@@ -59,7 +59,7 @@ namespace Horizon_HR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _userServices.UpdateUserAsync(id, updateUserDto);
+            await _userRepository.UpdateUserAsync(id, updateUserDto);
 
             return Ok(new { message = "User updated successfully." });
         }
@@ -72,7 +72,7 @@ namespace Horizon_HR.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(Guid id)
         {
-            var user = await _userServices.GetUserByIdAsync(id);
+            var user = await _userRepository.GetUserByIdAsync(id);
             return Ok(new { message = "User retrieved successfully.", data = user });
         }
 
@@ -84,7 +84,7 @@ namespace Horizon_HR.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserAsync(Guid id)
         {
-            await _userServices.DeleteUserAsync(id);
+            await _userRepository.DeleteUserAsync(id);
             return Ok(new { message = "User deleted successfully." });
         }
     }

@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Horizon_HR.Repositories.Implementations
 {
-    public class TeamServices : ITeamServices
+    public class TeamRepository : ITeamRepository
     {
         private readonly DataBaseContext _context;
         private readonly IMapper _mapper;
-        private readonly ILogger<TeamServices> _logger;
+        private readonly ILogger<TeamRepository> _logger;
 
-        public TeamServices(DataBaseContext context, IMapper mapper, ILogger<TeamServices> logger)
+        public TeamRepository(DataBaseContext context, IMapper mapper, ILogger<TeamRepository> logger)
         {
             _context = context;
             _mapper = mapper;

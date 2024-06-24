@@ -240,5 +240,41 @@
         <member name="M:Horizon_HR.Migrations.Position_Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Horizon_HR.Migrations.Add_Team_Department_relationship">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Add_Team_Department_relationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Add_Team_Department_relationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.Add_Team_Department_relationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.relationships_migration">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.relationships_migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.relationships_migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.relationships_migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.users_crud_migration">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.users_crud_migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.users_crud_migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.users_crud_migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

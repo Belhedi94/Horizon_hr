@@ -18,5 +18,7 @@ namespace Horizon_HR.Models
         [Required]
         [StringLength(50)]
         public string Description { get; set; }
+
+        public ICollection<EmploymentDetails> EmploymentsDetails { get; set; }
     }
 }

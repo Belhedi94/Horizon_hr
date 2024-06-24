@@ -11,15 +11,15 @@ using System.Text;
 namespace Horizon_HR.Repositories.Implementations
 {
 
-    public class UserServices : IUserServices
+    public class UserRepository : IUserRepository
     {
         private readonly DataBaseContext _context;
-        private readonly ILogger<UserServices> _logger;
+        private readonly ILogger<UserRepository> _logger;
         private readonly IMapper _mapper;
-        private readonly IFileStorageService _fileStorageService;
+        private readonly IFileStorageRepository _fileStorageService;
 
-        public UserServices(DataBaseContext context, ILogger<UserServices> logger, IMapper mapper,
-            IFileStorageService fileStorageService)
+        public UserRepository(DataBaseContext context, ILogger<UserRepository> logger, IMapper mapper,
+            IFileStorageRepository fileStorageService)
         {
             _context = context;
             _logger = logger;

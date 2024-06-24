@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Horizon_HR.Repositories.Implementations
 {
-    public class DepartmentServices : IDepartmentServices
+    public class DepartmentRepository : IDepartmentRepository
     {
         private readonly DataBaseContext _context;
         private readonly IMapper _mapper;
-        private readonly ILogger<DepartmentServices> _logger;
+        private readonly ILogger<DepartmentRepository> _logger;
 
-        public DepartmentServices(DataBaseContext context, IMapper mapper, ILogger<DepartmentServices> logger)
+        public DepartmentRepository(DataBaseContext context, IMapper mapper, ILogger<DepartmentRepository> logger)
         {
             _context = context;
             _mapper = mapper;

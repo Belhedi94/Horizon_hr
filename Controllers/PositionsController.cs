@@ -8,9 +8,9 @@ namespace Horizon_HR.Controllers
     [ApiController]
     public class PositionsController : ControllerBase
     {
-        private readonly IPositionServices _positionServices;
+        private readonly IPositionRepository _positionServices;
 
-        public PositionsController(IPositionServices positionServices)
+        public PositionsController(IPositionRepository positionServices)
         {
             _positionServices = positionServices;
         }

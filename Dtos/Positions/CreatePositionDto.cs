@@ -6,7 +6,7 @@ namespace Horizon_HR.Dtos.Positions
     {
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [Required]
         [StringLength(50)]

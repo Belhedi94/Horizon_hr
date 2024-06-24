@@ -50,6 +50,25 @@ namespace Horizon_HR.AppDataContext
                 .HasOne(u => u.EmploymentDetails)
                 .WithOne(e => e.User)
                 .HasForeignKey<EmploymentDetails>(e => e.UserId);
+
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.Department)
+                .WithMany(d => d.Teams)
+                .HasForeignKey(t => t.DepartmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EmploymentDetails>()
+                .HasOne(e => e.Team)
+                .WithMany(t => t.EmploymentsDetails)
+                .HasForeignKey(e => e.TeamId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EmploymentDetails>()
+                .HasOne(e => e.Position)
+                .WithMany(p => p.EmploymentsDetails)
+                .HasForeignKey(e => e.PositionId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
 
     }

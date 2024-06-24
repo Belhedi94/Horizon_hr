@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Horizon_HR.Repositories.Implementations
 {
-    public class PositionServices : IPositionServices
+    public class PositionRepository : IPositionRepository
     {
         private readonly DataBaseContext _context;
         private readonly IMapper _mapper;
-        private readonly ILogger<PositionServices> _logger;
+        private readonly ILogger<PositionRepository> _logger;
 
-        public PositionServices(DataBaseContext context, IMapper mapper, ILogger<PositionServices> logger)
+        public PositionRepository(DataBaseContext context, IMapper mapper, ILogger<PositionRepository> logger)
         {
             _context = context;
             _mapper = mapper;

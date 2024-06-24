@@ -11,5 +11,7 @@ namespace Horizon_HR.Dtos.Teams
         [Required]
         [StringLength(50)]
         public string Description { get; set; }
+
+        public Guid DepartmentId { get; set; }
     }
 }
