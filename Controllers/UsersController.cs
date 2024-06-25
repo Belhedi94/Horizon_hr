@@ -27,9 +27,9 @@ namespace Horizon_HR.Controllers
                 return BadRequest(ModelState);
 
             await _userRepository.CreateUserAsync(createUserDto);
-            return Ok(new {message = "User created successfully."});
-            
-            
+            return Ok(new { message = "User created successfully." });
+
+
         }
 
         /// <summary>
