@@ -29,6 +29,9 @@ namespace Horizon_HR.Dtos.Users
         [StringLength(20)]
         public string Cin { get; set; }
 
+        [StringLength(20)]
+        public string CnssRegsitrationNumber { get; set; }
+
         [StringLength(50)]
         public string Role { get; set; }
 

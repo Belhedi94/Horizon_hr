@@ -59,6 +59,10 @@ namespace Horizon_HR.Models
         [StringLength(20)]
         public string Cin { get; set; }
 
+        [Column("cnss_registration_number")]
+        [StringLength(20)]
+        public string? CnssRegistrationNumber { get; set; }
+
         [Column("role")]
         [Required]
         [StringLength(50)]

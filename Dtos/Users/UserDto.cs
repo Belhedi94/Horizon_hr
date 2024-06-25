@@ -9,6 +9,7 @@
         public string ProfessionalEmail { get; set; }
         public string PersonalPhone { get; set; }
         public string Cin { get; set; }
+        public string CnssRegistrationNumber { get; set; }
         public string Role { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Address { get; set; }
