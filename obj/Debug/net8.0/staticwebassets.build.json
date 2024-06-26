@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JypQFSeUqUXFIi77aoP6DkmHtjmVbK285z6ovuJJoFY=",
+  "Hash": "dB2Xd0mmtpTI4/1K1TAExdcbP1rL35N8EdZM8KqFQ7g=",
   "Source": "Horizon_HR",
   "BasePath": "_content/Horizon_HR",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\cvs\\191fd562-40c5-4b68-a292-2bd1755d2bbe_Rafaa_Belhedi_CV.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\cvs\\394788ed-7645-4029-9e77-a40747c14699_1.jpg",
+      "SourceId": "Horizon_HR",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\",
+      "BasePath": "_content/Horizon_HR",
+      "RelativePath": "cvs/394788ed-7645-4029-9e77-a40747c14699_1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\cvs\\394788ed-7645-4029-9e77-a40747c14699_1.jpg"
     },
     {
       "Identity": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\cvs\\4194276c-4aaa-45af-b2aa-c198ee3aa5ba_1.jpg",
@@ -395,6 +414,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\profile_images\\7289b46d-7b5f-42c3-b70f-eadce72fe147_9.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\profile_images\\97254e5a-6183-4394-a2a4-d43e157aa245_9.jpg",
+      "SourceId": "Horizon_HR",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\",
+      "BasePath": "_content/Horizon_HR",
+      "RelativePath": "profile_images/97254e5a-6183-4394-a2a4-d43e157aa245_9.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profile_images\\97254e5a-6183-4394-a2a4-d43e157aa245_9.jpg"
     },
     {
       "Identity": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\wwwroot\\profile_images\\d384b5be-2c4e-49de-aa27-ebaec2daf360_9.jpg",

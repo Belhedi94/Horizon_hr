@@ -276,5 +276,29 @@
         <member name="M:Horizon_HR.Migrations.users_crud_migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Horizon_HR.Migrations.BankAccountMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.BankAccountMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.BankAccountMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.BankAccountMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.BankAccountMigration_1">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.BankAccountMigration_1.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.BankAccountMigration_1.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.BankAccountMigration_1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

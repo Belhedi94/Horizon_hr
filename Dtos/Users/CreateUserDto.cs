@@ -1,4 +1,5 @@
-﻿using Horizon_HR.Dtos.EmploymentDetails;
+﻿using Horizon_HR.Dtos.BankAccount;
+using Horizon_HR.Dtos.EmploymentDetails;
 using System.ComponentModel.DataAnnotations;
 
 namespace Horizon_HR.Dtos.Users
@@ -60,5 +61,7 @@ namespace Horizon_HR.Dtos.Users
         public IFormFile? ProfileImage { get; set; }
 
         public EmploymentDetailsCreationDto EmploymentDetails { get; set; }
+
+        public CreateBankAccountDto BankAccount { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Horizon_HR.Dtos.BankAccount;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Horizon_HR.Models
@@ -102,6 +103,11 @@ namespace Horizon_HR.Models
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public EmploymentDetails EmploymentDetails { get; set; }
+
+        [Column("bank_account_id")]
+        public Guid BankAccountId { get; set; }
+
+        public BankAccount BankAccount { get; set; }
 
     }
 }

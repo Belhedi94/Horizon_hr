@@ -18,6 +18,7 @@ namespace Horizon_HR.AppDataContext
         public DbSet<Team> Teams { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -46,10 +47,16 @@ namespace Horizon_HR.AppDataContext
                .ToTable("positions")
                .HasKey(p => p.Id);
 
+            modelBuilder.Entity<BankAccount>()
+               .ToTable("bank_accounts")
+               .HasKey(b => b.Id);
+
             modelBuilder.Entity<User>()
                 .HasOne(u => u.EmploymentDetails)
                 .WithOne(e => e.User)
                 .HasForeignKey<EmploymentDetails>(e => e.UserId);
+
+
 
             modelBuilder.Entity<Team>()
                 .HasOne(t => t.Department)

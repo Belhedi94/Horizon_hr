@@ -51,5 +51,7 @@ namespace Horizon_HR.Dtos.Users
         public IFormFile? ProfileImage { get; set; }
 
         //public EmploymentDetails EmploymentDetails { get; set; }
+
+        //public BankAccount BankAccount { get; set; }
     }
 }

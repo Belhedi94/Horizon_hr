@@ -5,6 +5,7 @@ using Horizon_HR.Dtos.Teams;
 using Horizon_HR.Models;
 using Horizon_HR.Dtos.Departments;
 using Horizon_HR.Dtos.Positions;
+using Horizon_HR.Dtos.BankAccount;
 
 namespace Horizon_HR.MappingProfiles
 {
@@ -30,6 +31,7 @@ namespace Horizon_HR.MappingProfiles
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<EmploymentDetailsCreationDto, EmploymentDetails>();
+            CreateMap<CreateBankAccountDto, BankAccount>();
 
             CreateMap<Team, TeamDto>();
             CreateMap<CreateTeamDto, Team>();
