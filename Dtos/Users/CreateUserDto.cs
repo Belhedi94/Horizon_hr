@@ -15,6 +15,10 @@ namespace Horizon_HR.Dtos.Users
         public string LastName { get; set; }
 
         [Required]
+        [StringLength(50)]
+        public string Username { get; set; }
+
+        [Required]
         [EmailAddress]
         public string PersonalEmail { get; set; }
 
@@ -23,23 +27,19 @@ namespace Horizon_HR.Dtos.Users
         public string ProfessionalEmail { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 8)]
-        public string Password { get; set; }
-
-        [Required]
         [Phone]
         public string PersonalPhone { get; set; }
+
+        [Required]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long")]
+        public string Password { get; set; }
 
         [Required]
         [StringLength(20)]
         public string Cin { get; set; }
 
         [StringLength(20)]
-        public string CnssRegsitrationNumber { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Role { get; set; }
+        public string CnssRegistrationNumber { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }

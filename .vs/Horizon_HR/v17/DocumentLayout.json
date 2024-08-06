@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\appdatacontext\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:appdatacontext\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\repositories\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:repositories\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\models\\bankaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:models\\bankaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\dtos\\users\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:dtos\\users\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\dtos\\users\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:dtos\\users\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,41 +38,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BankAccount.cs",
-              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Models\\BankAccount.cs",
-              "RelativeDocumentMoniker": "Models\\BankAccount.cs",
-              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Models\\BankAccount.cs",
-              "RelativeToolTip": "Models\\BankAccount.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAATAAAA",
+              "DocumentIndex": 0,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Repositories\\Implementations\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Implementations\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Repositories\\Implementations\\UserRepository.cs",
+              "RelativeToolTip": "Repositories\\Implementations\\UserRepository.cs",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAAAFkAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T22:38:12.606Z",
+              "WhenOpened": "2024-08-05T22:11:54.99Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AQIAAFcAAAAAAAAAAAAAAGoAAAAhAAAA",
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Dtos\\Users\\UserDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Users\\UserDto.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Dtos\\Users\\UserDto.cs",
+              "RelativeToolTip": "Dtos\\Users\\UserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T22:37:04.851Z",
+              "WhenOpened": "2024-08-05T22:11:33.832Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DataBaseContext.cs",
-              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\AppDataContext\\DataBaseContext.cs",
-              "RelativeDocumentMoniker": "AppDataContext\\DataBaseContext.cs",
-              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\AppDataContext\\DataBaseContext.cs",
-              "RelativeToolTip": "AppDataContext\\DataBaseContext.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAAADoAAAAAAAAA",
+              "DocumentIndex": 1,
+              "Title": "UpdateUserDto.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Dtos\\Users\\UpdateUserDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Users\\UpdateUserDto.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Dtos\\Users\\UpdateUserDto.cs",
+              "RelativeToolTip": "Dtos\\Users\\UpdateUserDto.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAAADcAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T22:29:38.404Z",
+              "WhenOpened": "2024-08-05T22:08:41.4Z",
               "EditorCaption": ""
             }
           ]

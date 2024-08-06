@@ -4,8 +4,10 @@ using Horizon_HR.Dtos.Users;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
+using System.Net.Http.Headers;
+using System.Net;
 
 
 namespace Horizon_HR.Repositories.Implementations
@@ -36,20 +38,49 @@ namespace Horizon_HR.Repositories.Implementations
         public async Task CreateUserAsync(CreateUserDto createUserDto)
         {
             var user = _mapper.Map<User>(createUserDto);
-            using (var hmac = new HMACSHA512())
+            var role = new String[] { "hrmanager_admin" };
+            var payload = new
             {
-                user.PasswordSalt = hmac.Key;
-                user.Password = hmac.ComputeHash(Encoding.UTF8.GetBytes(createUserDto.Password));
+                userName = createUserDto.Username,
+                password = createUserDto.Password,
+                roles = role,
+                appSource = GlobalVariables.AppSource
+            };
+
+            var jsonPayload = JsonSerializer.Serialize(payload);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://20.199.23.144:8080");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync("/api/Account/Register", content);
+
+                if (response.StatusCode == HttpStatusCode.Created)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    };
+                    var result = JsonSerializer.Deserialize<ExternalApiResponse>(responseString, options);
+                    if (user.Cv != null)
+                        user.Cv = await _fileStorageService.StoreFileAsync(createUserDto.Cv, "cvs");
+
+                    if (user.ProfileImage != null)
+                        user.ProfileImage = await _fileStorageService.StoreFileAsync(createUserDto.ProfileImage, "profile_images");
+
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    Console.WriteLine("User created successfully. Token: " + result.Token);
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Error Response: " + errorContent);
+                }
             }
-
-            if (user.Cv != null)
-                user.Cv = await _fileStorageService.StoreFileAsync(createUserDto.Cv, "cvs");
-
-            if (user.ProfileImage != null)
-                user.ProfileImage = await _fileStorageService.StoreFileAsync(createUserDto.ProfileImage, "profile_images");
-
-            _context.Add(user);
-            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
@@ -60,15 +91,7 @@ namespace Horizon_HR.Repositories.Implementations
 
             _mapper.Map(updateUserDto, user);
 
-            var password = updateUserDto.Password;
-            if (!string.IsNullOrEmpty(password))
-            {
-                using (var hmac = new HMACSHA512())
-                {
-                    user.PasswordSalt = hmac.Key;
-                    user.Password = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                }
-            }
+            //var password = updateUserDto.Password;
 
             var newCv = updateUserDto.Cv;
             if (newCv != null)

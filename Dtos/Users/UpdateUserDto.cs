@@ -1,4 +1,6 @@
-﻿using Horizon_HR.Models;
+﻿using Horizon_HR.Dtos.BankAccount;
+using Horizon_HR.Dtos.EmploymentDetails;
+using Horizon_HR.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Horizon_HR.Dtos.Users
@@ -14,6 +16,9 @@ namespace Horizon_HR.Dtos.Users
         [StringLength(50)]
         public string LastName { get; set; }
 
+        [StringLength(50)]
+        public string Username { get; set; }
+
         [EmailAddress]
         public string PersonalEmail { get; set; }
 
@@ -23,17 +28,15 @@ namespace Horizon_HR.Dtos.Users
         [Phone]
         public string PersonalPhone { get; set; }
 
-        [StringLength(100, MinimumLength =8)]
+        [Required]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long")]
         public string Password { get; set; }
 
         [StringLength(20)]
         public string Cin { get; set; }
 
         [StringLength(20)]
-        public string CnssRegsitrationNumber { get; set; }
-
-        [StringLength(50)]
-        public string Role { get; set; }
+        public string CnssRegistrationNumber { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 
@@ -50,8 +53,8 @@ namespace Horizon_HR.Dtos.Users
 
         public IFormFile? ProfileImage { get; set; }
 
-        //public EmploymentDetails EmploymentDetails { get; set; }
+        public EmploymentDetailsUpdateDto EmploymentDetails { get; set; }
 
-        //public BankAccount BankAccount { get; set; }
+        public UpdateBankAccountDto BankAccount { get; set; }
     }
 }

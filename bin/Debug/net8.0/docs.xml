@@ -300,5 +300,41 @@
         <member name="M:Horizon_HR.Migrations.BankAccountMigration_1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Horizon_HR.Migrations.AddUsernameField">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddUsernameField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddUsernameField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddUsernameField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.RemovingPasswordFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RemovingPasswordFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RemovingPasswordFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RemovingPasswordFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.RemovingRoleField">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RemovingRoleField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RemovingRoleField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RemovingRoleField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

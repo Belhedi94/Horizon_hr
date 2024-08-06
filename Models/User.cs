@@ -32,6 +32,11 @@ namespace Horizon_HR.Models
         [StringLength(50)]
         public string LastName { get; set; }
 
+        [Column("username")]
+        [Required]
+        [StringLength(50)]
+        public string Username {  get; set; }
+
         [Column("personal_email")]
         [Required]
         [EmailAddress]
@@ -41,14 +46,6 @@ namespace Horizon_HR.Models
         [Required]
         [EmailAddress]
         public string ProfessionalEmail { get; set; }
-
-        [Column("password")]
-        [Required]
-        public byte[] Password { get; set; }
-
-        [Column("password_salt")]
-        [Required]
-        public byte[] PasswordSalt { get; set; }
 
         [Column("personal_phone")]
         [Required]
@@ -63,11 +60,6 @@ namespace Horizon_HR.Models
         [Column("cnss_registration_number")]
         [StringLength(20)]
         public string? CnssRegistrationNumber { get; set; }
-
-        [Column("role")]
-        [Required]
-        [StringLength(50)]
-        public string Role { get; set; }
 
         [Column("date_of_birth")]
         [Required]

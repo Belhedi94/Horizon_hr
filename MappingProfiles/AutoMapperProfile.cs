@@ -17,21 +17,20 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<CreateUserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
-                .ForMember(dest => dest.Password, opt => opt.Ignore())
-                .ForMember(dest => dest.PasswordSalt, opt => opt.Ignore());
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
 
             CreateMap<UpdateUserDto, User>()
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
-                .ForMember(dest => dest.Password, opt => opt.Ignore())
-                .ForMember(dest => dest.PasswordSalt, opt => opt.Ignore())
                 .ForMember(dest => dest.Cv, opt => opt.Ignore())
                 .ForMember(dest => dest.ProfileImage, opt => opt.Ignore())
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<EmploymentDetailsCreationDto, EmploymentDetails>();
+            CreateMap<EmploymentDetailsUpdateDto, EmploymentDetails>();
+
             CreateMap<CreateBankAccountDto, BankAccount>();
+            CreateMap<UpdateBankAccountDto, BankAccount>();
 
             CreateMap<Team, TeamDto>();
             CreateMap<CreateTeamDto, Team>();
