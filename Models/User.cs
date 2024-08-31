@@ -101,5 +101,9 @@ namespace Horizon_HR.Models
 
         public BankAccount BankAccount { get; set; }
 
+        public ICollection<LeaveRequest> LeaveRequests { get; set; }
+
+        public LeaveBalance LeaveBalance { get; set; }
+
     }
 }

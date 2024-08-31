@@ -39,6 +39,63 @@
             <param name="id">The ID of the department to delete.</param>
             <returns>A status message indicating the result of the operation.</returns>
         </member>
+        <member name="M:Horizon_HR.Controllers.LeaveRequestsController.GetAllLeaveRequestsAsync">
+            <summary>
+            Retrieves all leave requests.
+            </summary>
+            <returns>A list of all leave requests.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.LeaveRequestsController.GetLeaveRequestByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a leave request by ID.
+            </summary>
+            <param name="id">The ID of the leave request to retrieve.</param>
+            <returns>The leave request data.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.LeaveRequestsController.GetLeaveRequestByUserIdAsync(System.Guid)">
+            <summary>
+            Retrieves a leave request by user Id.
+            </summary>
+            <param name="userId">The ID of the user</param>
+            <returns>The leave requests list of that user.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.LeaveRequestsController.AddLeaveRequestAsync(Horizon_HR.Dtos.LeaveRequest.CreateLeaveRequestDto)">
+            <summary>
+            Creates a new leave request.
+            </summary>
+            <param name="createLeaveRequestDto">The data transfer object containing leave request informations.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.LeaveRequestsController.UpdateLeaveRequestAsync(System.Guid,Horizon_HR.Dtos.LeaveRequest.UpdateLeaveRequestDto)">
+            <summary>
+            Updates an existing leave request.
+            </summary>
+            <param name="id">The ID of the leave request to update.</param>
+            <param name="updateLeaveRequestDto">The data transfer object containing updated leave request informations.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.LeaveRequestsController.DeleteLeaveRequestAsync(System.Guid)">
+            <summary>
+            Deletes a leave request by ID.
+            </summary>
+            <param name="id">The ID of the leave request to delete.</param>
+            <returns>A status message indicating the result of the operation.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.LeaveRequestsController.GetLeaveBalance(System.Guid)">
+            <summary>
+            Get user leave balance.
+            </summary>
+            <param name="userId">The ID of the user.</param>
+            <returns>A leave balance.</returns>
+        </member>
+        <member name="M:Horizon_HR.Controllers.LoginController.Login(Horizon_HR.Dtos.Login.LoginDto)">
+            <summary>
+            Authenticate a user.
+            </summary>
+            <param name="loginDto">The data transfer object containing user credentials.</param>
+            <returns>An object containing the neccessary tokens.</returns>
+            
+        </member>
         <member name="M:Horizon_HR.Controllers.PositionsController.CreatePositionAsync(Horizon_HR.Dtos.Positions.CreatePositionDto)">
             <summary>
             Creates a new position.
@@ -334,6 +391,30 @@
             <inheritdoc />
         </member>
         <member name="M:Horizon_HR.Migrations.RemovingRoleField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.AddLeaveRequestTable">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddLeaveRequestTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddLeaveRequestTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddLeaveRequestTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.AddLeaveBalanceAndPublicHolidays">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddLeaveBalanceAndPublicHolidays.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddLeaveBalanceAndPublicHolidays.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddLeaveBalanceAndPublicHolidays.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

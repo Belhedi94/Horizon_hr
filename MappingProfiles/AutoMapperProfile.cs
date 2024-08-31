@@ -6,6 +6,7 @@ using Horizon_HR.Models;
 using Horizon_HR.Dtos.Departments;
 using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Dtos.BankAccount;
+using Horizon_HR.Dtos.LeaveRequest;
 
 namespace Horizon_HR.MappingProfiles
 {
@@ -24,7 +25,13 @@ namespace Horizon_HR.MappingProfiles
                 .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.Cv, opt => opt.Ignore())
                 .ForMember(dest => dest.ProfileImage, opt => opt.Ignore())
+                .ForMember(dest => dest.EmploymentDetails, opt => opt.MapFrom(src => src.EmploymentDetails))
+                .ForMember(dest => dest.BankAccount, opt => opt.MapFrom(src => src.BankAccount))
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<EmploymentDetailsUpdateDto, EmploymentDetails>();
+
+            CreateMap<UpdateBankAccountDto, BankAccount>();
 
             CreateMap<EmploymentDetailsCreationDto, EmploymentDetails>();
             CreateMap<EmploymentDetailsUpdateDto, EmploymentDetails>();
@@ -43,6 +50,10 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<Position, PositionDto>();
             CreateMap<CreatePositionDto, Position>();
             CreateMap<UpdatePositionDto, Position>();
+
+            CreateMap<LeaveRequest, LeaveRequestDto>();
+            CreateMap<CreateLeaveRequestDto, LeaveRequest>();
+            CreateMap<UpdateLeaveRequestDto, LeaveRequest>();
 
 
         }

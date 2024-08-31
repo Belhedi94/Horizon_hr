@@ -85,13 +85,34 @@ namespace Horizon_HR.Repositories.Implementations
 
         public async Task UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(u => u.EmploymentDetails)
+                .Include(u => u.BankAccount)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
             if (user == null)
                 throw new Exception("User not found");
 
             _mapper.Map(updateUserDto, user);
 
-            //var password = updateUserDto.Password;
+            if (updateUserDto.EmploymentDetails != null)
+            {
+                if (user.EmploymentDetails != null)
+                    _mapper.Map(updateUserDto.EmploymentDetails, user.EmploymentDetails);
+
+                else
+                    user.EmploymentDetails = _mapper.Map<EmploymentDetails>(updateUserDto.EmploymentDetails);
+            }
+
+            if (updateUserDto.BankAccount != null)
+            {
+                if (user.BankAccount != null)
+                    _mapper.Map(updateUserDto.BankAccount, user.BankAccount);
+
+                else
+                    user.BankAccount = _mapper.Map<BankAccount>(updateUserDto.BankAccount);
+            }
+
 
             var newCv = updateUserDto.Cv;
             if (newCv != null)

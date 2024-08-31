@@ -4,6 +4,7 @@ using Horizon_HR.AppDataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Horizon_HR.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240811104830_AddLeaveRequestTable")]
+    partial class AddLeaveRequestTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,33 +151,6 @@ namespace Horizon_HR.Migrations
                     b.ToTable("employment_details", (string)null);
                 });
 
-            modelBuilder.Entity("Horizon_HR.Models.LeaveBalance", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<int>("TotalLeaveDays")
-                        .HasColumnType("int")
-                        .HasColumnName("total_leave_days");
-
-                    b.Property<float>("UsedLeaveDays")
-                        .HasColumnType("real")
-                        .HasColumnName("used_leave_days");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("leave_balances", (string)null);
-                });
-
             modelBuilder.Entity("Horizon_HR.Models.LeaveRequest", b =>
                 {
                     b.Property<Guid>("Id")
@@ -233,27 +209,6 @@ namespace Horizon_HR.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("positions", (string)null);
-                });
-
-            modelBuilder.Entity("Horizon_HR.Models.PublicHoliday", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("date");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("description");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("public_holidays", (string)null);
                 });
 
             modelBuilder.Entity("Horizon_HR.Models.Team", b =>
@@ -418,17 +373,6 @@ namespace Horizon_HR.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Horizon_HR.Models.LeaveBalance", b =>
-                {
-                    b.HasOne("Horizon_HR.Models.User", "User")
-                        .WithOne("LeaveBalance")
-                        .HasForeignKey("Horizon_HR.Models.LeaveBalance", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Horizon_HR.Models.LeaveRequest", b =>
                 {
                     b.HasOne("Horizon_HR.Models.User", "User")
@@ -486,9 +430,6 @@ namespace Horizon_HR.Migrations
             modelBuilder.Entity("Horizon_HR.Models.User", b =>
                 {
                     b.Navigation("EmploymentDetails")
-                        .IsRequired();
-
-                    b.Navigation("LeaveBalance")
                         .IsRequired();
 
                     b.Navigation("LeaveRequests");

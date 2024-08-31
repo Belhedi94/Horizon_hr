@@ -1,6 +1,4 @@
-﻿namespace Horizon_HR.Helpers;
-
-public static class GlobalVariables
+﻿public static class GlobalVariables
 {
-    public static string AppSource { get; set; } = "hrmanager";
+	public static string AppSource { get; set; } = "hrmanager";
 }

@@ -28,8 +28,6 @@ namespace Horizon_HR.Controllers
 
             await _userRepository.CreateUserAsync(createUserDto);
             return Ok(new { message = "User created successfully." });
-
-
         }
 
         /// <summary>
