@@ -64,6 +64,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\1991cf25-d9a4-4b4b-9c15-de00e58c5d3c_1.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\2fe342e6-7278-47dd-a4dc-d62f61a654c3_.Net brochure.pdf))">
+      <SourceType>Package</SourceType>
+      <SourceId>Horizon_HR</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Horizon_HR</BasePath>
+      <RelativePath>cvs/2fe342e6-7278-47dd-a4dc-d62f61a654c3_.Net brochure.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\2fe342e6-7278-47dd-a4dc-d62f61a654c3_.Net brochure.pdf))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\394788ed-7645-4029-9e77-a40747c14699_1.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Horizon_HR</SourceId>
@@ -192,6 +208,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\d0506416-ca73-40a2-b1d2-452c13e37669_Rafaa_Belhedi_CV.pdf))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\da097524-bb34-421b-a4f8-a5646a73e305_.Net brochure.pdf))">
+      <SourceType>Package</SourceType>
+      <SourceId>Horizon_HR</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Horizon_HR</BasePath>
+      <RelativePath>cvs/da097524-bb34-421b-a4f8-a5646a73e305_.Net brochure.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\da097524-bb34-421b-a4f8-a5646a73e305_.Net brochure.pdf))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\e1d2113b-e7bd-4f43-b286-10bc3ecd2613_1.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Horizon_HR</SourceId>
@@ -223,6 +255,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\e1ee7527-020a-4e56-97c8-daa1b64868a5_1.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\e304fd0c-b856-4ead-9e88-980f958aaf4b_.Net brochure.pdf))">
+      <SourceType>Package</SourceType>
+      <SourceId>Horizon_HR</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Horizon_HR</BasePath>
+      <RelativePath>cvs/e304fd0c-b856-4ead-9e88-980f958aaf4b_.Net brochure.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\e304fd0c-b856-4ead-9e88-980f958aaf4b_.Net brochure.pdf))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\cvs\f80a734c-fb08-4924-8bf4-afd6aa375a0b_Rafaa_Belhedi_CV.pdf))">
       <SourceType>Package</SourceType>
@@ -400,6 +448,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\61b2d045-49cd-4669-9bd4-a5e533ad5c92_9.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\6598cbbd-2d56-4483-aa5b-8e67d18350de_me.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Horizon_HR</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Horizon_HR</BasePath>
+      <RelativePath>profile_images/6598cbbd-2d56-4483-aa5b-8e67d18350de_me.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\6598cbbd-2d56-4483-aa5b-8e67d18350de_me.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\6cc24cbc-c09c-4b06-be0e-ff1628fb00a2_9.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Horizon_HR</SourceId>
@@ -448,6 +512,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\7289b46d-7b5f-42c3-b70f-eadce72fe147_9.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\7df6c87f-deff-4fbc-9d6f-1aeee5d49a69_me.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Horizon_HR</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Horizon_HR</BasePath>
+      <RelativePath>profile_images/7df6c87f-deff-4fbc-9d6f-1aeee5d49a69_me.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\7df6c87f-deff-4fbc-9d6f-1aeee5d49a69_me.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\97254e5a-6183-4394-a2a4-d43e157aa245_9.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Horizon_HR</SourceId>
@@ -463,6 +543,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\97254e5a-6183-4394-a2a4-d43e157aa245_9.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\c4014e37-f60f-49a9-935a-a39da7e86324_me.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Horizon_HR</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Horizon_HR</BasePath>
+      <RelativePath>profile_images/c4014e37-f60f-49a9-935a-a39da7e86324_me.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\c4014e37-f60f-49a9-935a-a39da7e86324_me.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\profile_images\d384b5be-2c4e-49de-aa27-ebaec2daf360_9.jpg))">
       <SourceType>Package</SourceType>

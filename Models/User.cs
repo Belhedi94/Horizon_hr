@@ -1,5 +1,4 @@
-﻿using Horizon_HR.Dtos.BankAccount;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Horizon_HR.Models

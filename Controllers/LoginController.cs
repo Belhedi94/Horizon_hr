@@ -62,6 +62,7 @@ namespace Horizon_HR.Controllers
                     
                     var userIdAsString = decodedToken.Claims.First(c => c.Type == "userId").Value;
                     Guid userId = Guid.Parse(userIdAsString);
+                    Console.WriteLine(userId);
                     var userData = await _userRepository.GetUserByIdAsync(userId);
                     
                     if (userData == null)

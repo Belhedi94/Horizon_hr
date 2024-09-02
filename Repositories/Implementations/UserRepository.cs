@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Net.Http.Headers;
 using System.Net;
+using System.IdentityModel.Tokens.Jwt;
 
 
 namespace Horizon_HR.Repositories.Implementations
@@ -71,6 +72,12 @@ namespace Horizon_HR.Repositories.Implementations
                     if (user.ProfileImage != null)
                         user.ProfileImage = await _fileStorageService.StoreFileAsync(createUserDto.ProfileImage, "profile_images");
 
+                    var token = result.Token;
+                    var handler = new JwtSecurityTokenHandler();
+                    var decodedToken = handler.ReadJwtToken(token);
+
+                    var userId = decodedToken.Claims.First(c => c.Type == "userId").Value;
+                    user.Id = Guid.Parse(userId);
                     _context.Add(user);
                     await _context.SaveChangesAsync();
                     Console.WriteLine("User created successfully. Token: " + result.Token);
