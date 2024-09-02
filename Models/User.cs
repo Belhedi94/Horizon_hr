@@ -18,6 +18,7 @@ namespace Horizon_HR.Models
     public class User
     {
         [Key]
+
         [Column("id")]
         public Guid Id { get; set; }
 
