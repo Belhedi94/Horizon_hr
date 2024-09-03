@@ -19,6 +19,7 @@ namespace Horizon_HR.Models
     {
         [Key]
 
+
         [Column("id")]
         public Guid Id { get; set; }
 
