@@ -39,7 +39,7 @@ namespace Horizon_HR.Dtos.Users
         public string Cin { get; set; }
 
         [StringLength(20)]
-        public string CnssRegistrationNumber { get; set; }
+        public string? CnssRegistrationNumber { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
@@ -56,12 +56,10 @@ namespace Horizon_HR.Dtos.Users
         [StringLength(20)]
         public string MaritalStatus { get; set; }
 
-        public IFormFile? Cv { get; set; }
-
         public IFormFile? ProfileImage { get; set; }
 
         public EmploymentDetailsCreationDto EmploymentDetails { get; set; }
 
-        public CreateBankAccountDto BankAccount { get; set; }
+        public CreateBankAccountDto? BankAccount { get; set; }
     }
 }

@@ -18,8 +18,6 @@ namespace Horizon_HR.Models
     public class User
     {
         [Key]
-
-
         [Column("id")]
         public Guid Id { get; set; }
 
@@ -81,10 +79,6 @@ namespace Horizon_HR.Models
         [StringLength(20)]
         public string MaritalStatus { get; set; }
 
-        [Column("cv")]
-        [StringLength(255)]
-        public string Cv { get; set; }
-
         [Column("profile_image")]
         [StringLength(255)]
         public string ProfileImage { get; set; }
@@ -97,8 +91,9 @@ namespace Horizon_HR.Models
 
         public EmploymentDetails EmploymentDetails { get; set; }
 
+
         [Column("bank_account_id")]
-        public Guid BankAccountId { get; set; }
+        public Guid? BankAccountId { get; set; }
 
         public BankAccount BankAccount { get; set; }
 

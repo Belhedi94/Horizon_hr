@@ -18,15 +18,11 @@ namespace Horizon_HR.Dtos.EmploymentDetails
         public string ProbationPeriod { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string EmploymentStatus { get; set; }
-
-        [Required]
         public decimal Salary { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string EmployeeType { get; set; }
+        public string EmploymentType { get; set; }
 
         public Guid TeamId { get; set; }
 

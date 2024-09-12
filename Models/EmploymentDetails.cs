@@ -27,18 +27,17 @@ namespace Horizon_HR.Models
         public string ProbationPeriod { get; set; }
 
         [Column("employment_status")]
-        [Required]
         [StringLength(50)]
-        public string EmploymentStatus { get; set; }
+        public string EmploymentStatus { get; set; } = "Active";
 
         [Column("salary")]
         [Required]
         public decimal Salary { get; set; }
 
-        [Column("employee_type")]
+        [Column("employment_type")]
         [Required]
         [StringLength(50)]
-        public string EmployeeType { get; set; }
+        public string EmploymentType { get; set; }
 
         [Column("user_id")]
         public Guid UserId { get; set; }

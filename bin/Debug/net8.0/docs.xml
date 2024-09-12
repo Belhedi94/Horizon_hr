@@ -417,5 +417,71 @@
         <member name="M:Horizon_HR.Migrations.AddLeaveBalanceAndPublicHolidays.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Horizon_HR.Migrations.DeleteCvColumn">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.DeleteCvColumn.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.DeleteCvColumn.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.DeleteCvColumn.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.ChangeEmploymentDetailsFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.ChangeEmploymentDetailsFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.ChangeEmploymentDetailsFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.ChangeEmploymentDetailsFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.AddDefaultValueToEmploymentStatus">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddDefaultValueToEmploymentStatus.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.RenderBankAccountInUsersNullable">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RenderBankAccountInUsersNullable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RenderBankAccountInUsersNullable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.RenderBankAccountInUsersNullable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.ChangeIbanFiekdByRibField">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.ChangeIbanFiekdByRibField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.ChangeIbanFiekdByRibField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.ChangeIbanFiekdByRibField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Horizon_HR.Migrations.AddCreatedAtAndUpdatedAtToBankAccount">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddCreatedAtAndUpdatedAtToBankAccount.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddCreatedAtAndUpdatedAtToBankAccount.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.AddCreatedAtAndUpdatedAtToBankAccount.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

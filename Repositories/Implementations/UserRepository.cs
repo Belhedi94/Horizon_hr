@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Net.Http.Headers;
 using System.Net;
 using System.IdentityModel.Tokens.Jwt;
+using Horizon_HR.Dtos.BankAccount;
 
 
 namespace Horizon_HR.Repositories.Implementations
@@ -48,6 +49,7 @@ namespace Horizon_HR.Repositories.Implementations
                 appSource = GlobalVariables.AppSource
             };
 
+
             var jsonPayload = JsonSerializer.Serialize(payload);
             using (var client = new HttpClient())
             {
@@ -66,26 +68,39 @@ namespace Horizon_HR.Repositories.Implementations
                         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                     };
                     var result = JsonSerializer.Deserialize<ExternalApiResponse>(responseString, options);
-                    if (user.Cv != null)
-                        user.Cv = await _fileStorageService.StoreFileAsync(createUserDto.Cv, "cvs");
 
                     if (user.ProfileImage != null)
                         user.ProfileImage = await _fileStorageService.StoreFileAsync(createUserDto.ProfileImage, "profile_images");
+                    else
+                        user.ProfileImage = "profile_images/default_employee_avatar.png";
 
                     var token = result.Token;
                     var handler = new JwtSecurityTokenHandler();
                     var decodedToken = handler.ReadJwtToken(token);
 
+                    CreateBankAccountDto bankAccountData;
+                    if (createUserDto.BankAccount != null)
+                    {
+                        bankAccountData = createUserDto.BankAccount;
+                        var bankAccountEntity = _mapper.Map<BankAccount>(bankAccountData);
+                        _context.Add(bankAccountEntity);
+                        await _context.SaveChangesAsync();
+
+                        var bankAccountId = bankAccountEntity.Id;
+                        user.BankAccountId = bankAccountId;
+                        
+                    }
+
                     var userId = decodedToken.Claims.First(c => c.Type == "userId").Value;
                     user.Id = Guid.Parse(userId);
                     _context.Add(user);
                     await _context.SaveChangesAsync();
-                    Console.WriteLine("User created successfully. Token: " + result.Token);
                 }
                 else
                 {
                     var errorContent = await response.Content.ReadAsStringAsync();
                     Console.WriteLine("Error Response: " + errorContent);
+                    throw new Exception($"Failed to create user: {errorContent}");
                 }
             }
         }
@@ -121,14 +136,14 @@ namespace Horizon_HR.Repositories.Implementations
             }
 
 
-            var newCv = updateUserDto.Cv;
-            if (newCv != null)
-            {
-                var currentCv = user.Cv;
-                if (!string.IsNullOrEmpty(currentCv))
-                    _fileStorageService.DeleteFile(currentCv);
-                user.Cv = await _fileStorageService.StoreFileAsync(newCv, "cvs");
-            }
+            //var newCv = updateUserDto.Cv;
+            //if (newCv != null)
+            //{
+            //    var currentCv = user.Cv;
+            //    if (!string.IsNullOrEmpty(currentCv))
+            //        _fileStorageService.DeleteFile(currentCv);
+            //    user.Cv = await _fileStorageService.StoreFileAsync(newCv, "cvs");
+            //}
 
             var newProfileImage = updateUserDto.ProfileImage;
             if (newProfileImage != null)
@@ -166,9 +181,9 @@ namespace Horizon_HR.Repositories.Implementations
                 throw new Exception("User not found");
             }
 
-            var cv = user.Cv;
-            if (!string.IsNullOrEmpty(cv))
-                _fileStorageService.DeleteFile(cv);
+            //var cv = user.Cv;
+            //if (!string.IsNullOrEmpty(cv))
+            //    _fileStorageService.DeleteFile(cv);
 
             var profileImage = user.ProfileImage;
             if (!string.IsNullOrEmpty(profileImage))

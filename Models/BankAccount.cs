@@ -8,25 +8,27 @@ namespace Horizon_HR.Models
         [Key]
         public Guid Id { get; set; }
 
-        [Required]
         [Column("bank_name")]
         [StringLength(50)]
         public string BankName { get; set; }
 
-        [Required]
         [Column("account_number")]
         [StringLength(50)]
         public string AccountNumber { get; set; }
 
-        [Required]
-        [Column("iban")]
+        [Column("rib")]
         [StringLength(50)]
-        public string Iban { get; set; }
+        public string Rib { get; set; }
 
-        [Required]
         [Column("holder_name")]
         [StringLength(50)]
         public string HolderName { get; set; }
+
+        [Column("created_at")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("updated_at")]
+        public DateTime updatedAt { get; set; } = DateTime.UtcNow;
 
         public User User { get; set; }
     }

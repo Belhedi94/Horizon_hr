@@ -48,7 +48,7 @@ namespace Horizon_HR.Dtos.Users
         [StringLength(20)]
         public string MaritalStatus { get; set; }
 
-        public IFormFile? Cv { get; set; }
+        //public IFormFile? Cv { get; set; }
 
         public IFormFile? ProfileImage { get; set; }
 

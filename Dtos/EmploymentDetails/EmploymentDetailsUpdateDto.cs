@@ -29,7 +29,7 @@ namespace Horizon_HR.Dtos.EmploymentDetails
 
         [Required]
         [StringLength(50)]
-        public string EmployeeType { get; set; }
+        public string EmploymentType { get; set; }
 
         public Guid TeamId { get; set; }
 

@@ -23,7 +23,7 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<UpdateUserDto, User>()
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
-                .ForMember(dest => dest.Cv, opt => opt.Ignore())
+                //.ForMember(dest => dest.Cv, opt => opt.Ignore())
                 .ForMember(dest => dest.ProfileImage, opt => opt.Ignore())
                 .ForMember(dest => dest.EmploymentDetails, opt => opt.MapFrom(src => src.EmploymentDetails))
                 .ForMember(dest => dest.BankAccount, opt => opt.MapFrom(src => src.BankAccount))

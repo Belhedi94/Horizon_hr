@@ -40,17 +40,25 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("bank_name");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
                     b.Property<string>("HolderName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("holder_name");
 
-                    b.Property<string>("Iban")
+                    b.Property<string>("Rib")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("iban");
+                        .HasColumnName("rib");
+
+                    b.Property<DateTime>("updatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -94,17 +102,17 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("contract_type");
 
-                    b.Property<string>("EmployeeType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("employee_type");
-
                     b.Property<string>("EmploymentStatus")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("employment_status");
+
+                    b.Property<string>("EmploymentType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("employment_type");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2")
@@ -299,7 +307,7 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("address");
 
-                    b.Property<Guid>("BankAccountId")
+                    b.Property<Guid?>("BankAccountId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("bank_account_id");
 
@@ -317,12 +325,6 @@ namespace Horizon_HR.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("created_at");
-
-                    b.Property<string>("Cv")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("cv");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2")
@@ -386,7 +388,8 @@ namespace Horizon_HR.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BankAccountId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[bank_account_id] IS NOT NULL");
 
                     b.ToTable("users", (string)null);
                 });
@@ -455,9 +458,7 @@ namespace Horizon_HR.Migrations
                 {
                     b.HasOne("Horizon_HR.Models.BankAccount", "BankAccount")
                         .WithOne("User")
-                        .HasForeignKey("Horizon_HR.Models.User", "BankAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Horizon_HR.Models.User", "BankAccountId");
 
                     b.Navigation("BankAccount");
                 });

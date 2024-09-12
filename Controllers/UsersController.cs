@@ -25,9 +25,16 @@ namespace Horizon_HR.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            try
+            {
+                await _userRepository.CreateUserAsync(createUserDto);
+                return Ok(new { message = "Employee created successfully." });
+        }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occured when creating the employee.", details = ex.Message});
+            }
 
-            await _userRepository.CreateUserAsync(createUserDto);
-            return Ok(new { message = "User created successfully." });
         }
 
         /// <summary>
