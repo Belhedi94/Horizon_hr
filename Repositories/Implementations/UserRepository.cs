@@ -161,7 +161,11 @@ namespace Horizon_HR.Repositories.Implementations
 
         public async Task<UserDto> GetUserByIdAsync(Guid id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(u => u.EmploymentDetails)
+                .Include(u => u.BankAccount)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
             if (user == null)
             {
                 _logger.LogWarning($"User with ID {id} not found.");

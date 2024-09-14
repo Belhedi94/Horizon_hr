@@ -1,4 +1,8 @@
-﻿namespace Horizon_HR.Dtos.Users
+﻿using Horizon_HR.Dtos.BankAccount;
+using Horizon_HR.Dtos.EmploymentDetails;
+
+namespace Horizon_HR.Dtos.Users
+
 {
     public class UserDto
     {
@@ -16,7 +20,8 @@
         public string Address { get; set; }
         public string Gender { get; set; }
         public string MaritalStatus { get; set; }
-        //public string Cv { get; set; }
         public string ProfileImage { get; set; }
+        public EmploymentDetailsDto EmploymentDetails { get; set; }
+        public BankAccountDto BankAccount { get; set; }
     }
 }

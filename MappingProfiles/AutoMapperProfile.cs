@@ -14,7 +14,9 @@ namespace Horizon_HR.MappingProfiles
     {
         public AutoMapperProfile() 
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.EmploymentDetails, opt => opt.MapFrom(src => src.EmploymentDetails))
+                .ForMember(dest => dest.BankAccount, opt => opt.MapFrom(src => src.BankAccount));
             CreateMap<CreateUserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
@@ -23,19 +25,17 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<UpdateUserDto, User>()
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
-                //.ForMember(dest => dest.Cv, opt => opt.Ignore())
                 .ForMember(dest => dest.ProfileImage, opt => opt.Ignore())
                 .ForMember(dest => dest.EmploymentDetails, opt => opt.MapFrom(src => src.EmploymentDetails))
                 .ForMember(dest => dest.BankAccount, opt => opt.MapFrom(src => src.BankAccount))
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<EmploymentDetailsUpdateDto, EmploymentDetails>();
 
-            CreateMap<UpdateBankAccountDto, BankAccount>();
-
+            CreateMap<EmploymentDetails, EmploymentDetailsDto>();
             CreateMap<EmploymentDetailsCreationDto, EmploymentDetails>();
             CreateMap<EmploymentDetailsUpdateDto, EmploymentDetails>();
 
+            CreateMap<BankAccount, BankAccountDto>();
             CreateMap<CreateBankAccountDto, BankAccount>();
             CreateMap<UpdateBankAccountDto, BankAccount>();
 
