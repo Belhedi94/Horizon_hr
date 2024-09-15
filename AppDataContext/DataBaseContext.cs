@@ -77,6 +77,12 @@ namespace Horizon_HR.AppDataContext
                 .HasForeignKey(t => t.DepartmentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.BankAccount)
+                .WithOne(b => b.User)
+                .HasForeignKey<User>(u => u.BankAccountId);
+                //.OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<EmploymentDetails>()
                 .HasOne(e => e.Team)
                 .WithMany(t => t.EmploymentsDetails)

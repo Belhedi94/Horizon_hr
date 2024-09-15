@@ -4,19 +4,16 @@ namespace Horizon_HR.Dtos.BankAccount
 {
     public class UpdateBankAccountDto
     {
-        [Required]
-        public Guid Id { get; set; }
+        [StringLength(50)]
+        public string? BankName { get; set; }
 
         [StringLength(50)]
-        public string BankName { get; set; }
+        public string? AccountNumber { get; set; }
 
         [StringLength(50)]
-        public string AccountNumber { get; set; }
+        public string? Rib { get; set; }
 
         [StringLength(50)]
-        public string Rib { get; set; }
-
-        [StringLength(50)]
-        public string HolderName { get; set; }
+        public string? HolderName { get; set; }
     }
 }

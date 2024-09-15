@@ -10,6 +10,7 @@ namespace Horizon_HR.Dtos.Users
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
+        public string Status { get; set; }
         public string PersonalEmail { get; set; }
         public string ProfessionalEmail { get; set; }
         public string PersonalPhone { get; set; }

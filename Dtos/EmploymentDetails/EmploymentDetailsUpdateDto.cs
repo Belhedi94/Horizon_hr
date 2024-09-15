@@ -5,9 +5,6 @@ namespace Horizon_HR.Dtos.EmploymentDetails
     public class EmploymentDetailsUpdateDto
     {
         [Required]
-        public Guid Id { get; set; }
-
-        [Required]
         [StringLength(50)]
         public string ContractType { get; set; }
 
@@ -19,10 +16,6 @@ namespace Horizon_HR.Dtos.EmploymentDetails
         [Required]
         [StringLength(50)]
         public string ProbationPeriod { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string EmploymentStatus { get; set; }
 
         [Required]
         public decimal Salary { get; set; }

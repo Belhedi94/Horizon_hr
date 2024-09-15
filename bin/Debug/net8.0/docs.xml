@@ -483,5 +483,17 @@
         <member name="M:Horizon_HR.Migrations.AddCreatedAtAndUpdatedAtToBankAccount.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Horizon_HR.Migrations.MoveEmploymentStatusToUserEntity">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.MoveEmploymentStatusToUserEntity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.MoveEmploymentStatusToUserEntity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Horizon_HR.Migrations.MoveEmploymentStatusToUserEntity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

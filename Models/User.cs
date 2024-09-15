@@ -36,6 +36,10 @@ namespace Horizon_HR.Models
         [StringLength(50)]
         public string Username {  get; set; }
 
+        [Column("status")]
+        [StringLength(50)]
+        public string Status { get; set; } = "Active";
+
         [Column("personal_email")]
         [Required]
         [EmailAddress]

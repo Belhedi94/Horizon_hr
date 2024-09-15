@@ -26,10 +26,6 @@ namespace Horizon_HR.Models
         [StringLength(50)]
         public string ProbationPeriod { get; set; }
 
-        [Column("employment_status")]
-        [StringLength(50)]
-        public string EmploymentStatus { get; set; } = "Active";
-
         [Column("salary")]
         [Required]
         public decimal Salary { get; set; }

@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Net;
 using System.IdentityModel.Tokens.Jwt;
 using Horizon_HR.Dtos.BankAccount;
+using Horizon_HR.Dtos.ResetPassword;
 
 
 namespace Horizon_HR.Repositories.Implementations
@@ -21,14 +22,16 @@ namespace Horizon_HR.Repositories.Implementations
         private readonly ILogger<UserRepository> _logger;
         private readonly IMapper _mapper;
         private readonly IFileStorageRepository _fileStorageService;
+        private readonly IResetPasswordRepository _resetPasswordRepository;
 
         public UserRepository(DataBaseContext context, ILogger<UserRepository> logger, IMapper mapper,
-            IFileStorageRepository fileStorageService)
+            IFileStorageRepository fileStorageService, IResetPasswordRepository resetPasswordRepository)
         {
             _context = context;
             _logger = logger;
             _mapper = mapper;
             _fileStorageService = fileStorageService;
+            _resetPasswordRepository = resetPasswordRepository;
         }
 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
@@ -115,35 +118,31 @@ namespace Horizon_HR.Repositories.Implementations
             if (user == null)
                 throw new Exception("User not found");
 
-            _mapper.Map(updateUserDto, user);
-
-            if (updateUserDto.EmploymentDetails != null)
+            if (updateUserDto.Password != null)
             {
-                if (user.EmploymentDetails != null)
-                    _mapper.Map(updateUserDto.EmploymentDetails, user.EmploymentDetails);
+                var request = new RequestResetPasswordDto
+                {
+                    Username = updateUserDto.Username,
+                    NewPassword = updateUserDto.Password
+                };
 
-                else
-                    user.EmploymentDetails = _mapper.Map<EmploymentDetails>(updateUserDto.EmploymentDetails);
+                bool result = await _resetPasswordRepository.ResetPassword(request);
             }
 
             if (updateUserDto.BankAccount != null)
+                _mapper.Map(updateUserDto, user);
+            else
             {
-                if (user.BankAccount != null)
-                    _mapper.Map(updateUserDto.BankAccount, user.BankAccount);
-
-                else
-                    user.BankAccount = _mapper.Map<BankAccount>(updateUserDto.BankAccount);
+                if (user.BankAccountId != null)
+                {
+                    var bankAccount = await _context.BankAccounts.FindAsync(user.BankAccountId);
+                    if (bankAccount != null)
+                        _context.BankAccounts.Remove(bankAccount);
+                    user.BankAccountId = null;
+                }
             }
 
-
-            //var newCv = updateUserDto.Cv;
-            //if (newCv != null)
-            //{
-            //    var currentCv = user.Cv;
-            //    if (!string.IsNullOrEmpty(currentCv))
-            //        _fileStorageService.DeleteFile(currentCv);
-            //    user.Cv = await _fileStorageService.StoreFileAsync(newCv, "cvs");
-            //}
+            _mapper.Map(updateUserDto, user);
 
             var newProfileImage = updateUserDto.ProfileImage;
             if (newProfileImage != null)
@@ -161,6 +160,7 @@ namespace Horizon_HR.Repositories.Implementations
 
         public async Task<UserDto> GetUserByIdAsync(Guid id)
         {
+
             var user = await _context.Users
                 .Include(u => u.EmploymentDetails)
                 .Include(u => u.BankAccount)
@@ -184,10 +184,6 @@ namespace Horizon_HR.Repositories.Implementations
                 _logger.LogWarning($"User with ID {id} not found.");
                 throw new Exception("User not found");
             }
-
-            //var cv = user.Cv;
-            //if (!string.IsNullOrEmpty(cv))
-            //    _fileStorageService.DeleteFile(cv);
 
             var profileImage = user.ProfileImage;
             if (!string.IsNullOrEmpty(profileImage))

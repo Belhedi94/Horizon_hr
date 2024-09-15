@@ -3,6 +3,7 @@ using Horizon_HR.Middleware;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -17,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
-builder.Services.AddSingleton<DataBaseContext>();
+builder.Services.AddDbContext<DataBaseContext>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -28,6 +29,8 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 builder.Services.AddScoped<IFileStorageRepository, FileStorageRepository>();
 builder.Services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
+builder.Services.AddScoped<IResetPasswordRepository, ResetPasswordRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
@@ -40,10 +43,10 @@ builder.Host.UseSerilog();
 var app = builder.Build();
 app.UseCors("AllowReactApp");
 
-{
-    using var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider;
-}
+//{
+//    using var scope = app.Services.CreateScope();
+//    var context = scope.ServiceProvider;
+//}
 
 if (app.Environment.IsDevelopment())
 {
