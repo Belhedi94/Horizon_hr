@@ -3,18 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Horizon_HR.Models
 {
-    public enum Gender
-    {
-        Male,
-        Female
-    }
-
-    public enum MaritalStatus
-    {
-        Single,
-        Married
-    }
-
     public class User
     {
         [Key]
@@ -76,12 +64,12 @@ namespace Horizon_HR.Models
         [Column("gender")]
         [Required]
         [StringLength(10)]
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Column("marital_status")]
         [Required]
         [StringLength(20)]
-        public string MaritalStatus { get; set; }
+        public MaritalStatus MaritalStatus { get; set; }
 
         [Column("profile_image")]
         [StringLength(255)]
@@ -100,10 +88,6 @@ namespace Horizon_HR.Models
         public Guid? BankAccountId { get; set; }
 
         public BankAccount BankAccount { get; set; }
-
-        public ICollection<LeaveRequest> LeaveRequests { get; set; }
-
-        public LeaveBalance LeaveBalance { get; set; }
 
     }
 }

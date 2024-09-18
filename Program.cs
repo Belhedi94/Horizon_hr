@@ -3,7 +3,6 @@ using Horizon_HR.Middleware;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -28,7 +27,6 @@ builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 builder.Services.AddScoped<IFileStorageRepository, FileStorageRepository>();
-builder.Services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
 builder.Services.AddScoped<IResetPasswordRepository, ResetPasswordRepository>();
 
 builder.Services.AddCors(options =>
@@ -42,11 +40,6 @@ builder.Host.UseSerilog();
 
 var app = builder.Build();
 app.UseCors("AllowReactApp");
-
-//{
-//    using var scope = app.Services.CreateScope();
-//    var context = scope.ServiceProvider;
-//}
 
 if (app.Environment.IsDevelopment())
 {

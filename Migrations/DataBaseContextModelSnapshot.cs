@@ -150,43 +150,23 @@ namespace Horizon_HR.Migrations
                     b.ToTable("employment_details", (string)null);
                 });
 
-            modelBuilder.Entity("Horizon_HR.Models.LeaveBalance", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<int>("TotalLeaveDays")
-                        .HasColumnType("int")
-                        .HasColumnName("total_leave_days");
-
-                    b.Property<float>("UsedLeaveDays")
-                        .HasColumnType("real")
-                        .HasColumnName("used_leave_days");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("leave_balances", (string)null);
-                });
-
             modelBuilder.Entity("Horizon_HR.Models.LeaveRequest", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("end_date");
+
+                    b.Property<bool>("IsHalfDay")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_half_day");
 
                     b.Property<string>("Reason")
                         .IsRequired()
@@ -202,6 +182,15 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("status");
 
+                    b.Property<int>("Type")
+                        .HasMaxLength(50)
+                        .HasColumnType("int")
+                        .HasColumnName("type");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_at");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_id");
@@ -210,7 +199,7 @@ namespace Horizon_HR.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("leave_requests", (string)null);
+                    b.ToTable("leave_requests1", (string)null);
                 });
 
             modelBuilder.Entity("Horizon_HR.Models.Position", b =>
@@ -235,27 +224,6 @@ namespace Horizon_HR.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("positions", (string)null);
-                });
-
-            modelBuilder.Entity("Horizon_HR.Models.PublicHoliday", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("date");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("description");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("public_holidays", (string)null);
                 });
 
             modelBuilder.Entity("Horizon_HR.Models.Team", b =>
@@ -330,10 +298,9 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("first_name");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
+                    b.Property<int>("Gender")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                        .HasColumnType("int")
                         .HasColumnName("gender");
 
                     b.Property<string>("LastName")
@@ -342,10 +309,9 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("last_name");
 
-                    b.Property<string>("MaritalStatus")
-                        .IsRequired()
+                    b.Property<int>("MaritalStatus")
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("int")
                         .HasColumnName("marital_status");
 
                     b.Property<string>("PersonalEmail")
@@ -421,21 +387,10 @@ namespace Horizon_HR.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Horizon_HR.Models.LeaveBalance", b =>
-                {
-                    b.HasOne("Horizon_HR.Models.User", "User")
-                        .WithOne("LeaveBalance")
-                        .HasForeignKey("Horizon_HR.Models.LeaveBalance", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Horizon_HR.Models.LeaveRequest", b =>
                 {
                     b.HasOne("Horizon_HR.Models.User", "User")
-                        .WithMany("LeaveRequests")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -488,11 +443,6 @@ namespace Horizon_HR.Migrations
                 {
                     b.Navigation("EmploymentDetails")
                         .IsRequired();
-
-                    b.Navigation("LeaveBalance")
-                        .IsRequired();
-
-                    b.Navigation("LeaveRequests");
                 });
 #pragma warning restore 612, 618
         }

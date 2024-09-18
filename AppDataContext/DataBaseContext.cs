@@ -20,8 +20,6 @@ namespace Horizon_HR.AppDataContext
         public DbSet<Position> Positions { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
-        public DbSet<LeaveBalance> LeaveBalances { get; set; }
-        public DbSet<PublicHoliday> PublicHolidays { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -55,16 +53,8 @@ namespace Horizon_HR.AppDataContext
                .HasKey(b => b.Id);
 
             modelBuilder.Entity<LeaveRequest>()
-                           .ToTable("leave_requests")
-                           .HasKey(l => l.Id);
-
-            modelBuilder.Entity<LeaveBalance>()
-                .ToTable("leave_balances")
-                .HasKey(lb => lb.Id);
-
-            modelBuilder.Entity<PublicHoliday>()
-                .ToTable("public_holidays")
-                .HasKey(p => p.Id);
+                .ToTable("leave_requests")
+                .HasKey(l => l.Id);
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.EmploymentDetails)
@@ -81,7 +71,6 @@ namespace Horizon_HR.AppDataContext
                 .HasOne(u => u.BankAccount)
                 .WithOne(b => b.User)
                 .HasForeignKey<User>(u => u.BankAccountId);
-                //.OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<EmploymentDetails>()
                 .HasOne(e => e.Team)
@@ -94,17 +83,6 @@ namespace Horizon_HR.AppDataContext
                 .WithMany(p => p.EmploymentsDetails)
                 .HasForeignKey(e => e.PositionId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<LeaveRequest>()
-                .HasOne(l => l.User)
-                .WithMany(u => u.LeaveRequests)
-                .HasForeignKey(l => l.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.LeaveBalance)
-                .WithOne(lb => lb.User)
-                .HasForeignKey<LeaveBalance>(lb => lb.UserId);
 
         }
 
