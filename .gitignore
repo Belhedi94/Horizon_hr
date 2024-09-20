@@ -20,10 +20,13 @@ wwwroot/profile_images/**
 # Ignore logs
 logs/
 
-#Ignore vs configs
-.vs/
 # dotenv files
 .env
+
+*.csproj.user
+
+appsettings.Development.json
+
 
 
 # User-specific files
