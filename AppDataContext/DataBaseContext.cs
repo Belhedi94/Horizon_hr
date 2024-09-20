@@ -20,6 +20,7 @@ namespace Horizon_HR.AppDataContext
         public DbSet<Position> Positions { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
+        public DbSet<PublicHoliday> PublicHolidays { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +29,17 @@ namespace Horizon_HR.AppDataContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<PublicHoliday>().HasData(
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 1, 1), Description = "New year's Day" },
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 3, 20), Description = "Independence Day" },
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 4, 9), Description = "Martyrs' Day" },
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 5, 1), Description = "Labour Day" },
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 7, 25), Description = "Republic Day" },
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 8, 13), Description = "Women's Day" },
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 10, 15), Description = "Evacuation Day" },
+                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 12, 18), Description = "Revolution Day" }
+                );
+
             modelBuilder.Entity<User>()
                 .ToTable("users")
                 .HasKey(u => u.Id);
@@ -83,6 +95,11 @@ namespace Horizon_HR.AppDataContext
                 .WithMany(p => p.EmploymentsDetails)
                 .HasForeignKey(e => e.PositionId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.LeaveRequests)
+                .WithOne(l => l.User)
+                .HasForeignKey(l => l.UserId);
 
         }
 

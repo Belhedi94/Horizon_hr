@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\appdatacontext\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:appdatacontext\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|c:\\users\\rafaa\\desktop\\pfe sesame\\projet\\horizon_hr\\migrations\\20240920160736_createpublicholidaytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0614AD1F-7CA3-4334-8F20-0C4580C42626}|Horizon_HR.csproj|solutionrelative:migrations\\20240920160736_createpublicholidaytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,27 +39,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DataBaseContext.cs",
-              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\AppDataContext\\DataBaseContext.cs",
-              "RelativeDocumentMoniker": "AppDataContext\\DataBaseContext.cs",
-              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\AppDataContext\\DataBaseContext.cs",
-              "RelativeToolTip": "AppDataContext\\DataBaseContext.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAAAEMAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T18:56:27.464Z",
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-20T16:12:12.066Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAAAGUAAAA0AAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T18:56:04.72Z",
+              "WhenOpened": "2024-09-20T16:12:02.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20240920160736_CreatePublicHolidayTable.cs",
+              "DocumentMoniker": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Migrations\\20240920160736_CreatePublicHolidayTable.cs",
+              "RelativeDocumentMoniker": "Migrations\\20240920160736_CreatePublicHolidayTable.cs",
+              "ToolTip": "C:\\Users\\rafaa\\Desktop\\PFE SESAME\\Projet\\Horizon_HR\\Migrations\\20240920160736_CreatePublicHolidayTable.cs",
+              "RelativeToolTip": "Migrations\\20240920160736_CreatePublicHolidayTable.cs",
+              "ViewState": "AQIAADQAAAAAAAAAAAASwEcAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T16:07:52.613Z",
               "EditorCaption": ""
             }
           ]

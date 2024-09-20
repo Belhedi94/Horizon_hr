@@ -199,7 +199,7 @@ namespace Horizon_HR.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("leave_requests1", (string)null);
+                    b.ToTable("leave_requests", (string)null);
                 });
 
             modelBuilder.Entity("Horizon_HR.Models.Position", b =>
@@ -224,6 +224,74 @@ namespace Horizon_HR.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("positions", (string)null);
+                });
+
+            modelBuilder.Entity("Horizon_HR.Models.PublicHoliday", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PublicHolidays");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8310b62d-f35b-45d0-b590-84fb2ef65216"),
+                            Date = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "New year's Day"
+                        },
+                        new
+                        {
+                            Id = new Guid("f004985b-b1de-45e3-af3a-ecf0c6dd7238"),
+                            Date = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Independence Day"
+                        },
+                        new
+                        {
+                            Id = new Guid("21e8bf45-04e4-46a0-9d3a-f0120ec989b6"),
+                            Date = new DateTime(2024, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Martyrs' Day"
+                        },
+                        new
+                        {
+                            Id = new Guid("0ce49648-ad69-4a9e-85da-9c39705da56a"),
+                            Date = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Labour Day"
+                        },
+                        new
+                        {
+                            Id = new Guid("57ca2f30-4d0d-40cf-84da-d8c701360261"),
+                            Date = new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Republic Day"
+                        },
+                        new
+                        {
+                            Id = new Guid("81cd297f-3bc7-4732-8e8d-31c360950e54"),
+                            Date = new DateTime(2024, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Women's Day"
+                        },
+                        new
+                        {
+                            Id = new Guid("0cbe0883-1c1d-41a3-83b0-cb6b407c19a9"),
+                            Date = new DateTime(2024, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Evacuation Day"
+                        },
+                        new
+                        {
+                            Id = new Guid("d98eb67f-ae7d-4a13-98f9-a299c3a0cbd6"),
+                            Date = new DateTime(2024, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Revolution Day"
+                        });
                 });
 
             modelBuilder.Entity("Horizon_HR.Models.Team", b =>
@@ -390,7 +458,7 @@ namespace Horizon_HR.Migrations
             modelBuilder.Entity("Horizon_HR.Models.LeaveRequest", b =>
                 {
                     b.HasOne("Horizon_HR.Models.User", "User")
-                        .WithMany()
+                        .WithMany("LeaveRequests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -443,6 +511,8 @@ namespace Horizon_HR.Migrations
                 {
                     b.Navigation("EmploymentDetails")
                         .IsRequired();
+
+                    b.Navigation("LeaveRequests");
                 });
 #pragma warning restore 612, 618
         }

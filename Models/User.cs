@@ -83,11 +83,12 @@ namespace Horizon_HR.Models
 
         public EmploymentDetails EmploymentDetails { get; set; }
 
-
         [Column("bank_account_id")]
         public Guid? BankAccountId { get; set; }
 
         public BankAccount BankAccount { get; set; }
+
+        public ICollection<LeaveRequest> LeaveRequests { get; set; }
 
     }
 }

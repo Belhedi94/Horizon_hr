@@ -20,8 +20,11 @@ wwwroot/profile_images/**
 # Ignore logs
 logs/
 
+#Ignore vs configs
+.vs/
 # dotenv files
 .env
+
 
 # User-specific files
 *.rsuser
