@@ -2,18 +2,15 @@
 
 namespace Horizon_HR.Dtos.LeaveRequest
 {
-    public class CreateLeaveRequestDto
+    public class UpdateLeaveRequestDto
     {
         [Required]
-        public Guid UserId { get; set; }
+        public LeaveType Type { get; set; }
 
         [Required]
-        public string Type { get; set; }
+        public DateTime StartDate { get; set; }
 
-        [Required]
-        public string StartDate { get; set; }
-
-        public string? EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [Required]
         public bool IsHalfDay { get; set; }

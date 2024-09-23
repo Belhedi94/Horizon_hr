@@ -6,6 +6,8 @@ using Horizon_HR.Models;
 using Horizon_HR.Dtos.Departments;
 using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Dtos.BankAccount;
+using Horizon_HR.Dtos.LeaveRequest;
+using Horizon_HR.Dtos.LeaveBalance;
 
 namespace Horizon_HR.MappingProfiles
 {
@@ -49,6 +51,19 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<Position, PositionDto>();
             CreateMap<CreatePositionDto, Position>();
             CreateMap<UpdatePositionDto, Position>();
+
+
+            CreateMap<CreateLeaveRequestDto, LeaveRequest>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+
+            CreateMap<LeaveRequest, LeaveRequestDto>();
+
+            CreateMap<UpdateLeaveRequestDto, LeaveRequest>()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.Now));
+
+            CreateMap<LeaveBalance, CreateLeaveBalanceDto>();
+            CreateMap<CreateLeaveBalanceDto, LeaveBalance>();
 
 
         }

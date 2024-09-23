@@ -11,6 +11,8 @@ using System.Net;
 using System.IdentityModel.Tokens.Jwt;
 using Horizon_HR.Dtos.BankAccount;
 using Horizon_HR.Dtos.ResetPassword;
+using Horizon_HR.Services.Interfaces;
+using Horizon_HR.Dtos.LeaveBalance;
 
 
 namespace Horizon_HR.Repositories.Implementations
@@ -23,15 +25,18 @@ namespace Horizon_HR.Repositories.Implementations
         private readonly IMapper _mapper;
         private readonly IFileStorageRepository _fileStorageService;
         private readonly IResetPasswordRepository _resetPasswordRepository;
+        private readonly ILeaveBalanceService _leaveBalanceService;
 
         public UserRepository(DataBaseContext context, ILogger<UserRepository> logger, IMapper mapper,
-            IFileStorageRepository fileStorageService, IResetPasswordRepository resetPasswordRepository)
+            IFileStorageRepository fileStorageService, IResetPasswordRepository resetPasswordRepository,
+            ILeaveBalanceService leaveBalanceService)
         {
             _context = context;
             _logger = logger;
             _mapper = mapper;
             _fileStorageService = fileStorageService;
             _resetPasswordRepository = resetPasswordRepository;
+            _leaveBalanceService = leaveBalanceService;
         }
 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
@@ -88,7 +93,7 @@ namespace Horizon_HR.Repositories.Implementations
                         var bankAccountEntity = _mapper.Map<BankAccount>(bankAccountData);
                         _context.Add(bankAccountEntity);
                         await _context.SaveChangesAsync();
-
+                        
                         var bankAccountId = bankAccountEntity.Id;
                         user.BankAccountId = bankAccountId;
                         
@@ -98,6 +103,17 @@ namespace Horizon_HR.Repositories.Implementations
                     user.Id = Guid.Parse(userId);
                     _context.Add(user);
                     await _context.SaveChangesAsync();
+
+                    var newLeaveBalance = new CreateLeaveBalanceDto
+                    {
+                        Annual = 0,
+                        Sick = 10,
+                        UserId = user.Id
+                    };
+
+                    await _leaveBalanceService.CreateUserLeaveBalanceAsync(newLeaveBalance);
+
+
                 }
                 else
                 {

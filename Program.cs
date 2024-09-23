@@ -3,6 +3,8 @@ using Horizon_HR.Middleware;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
+using Horizon_HR.Services.Implementations;
+using Horizon_HR.Services.Interfaces;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -28,6 +30,10 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 builder.Services.AddScoped<IFileStorageRepository, FileStorageRepository>();
 builder.Services.AddScoped<IResetPasswordRepository, ResetPasswordRepository>();
+builder.Services.AddScoped<ILeaveRequestService, LeaveRequestService>();
+builder.Services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
+builder.Services.AddScoped<ILeaveBalanceRepository, LeaveBalanceRepository>();
+builder.Services.AddScoped<ILeaveBalanceService, LeaveBalanceService>();
 
 builder.Services.AddCors(options =>
 {

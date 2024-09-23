@@ -90,5 +90,7 @@ namespace Horizon_HR.Models
 
         public ICollection<LeaveRequest> LeaveRequests { get; set; }
 
+        public LeaveBalance LeaveBalance { get; set; }
+
     }
 }
