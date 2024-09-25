@@ -34,6 +34,7 @@ namespace Horizon_HR.Services.Implementations
             var isHalfDay = createLeaveRequestDto.IsHalfDay;
             var startDate = DateTime.Parse(createLeaveRequestDto.StartDate);
             DateTime? endDate = null;
+
             if (!string.IsNullOrEmpty(createLeaveRequestDto.EndDate))
                 endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
             if (!isHalfDay)
@@ -48,10 +49,14 @@ namespace Horizon_HR.Services.Implementations
                 if (endDate != null)
                     return Result<LeaveRequest>.Failure("Date range is not acceptable for half days type");
 
-                var publicHoliday = _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
-                if (publicHoliday == null)
+                var publicHoliday = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
+                if (!publicHoliday.Any() && DayOfWeek.Saturday != startDate.DayOfWeek && DayOfWeek.Sunday != startDate.DayOfWeek)
                     daysTaken = 0.5;
+
             }
+
+            if (daysTaken == 0.0)
+                return Result<LeaveRequest>.Failure("Please verify your selection, you can't choose a date which corresponds to public holiday/weekend");
 
             var leaveRequest = _mapper.Map<LeaveRequest>(createLeaveRequestDto);
             leaveRequest.UpdatedAt = DateTime.Now;
