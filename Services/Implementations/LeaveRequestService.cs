@@ -27,26 +27,30 @@ namespace Horizon_HR.Services.Implementations
 
         public async Task<Result<LeaveRequest>> SubmitLeaveRequestAsync(CreateLeaveRequestDto createLeaveRequestDto)
         {
-            var leaveType = createLeaveRequestDto.Type;
             var userId = createLeaveRequestDto.UserId;
-            if (leaveType == "Annual")
+            var daysTaken = 0.0;
+            
+            var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
+            var isHalfDay = createLeaveRequestDto.IsHalfDay;
+            var startDate = DateTime.Parse(createLeaveRequestDto.StartDate);
+            DateTime? endDate = null;
+            if (!string.IsNullOrEmpty(createLeaveRequestDto.EndDate))
+                endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
+            if (!isHalfDay)
             {
-                var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
-                var isHalfDay = createLeaveRequestDto.IsHalfDay;
+                daysTaken = await CalculateLeaveDays(startDate, endDate);
+                var remainingBalance = createLeaveRequestDto.Type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
+                if (daysTaken > remainingBalance)
+                    return Result<LeaveRequest>.Failure("Insufficient leave balance");
+            }
+            else
+            {
+                if (endDate != null)
+                    return Result<LeaveRequest>.Failure("Date range is not acceptable for half days type");
 
-                if (!isHalfDay)
-                {
-                    var startDate = DateTime.Parse(createLeaveRequestDto.StartDate);
-                    DateTime? endDate = null;
-                    if (!string.IsNullOrEmpty(createLeaveRequestDto.EndDate))
-                        endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
-
-                    //var daysTaken = endDate.HasValue ? await CalculateLeaveDays(startDate, endDate.Value) : 1;
-
-                    var daysTaken = await CalculateLeaveDays(startDate, endDate);
-                    if (daysTaken > leaveBalance.Annual)
-                        return Result<LeaveRequest>.Failure("Insufficient leave balance");
-                }
+                var publicHoliday = _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
+                if (publicHoliday == null)
+                    daysTaken = 0.5;
             }
 
             var leaveRequest = _mapper.Map<LeaveRequest>(createLeaveRequestDto);
@@ -60,25 +64,27 @@ namespace Horizon_HR.Services.Implementations
 
         public async Task<int> CalculateLeaveDays(DateTime startDate, DateTime? endDate)
         {
-            //TimeSpan difference = endDate - startDate;
-            //int daysBetween = difference.Days;
-
-            //return daysBetween;
-
             var publicHolidays = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, endDate);
-
             int validLeaveDays = 0;
-            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            if (endDate.HasValue)
             {
-                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
-                    continue;
+                for (var date = startDate; date <= endDate; date = date.AddDays(1))
+                {
+                    if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                        continue;
 
-                if (publicHolidays.Contains(date))
-                    continue;
+                    if (publicHolidays.Contains(date))
+                        continue;
 
-                validLeaveDays++;
+                    validLeaveDays++;
+                }
             }
-
+            else
+            {
+                if(!publicHolidays.Any() && startDate.DayOfWeek != DayOfWeek.Saturday && startDate.DayOfWeek != DayOfWeek.Sunday)
+                    validLeaveDays = 1;
+            }
+            
             return validLeaveDays;
 
         }

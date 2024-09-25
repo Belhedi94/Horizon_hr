@@ -25,7 +25,7 @@ namespace Horizon_HR.Repositories.Implementations
             else
                 publicHolidays = await _context.PublicHolidays
                     .Where(p => p.Date >= startDate)
-                    .Where(p => p.Date <= startDate)
+                    .Where(p => p.Date <= endDate)
                     .Select(p => p.Date)
                     .ToListAsync();
 
