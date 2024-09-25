@@ -1,6 +1,7 @@
 ﻿using Horizon_HR.AppDataContext;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Horizon_HR.Repositories.Implementations
 {
@@ -19,7 +20,7 @@ namespace Horizon_HR.Repositories.Implementations
         {
             try
             {
-                _context.leaveBalance.Add(leaveBalance);
+                _context.LeaveBalances.Add(leaveBalance);
 
                 await _context.SaveChangesAsync();
 
@@ -32,5 +33,12 @@ namespace Horizon_HR.Repositories.Implementations
                 
             }
         }
+
+        public async Task<LeaveBalance> GetLeaveBalanceByUserAsync(Guid userId)
+        {
+            var leaveBalance = await _context.LeaveBalances.FirstOrDefaultAsync(l => l.UserId == userId);
+            return leaveBalance;
+        }
+
     }
 }

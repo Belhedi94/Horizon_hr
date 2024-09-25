@@ -5,6 +5,7 @@ using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.Services.Implementations;
 using Horizon_HR.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -19,7 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
-builder.Services.AddDbContext<DataBaseContext>();
+builder.Services.AddDbContext<DataBaseContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -34,6 +36,8 @@ builder.Services.AddScoped<ILeaveRequestService, LeaveRequestService>();
 builder.Services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
 builder.Services.AddScoped<ILeaveBalanceRepository, LeaveBalanceRepository>();
 builder.Services.AddScoped<ILeaveBalanceService, LeaveBalanceService>();
+builder.Services.AddScoped<IPublicHolidaysRepository, PublicHolidaysRepository>();
+builder.Services.AddScoped<IPublicHolidaysService, PublicHolidaysService>();
 
 builder.Services.AddCors(options =>
 {

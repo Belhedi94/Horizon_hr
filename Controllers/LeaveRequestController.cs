@@ -21,9 +21,12 @@ namespace Horizon_HR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = _leaveRequestService.SubmitLeaveRequestAsync(createLeaveRequestDto);
+            var result = await _leaveRequestService.SubmitLeaveRequestAsync(createLeaveRequestDto);
 
-            return Ok(result);
+            if (result.IsSuccess)
+                return Ok(result.Data);
+            else
+                return BadRequest(result.ErrorMessage);
         }
     }
 }

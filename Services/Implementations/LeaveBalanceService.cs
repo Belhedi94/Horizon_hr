@@ -16,10 +16,12 @@ namespace Horizon_HR.Services.Implementations
             _mapper = mapper;
             _leaveBalanceRepository = leaveBalanceRepository;
         }
-        //public async Task<LeaveBalance> GetLeaveBalanceByUserAsync(Guid userId)
-        //{
-            
-        //}
+
+        public async Task<LeaveBalance> GetLeaveBalanceByUserAsync(Guid userId)
+        {
+            var leaveBalance = await _leaveBalanceRepository.GetLeaveBalanceByUserAsync(userId);
+            return leaveBalance;
+        }
 
         public async Task CreateUserLeaveBalanceAsync(CreateLeaveBalanceDto createLeaveBalanceDto)
         {

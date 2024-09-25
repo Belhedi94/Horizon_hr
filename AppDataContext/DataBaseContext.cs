@@ -21,7 +21,7 @@ namespace Horizon_HR.AppDataContext
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<PublicHoliday> PublicHolidays { get; set; }
-        public DbSet<LeaveBalance> leaveBalance { get; set; }
+        public DbSet<LeaveBalance> LeaveBalances { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

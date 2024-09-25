@@ -5,7 +5,7 @@ namespace Horizon_HR.Services.Interfaces
 {
     public interface ILeaveBalanceService
     {
-        //Task<LeaveBalance> GetLeaveBalanceByUserAsync(Guid userId);
+        Task<LeaveBalance> GetLeaveBalanceByUserAsync(Guid userId);
         Task CreateUserLeaveBalanceAsync(CreateLeaveBalanceDto createLeaveBalanceDto);
     }
 }
