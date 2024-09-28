@@ -1,6 +1,7 @@
 ﻿using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.AppDataContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace Horizon_HR.Repositories.Implementations
 {
@@ -14,6 +15,7 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
             _context = context;
         }
+
         public async Task SubmitLeaveRequestAsync(LeaveRequest leaveRequest)
         {
             try
@@ -27,6 +29,15 @@ namespace Horizon_HR.Repositories.Implementations
                 throw;
             }
             
+        }
+
+        public async Task<IEnumerable<LeaveRequest>> GetLeaveRequestsByUserAsync(Guid userId)
+        {
+            var leaveRequest = await _context.LeaveRequests
+                .Where(l => l.UserId == userId)
+                .ToListAsync();
+
+            return leaveRequest;
         }
 
     }

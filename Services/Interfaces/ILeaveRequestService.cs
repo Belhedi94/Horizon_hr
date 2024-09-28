@@ -7,7 +7,7 @@ namespace Horizon_HR.Services.Interfaces
     public interface ILeaveRequestService
     {
         Task<Result<LeaveRequest>>SubmitLeaveRequestAsync(CreateLeaveRequestDto createLeaveRequestDto);
-        //Task<int> CalculateLeaveDays(DateTime startDate, DateTime endDate);
-        Task<int> CalculateLeaveDays(DateTime startDate, DateTime? endDate);
+        Task<int> CalculateLeaveDaysAsync(DateTime startDate, DateTime? endDate);
+        Task<Result<IEnumerable<LeaveRequestDto>>> GetLeaveRequestsByUserAsync(Guid userId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Horizon_HR.Dtos.LeaveRequest;
 using Horizon_HR.Models;
+using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.Services.Common;
 using Horizon_HR.Services.Interfaces;
@@ -39,7 +40,7 @@ namespace Horizon_HR.Services.Implementations
                 endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
             if (!isHalfDay)
             {
-                daysTaken = await CalculateLeaveDays(startDate, endDate);
+                daysTaken = await CalculateLeaveDaysAsync(startDate, endDate);
                 var remainingBalance = createLeaveRequestDto.Type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
                 if (daysTaken > remainingBalance)
                     return Result<LeaveRequest>.Failure("Insufficient leave balance");
@@ -67,7 +68,7 @@ namespace Horizon_HR.Services.Implementations
         }
 
 
-        public async Task<int> CalculateLeaveDays(DateTime startDate, DateTime? endDate)
+        public async Task<int> CalculateLeaveDaysAsync(DateTime startDate, DateTime? endDate)
         {
             var publicHolidays = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, endDate);
             int validLeaveDays = 0;
@@ -91,6 +92,20 @@ namespace Horizon_HR.Services.Implementations
             }
             
             return validLeaveDays;
+
+        }
+
+        public async Task<Result<IEnumerable<LeaveRequestDto>>> GetLeaveRequestsByUserAsync(Guid userId)
+        {
+            var leaveRequests = await _leaveRequestRepository.GetLeaveRequestsByUserAsync(userId);
+            if (leaveRequests != null && leaveRequests.Any())
+            {
+                var result = _mapper.Map<IEnumerable<LeaveRequestDto>>(leaveRequests);
+                return Result<IEnumerable<LeaveRequestDto>>.Success(result);
+            }
+            else
+                return Result<IEnumerable<LeaveRequestDto>>.Failure("No leave requests saved for this user");
+
 
         }
 

@@ -24,9 +24,20 @@ namespace Horizon_HR.Controllers
             var result = await _leaveRequestService.SubmitLeaveRequestAsync(createLeaveRequestDto);
 
             if (result.IsSuccess)
-                return Ok(result.Data);
+                return Created();
             else
                 return BadRequest(result.ErrorMessage);
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetLeaveRequestsByUserAsync(Guid userId)
+        {
+            var result = await _leaveRequestService.GetLeaveRequestsByUserAsync(userId);
+
+            if (result.IsSuccess)
+                return Ok(result.Data);
+            else
+                return NotFound(result.ErrorMessage);
         }
     }
 }
