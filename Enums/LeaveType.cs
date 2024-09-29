@@ -1,5 +1,5 @@
 ﻿public enum LeaveType
 {
-    SickLeave,
+    Sick,
     Annual,
 }

@@ -31,5 +31,18 @@ namespace Horizon_HR.Services.Implementations
 
         }
 
+        public async Task UpdateLeaveBalanceAsync(Guid id, string type, double actualBalance, double takenDays)
+        {
+            UpdateLeaveBalanceDto updateLeaveBalanceDto = new();
+            if (type == "Annual")
+                updateLeaveBalanceDto.Annual = actualBalance - takenDays;
+            else
+                updateLeaveBalanceDto.Sick = actualBalance - takenDays;
+
+            updateLeaveBalanceDto.UpdatedAt = DateTime.Now;
+
+            await _leaveBalanceRepository.UpdateLeaveBalanceAsync(id, updateLeaveBalanceDto);
+        }
+
     }
 }

@@ -2,8 +2,8 @@
 {
     public class UpdateLeaveBalanceDto
     {
-        public int? Annual { get; set; }
-        public int? Sick { get; set; }
-        public DateTime LastUpdated { get; set; }
+        public double? Annual { get; set; }
+        public double? Sick { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

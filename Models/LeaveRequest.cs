@@ -15,7 +15,7 @@ namespace Horizon_HR.Models
         [Required]
         [Column("type")]
         [StringLength(50)]
-        public LeaveType Type { get; set; }
+        public string Type { get; set; }
 
         [Required]
         [Column("start_date")]

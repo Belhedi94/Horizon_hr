@@ -2,11 +2,11 @@
 {
     public class LeaveBalanceDto
     {
-        public int Annual { get; set; }
+        public double Annual { get; set; }
 
-        public int Sick { get; set; }
+        public double Sick { get; set; }
 
-        public Guid UserId { get; set; }
+        public Guid LeaveBalanceId { get; set; }
 
     }
 }

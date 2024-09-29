@@ -1,4 +1,5 @@
-﻿using Horizon_HR.Models;
+﻿using Horizon_HR.Dtos.LeaveBalance;
+using Horizon_HR.Models;
 
 namespace Horizon_HR.Repositories.Interfaces
 {
@@ -6,5 +7,6 @@ namespace Horizon_HR.Repositories.Interfaces
     {
         Task<LeaveBalance> CreateUserLeaveBalanceAsync(LeaveBalance leaveBalance);
         Task<LeaveBalance> GetLeaveBalanceByUserAsync(Guid userId);
+        Task UpdateLeaveBalanceAsync(Guid id, UpdateLeaveBalanceDto updateLeaveBalanceDto);
     }
 }

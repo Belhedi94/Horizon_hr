@@ -4,6 +4,7 @@ using Horizon_HR.AppDataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Horizon_HR.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240929091956_UpdateLeaveType")]
+    partial class UpdateLeaveType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,12 +159,12 @@ namespace Horizon_HR.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Annual")
-                        .HasColumnType("float")
+                    b.Property<int>("Annual")
+                        .HasColumnType("int")
                         .HasColumnName("annual");
 
-                    b.Property<double>("Sick")
-                        .HasColumnType("float")
+                    b.Property<int>("Sick")
+                        .HasColumnType("int")
                         .HasColumnName("sick");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -277,49 +280,49 @@ namespace Horizon_HR.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9644258c-4136-4099-a54d-f12ec3bf2558"),
+                            Id = new Guid("f8be0685-81aa-4bb0-868b-49748a133e36"),
                             Date = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "New year's Day"
                         },
                         new
                         {
-                            Id = new Guid("3dd0c6d6-d12b-406d-be6e-de34a30738cf"),
+                            Id = new Guid("f5284b3a-e365-4707-9963-e9daee276c15"),
                             Date = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Independence Day"
                         },
                         new
                         {
-                            Id = new Guid("5607434f-613a-410e-ad57-f10a3b2a2663"),
+                            Id = new Guid("799bc15f-f023-4399-9a2a-2c793161925f"),
                             Date = new DateTime(2024, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Martyrs' Day"
                         },
                         new
                         {
-                            Id = new Guid("2a1bd0e0-77e1-4d76-9f59-c1e3a1bc6d3e"),
+                            Id = new Guid("fcee232d-2fec-4ad1-82fb-54903ae74d9f"),
                             Date = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Labour Day"
                         },
                         new
                         {
-                            Id = new Guid("90b0a845-8c18-486e-93c9-79d0136e3ca9"),
+                            Id = new Guid("5d93cbf4-7555-42cf-ad0f-2b8c2e074e41"),
                             Date = new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Republic Day"
                         },
                         new
                         {
-                            Id = new Guid("1691eba7-9a9f-4219-b8c8-7160ddf5450a"),
+                            Id = new Guid("a3be82f5-f9b9-4d7b-88b7-b3e7d008713e"),
                             Date = new DateTime(2024, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Women's Day"
                         },
                         new
                         {
-                            Id = new Guid("0b360352-77bd-4a7f-89d8-13aa63e60cb5"),
+                            Id = new Guid("e5ebffbb-5e57-495d-a67e-38337ed4ebd3"),
                             Date = new DateTime(2024, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Evacuation Day"
                         },
                         new
                         {
-                            Id = new Guid("c3567d7d-c627-4044-bea6-18552f2c9078"),
+                            Id = new Guid("ae63635e-3dfb-49c4-8c94-4a0138f5420f"),
                             Date = new DateTime(2024, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Revolution Day"
                         });

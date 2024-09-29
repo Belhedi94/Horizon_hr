@@ -9,10 +9,10 @@ namespace Horizon_HR.Models
         public Guid Id { get; set; }
 
         [Column("annual")]
-        public int Annual { get; set; }
+        public double Annual { get; set; }
 
         [Column("sick")]
-        public int Sick { get; set; }
+        public double Sick { get; set; }
 
         [Column("updated_at")]
         public DateTime UpdatedAt { get; set; }

@@ -39,5 +39,11 @@ namespace Horizon_HR.Controllers
             else
                 return NotFound(result.ErrorMessage);
         }
+
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
+        //{
+            
+        //}
     }
 }

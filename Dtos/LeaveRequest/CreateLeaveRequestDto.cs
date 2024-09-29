@@ -20,8 +20,5 @@ namespace Horizon_HR.Dtos.LeaveRequest
 
         [Required]
         public string Reason { get; set; }
-
-        [Required]
-        public string Status { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Horizon_HR.Dtos.LeaveRequest;
 using Horizon_HR.Models;
-using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.Services.Common;
 using Horizon_HR.Services.Interfaces;
@@ -30,18 +29,19 @@ namespace Horizon_HR.Services.Implementations
         {
             var userId = createLeaveRequestDto.UserId;
             var daysTaken = 0.0;
-            
+            var remainingBalance = 0.0;
+
             var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
             var isHalfDay = createLeaveRequestDto.IsHalfDay;
             var startDate = DateTime.Parse(createLeaveRequestDto.StartDate);
             DateTime? endDate = null;
+            remainingBalance = createLeaveRequestDto.Type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
 
             if (!string.IsNullOrEmpty(createLeaveRequestDto.EndDate))
                 endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
             if (!isHalfDay)
             {
                 daysTaken = await CalculateLeaveDaysAsync(startDate, endDate);
-                var remainingBalance = createLeaveRequestDto.Type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
                 if (daysTaken > remainingBalance)
                     return Result<LeaveRequest>.Failure("Insufficient leave balance");
             }
@@ -61,7 +61,11 @@ namespace Horizon_HR.Services.Implementations
 
             var leaveRequest = _mapper.Map<LeaveRequest>(createLeaveRequestDto);
             leaveRequest.UpdatedAt = DateTime.Now;
+            leaveRequest.Status = "Draft";
             await _leaveRequestRepository.SubmitLeaveRequestAsync(leaveRequest);
+
+            await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, createLeaveRequestDto.Type, remainingBalance, daysTaken);
+
 
             return Result<LeaveRequest>.Success(leaveRequest);
 
