@@ -1,4 +1,6 @@
-﻿namespace Horizon_HR.Dtos.LeaveRequest
+﻿using Horizon_HR.Dtos.Users;
+
+namespace Horizon_HR.Dtos.LeaveRequest
 {
     public class LeaveRequestDto
     {
@@ -6,7 +8,7 @@
 
         public Guid UserId { get; set; }
 
-        public LeaveType Type { get; set; }
+        public string Type { get; set; }
 
         public DateTime StartDate { get; set; }
 
@@ -19,5 +21,7 @@
         public string Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public UserDto User { get; set; }
     }
 }

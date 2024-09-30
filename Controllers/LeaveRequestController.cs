@@ -40,10 +40,29 @@ namespace Horizon_HR.Controllers
                 return NotFound(result.ErrorMessage);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
-        //{
-            
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetAllLeaveRequestsAsync()
+        {
+            var result = await _leaveRequestService.GetAllLeaveRequestsAsync();
+
+            if (result.IsSuccess)
+                return Ok(result.Data);
+            else
+                return NotFound(result.ErrorMessage);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateLeaveRequestsAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _leaveRequestService.UpdateLeaveRequestAsync(id, updateLeaveRequestDto);
+
+            if (result.IsSuccess)
+                return Ok(result.Data);
+            else
+                return NotFound(result.ErrorMessage);
+        }
     }
 }

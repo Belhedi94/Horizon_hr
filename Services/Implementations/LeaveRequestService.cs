@@ -113,5 +113,20 @@ namespace Horizon_HR.Services.Implementations
 
         }
 
+        public async Task<Result<IEnumerable<LeaveRequestDto>>> GetAllLeaveRequestsAsync()
+        {
+            var leaveRequests = await _leaveRequestRepository.GetAllLeaveRequestsAsync();
+
+            return Result<IEnumerable<LeaveRequestDto>>.Success(leaveRequests);
+        }
+
+        public async Task<Result<LeaveRequestDto>> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
+        {
+            var leaveRequest = await _leaveRequestRepository.UpdateLeaveRequestAsync(id, updateLeaveRequestDto);
+            var result = _mapper.Map<LeaveRequestDto>(leaveRequest);
+            
+            return Result<LeaveRequestDto>.Success(result);
+
+        }
     }
 }

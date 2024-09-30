@@ -7,5 +7,7 @@ namespace Horizon_HR.Repositories.Interfaces
     {
         Task SubmitLeaveRequestAsync(LeaveRequest leaveRequest);
         Task <IEnumerable<LeaveRequest>> GetLeaveRequestsByUserAsync(Guid userId);
+        Task <IEnumerable<LeaveRequestDto>> GetAllLeaveRequestsAsync();
+        Task<LeaveRequest> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto);
     }
 }
