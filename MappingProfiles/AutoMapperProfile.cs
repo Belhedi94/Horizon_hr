@@ -50,7 +50,8 @@ namespace Horizon_HR.MappingProfiles
 
             CreateMap<Position, PositionDto>();
             CreateMap<CreatePositionDto, Position>();
-            CreateMap<UpdatePositionDto, Position>();
+            CreateMap<UpdatePositionDto, Position>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
 
             CreateMap<CreateLeaveRequestDto, LeaveRequest>()

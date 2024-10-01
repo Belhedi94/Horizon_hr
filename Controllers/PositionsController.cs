@@ -1,5 +1,8 @@
-﻿using Horizon_HR.Dtos.Positions;
+﻿using Azure.Core.GeoJson;
+using Horizon_HR.Dtos.ApiResponse;
+using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Repositories.Interfaces;
+using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Horizon_HR.Controllers
@@ -8,11 +11,36 @@ namespace Horizon_HR.Controllers
     [ApiController]
     public class PositionsController : ControllerBase
     {
-        private readonly IPositionRepository _positionServices;
+        private readonly IPositionService _positionService;
 
-        public PositionsController(IPositionRepository positionServices)
+        public PositionsController(IPositionService positionServices)
         {
-            _positionServices = positionServices;
+            _positionService = positionServices;
+        }
+
+        /// <summary>
+        /// Retrieves all positions.
+        /// </summary>
+        /// <returns>A list of all positions.</returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllPositionsAsync()
+        {
+            var positions = await _positionService.GetAllPositionsAsync();
+            if (!positions.Any())
+                return Ok(new ApiResponse<IEnumerable<PositionDto>>
+                {
+                    Status = 404,
+                    Message = "No positions found.",
+                    Data = Enumerable.Empty<PositionDto>()
+                });
+
+            return Ok(new ApiResponse<IEnumerable<PositionDto>>
+            {
+                Status = 200,
+                Message = "Positions retrieved successfully.",
+                Data = positions
+            });
+
         }
 
         /// <summary>
@@ -24,14 +52,36 @@ namespace Horizon_HR.Controllers
         public async Task<IActionResult> CreatePositionAsync(CreatePositionDto createPositionDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            await _positionServices.CreatePositionAsync(createPositionDto);
+            var newPosition = await _positionService.CreatePositionAsync(createPositionDto);
 
-            return Ok(new {message = "Position created successfully."});
+            return Ok (new ApiResponse<PositionDto>
+            {
+                Status = 201,
+                Message = "Position created successfully.",
+                Data = newPosition
+            });
         }
+
+        /// <summary>
+        /// Retrieves a position by ID.
+        /// </summary>
+        /// <param name="id">The ID of the position to retrieve.</param>
+        /// <returns>The position data.</returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPositionByIdAsync(Guid id)
+        {
+            var position = await _positionService.GetPositionByIdAsync(id);
+
+            return Ok(new ApiResponse<PositionDto>
+            {
+                Status = 201,
+                Message = "Position retrieved successfully.",
+                Data = position
+            });
+        }
+
 
         /// <summary>
         /// Updates an existing position.
@@ -45,37 +95,16 @@ namespace Horizon_HR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _positionServices.UpdatePositionAsync(id, updatePositionDto);
+            var updatedPosition = await _positionService.UpdatePositionAsync(id, updatePositionDto);
 
-            return Ok(new { message = "Position updated successfully." });
+            return Ok(new ApiResponse<PositionDto>
+            {
+                Status = 201,
+                Message = "Position updated successfully.",
+                Data = updatedPosition
+            });
         }
 
-        /// <summary>
-        /// Retrieves all positions.
-        /// </summary>
-        /// <returns>A list of all positions.</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetAllPositionsAsync()
-        {
-            var positions = await _positionServices.GetAllPositionsAsync();
-            if (!positions.Any())
-                return Ok(new { message = "No positions found", data = Enumerable.Empty<PositionDto>() });
-
-            return Ok(new { message = "Positions retrieved successfully", data = positions });
-
-        }
-
-        /// <summary>
-        /// Retrieves a position by ID.
-        /// </summary>
-        /// <param name="id">The ID of the position to retrieve.</param>
-        /// <returns>The position data.</returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPositionByIdAsync(Guid id)
-        {
-            var position = await _positionServices.GetPositionByIdAsync(id);
-            return Ok(new { message = "Position retrieved successfully.", data = position });
-        }
 
         /// <summary>
         /// Deletes a position by ID.
@@ -85,8 +114,14 @@ namespace Horizon_HR.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePositionAsync(Guid id)
         {
-            await _positionServices.DeletePositionAsync(id);
-            return Ok(new { message = "Position deleted successfully." });
+            await _positionService.DeletePositionAsync(id);
+
+            return Ok(new ApiResponse<PositionDto>
+            {
+                Status = 201,
+                Message = "Position deleted successfully.",
+                Data = {}
+            });
         }
     }
 }

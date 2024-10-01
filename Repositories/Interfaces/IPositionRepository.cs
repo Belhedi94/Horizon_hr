@@ -1,13 +1,14 @@
 ﻿using Horizon_HR.Dtos.Positions;
+using Horizon_HR.Models;
 
 namespace Horizon_HR.Repositories.Interfaces
 {
     public interface IPositionRepository
     {
-        Task<IEnumerable<PositionDto>> GetAllPositionsAsync();
-        Task CreatePositionAsync(CreatePositionDto createPositionDto);
-        Task<PositionDto> GetPositionByIdAsync(Guid id);
-        Task UpdatePositionAsync(Guid id, UpdatePositionDto updatePositionDto);
+        Task<IEnumerable<Position>> GetAllPositionsAsync();
+        Task<Position> CreatePositionAsync(Position position);
+        Task<Position> GetPositionByIdAsync(Guid id);
+        Task<Position> UpdatePositionAsync(Guid id, UpdatePositionDto updatePositionDto);
         Task DeletePositionAsync(Guid id);
     }
 }

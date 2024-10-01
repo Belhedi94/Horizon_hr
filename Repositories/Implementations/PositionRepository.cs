@@ -20,31 +20,21 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
         }
 
-        public async Task<IEnumerable<PositionDto>> GetAllPositionsAsync()
+        public async Task<IEnumerable<Position>> GetAllPositionsAsync()
         {
             var positions = await _context.Positions.ToListAsync();
-            return _mapper.Map<IEnumerable<PositionDto>>(positions);
+            return positions;
         }
 
-        public async Task CreatePositionAsync(CreatePositionDto createPositionDto)
+        public async Task<Position> CreatePositionAsync(Position position)
         {
-            var position = _mapper.Map<Position>(createPositionDto);
-            _context.Add(position);
+            await _context.Positions.AddAsync(position);
             await _context.SaveChangesAsync();
+
+            return position;
         }
 
-        public async Task UpdatePositionAsync(Guid id, UpdatePositionDto updatePositionDto)
-        {
-            var position = await _context.Positions.FindAsync(id);
-            if (position == null)
-                throw new Exception("Position not found");
-
-            _mapper.Map(updatePositionDto, position);
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<PositionDto> GetPositionByIdAsync(Guid id)
+        public async Task<Position> GetPositionByIdAsync(Guid id)
         {
             var position = await _context.Positions.FindAsync(id);
             if (position == null)
@@ -53,12 +43,25 @@ namespace Horizon_HR.Repositories.Implementations
                 throw new Exception("Position not found");
             }
 
-            return _mapper.Map<PositionDto>(position);
+            return position;
+        }
+
+        public async Task<Position> UpdatePositionAsync(Guid id, UpdatePositionDto updatePositionDto)
+        {
+            var position = await _context.Positions.FindAsync(id);
+            if (position == null)
+                throw new Exception("Position not found");
+
+            _mapper.Map(updatePositionDto, position);
+
+            await _context.SaveChangesAsync();
+
+            return position;
         }
 
         public async Task DeletePositionAsync(Guid id)
         {
-            var position = await _context.Positions.FindAsync(id);
+            var position = await GetPositionByIdAsync(id);
             if (position == null)
             {
                 _logger.LogWarning($"Position with ID {id} not found.");
