@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Horizon_HR.AppDataContext;
+using Horizon_HR.Dtos.PagedResult;
 using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
@@ -20,10 +21,27 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
         }
 
-        public async Task<IEnumerable<Position>> GetAllPositionsAsync()
+        public async Task<PagedResult<Position>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter)
         {
-            var positions = await _context.Positions.ToListAsync();
-            return positions;
+            var query = _context.Positions.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(p => p.Title.Contains(filter) || p.Description.Contains(filter));
+
+            var totalCount = await query.CountAsync();
+
+            var positions = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResult<Position>
+            {
+                Items = positions,
+                TotalItems = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
 
         public async Task<Position> CreatePositionAsync(Position position)

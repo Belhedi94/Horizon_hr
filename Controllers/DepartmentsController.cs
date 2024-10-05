@@ -1,5 +1,7 @@
-﻿using Horizon_HR.Dtos.Departments;
-using Horizon_HR.Repositories.Interfaces;
+﻿using Horizon_HR.Dtos.ApiResponse;
+using Horizon_HR.Dtos.PagedResult;
+using Horizon_HR.Dtos.Departments;
+using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Horizon_HR.Controllers
@@ -8,11 +10,42 @@ namespace Horizon_HR.Controllers
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
-        private readonly IDepartmentRepository _departmentServices;
+        private readonly IDepartmentService _departmentService;
 
-        public DepartmentsController(IDepartmentRepository departmentServices)
+        public DepartmentsController(IDepartmentService departmentServices)
         {
-            _departmentServices = departmentServices;
+            _departmentService = departmentServices;
+        }
+
+        /// <summary>
+        /// Retrieves all departments.
+        /// </summary>
+        /// <returns>A list of all departments.</returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllDepartmentsAsync(int pageNumber = 1, int pageSize = 10, string filter = null)
+        {
+            var departments = await _departmentService.GetAllDepartmentsAsync(pageNumber, pageSize, filter);
+            if (!departments.Items.Any())
+                return Ok(new ApiResponse<PagedResult<DepartmentDto>>
+                {
+                    Status = 404,
+                    Message = "No departments found.",
+                    Data = new PagedResult<DepartmentDto>
+                    {
+                        Items = Enumerable.Empty<DepartmentDto>(),
+                        TotalItems = 0,
+                        PageNumber = pageNumber,
+                        PageSize = pageSize
+                    }
+                });
+
+            return Ok(new ApiResponse<PagedResult<DepartmentDto>>
+            {
+                Status = 200,
+                Message = "Departments retrieved successfully.",
+                Data = departments
+            });
+
         }
 
         /// <summary>
@@ -24,14 +57,36 @@ namespace Horizon_HR.Controllers
         public async Task<IActionResult> CreateDepartmentAsync(CreateDepartmentDto createDepartmentDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            await _departmentServices.CreateDepartmentAsync(createDepartmentDto);
+            var newDepartment = await _departmentService.CreateDepartmentAsync(createDepartmentDto);
 
-            return Ok(new {message = "Department created successfully."});
+            return Ok(new ApiResponse<DepartmentDto>
+            {
+                Status = 201,
+                Message = "Department created successfully.",
+                Data = newDepartment
+            });
         }
+
+        /// <summary>
+        /// Retrieves a department by ID.
+        /// </summary>
+        /// <param name="id">The ID of the department to retrieve.</param>
+        /// <returns>The department data.</returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDepartmentByIdAsync(Guid id)
+        {
+            var department = await _departmentService.GetDepartmentByIdAsync(id);
+
+            return Ok(new ApiResponse<DepartmentDto>
+            {
+                Status = 201,
+                Message = "Department retrieved successfully.",
+                Data = department
+            });
+        }
+
 
         /// <summary>
         /// Updates an existing department.
@@ -45,37 +100,16 @@ namespace Horizon_HR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _departmentServices.UpdateDepartmentAsync(id, updateDepartmentDto);
+            var updatedDepartment = await _departmentService.UpdateDepartmentAsync(id, updateDepartmentDto);
 
-            return Ok(new { message = "Department updated successfully." });
+            return Ok(new ApiResponse<DepartmentDto>
+            {
+                Status = 201,
+                Message = "Department updated successfully.",
+                Data = updatedDepartment
+            });
         }
 
-        /// <summary>
-        /// Retrieves all departments.
-        /// </summary>
-        /// <returns>A list of all departments.</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetAllDepartmentsAsync()
-        {
-            var departments = await _departmentServices.GetAllDepartmentsAsync();
-            if (!departments.Any())
-                return Ok(new { message = "No departments found", data = Enumerable.Empty<DepartmentDto>() });
-
-            return Ok(new { message = "Departments retrieved successfully", data = departments });
-
-        }
-
-        /// <summary>
-        /// Retrieves a department by ID.
-        /// </summary>
-        /// <param name="id">The ID of the department to retrieve.</param>
-        /// <returns>The department data.</returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDepartmentByIdAsync(Guid id)
-        {
-            var department = await _departmentServices.GetDepartmentByIdAsync(id);
-            return Ok(new { message = "Department retrieved successfully.", data = department });
-        }
 
         /// <summary>
         /// Deletes a department by ID.
@@ -85,8 +119,14 @@ namespace Horizon_HR.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDepartmentAsync(Guid id)
         {
-            await _departmentServices.DeleteDepartmentAsync(id);
-            return Ok(new { message = "Department deleted successfully." });
+            await _departmentService.DeleteDepartmentAsync(id);
+
+            return Ok(new ApiResponse<DepartmentDto>
+            {
+                Status = 201,
+                Message = "Department deleted successfully.",
+                Data = { }
+            });
         }
     }
 }

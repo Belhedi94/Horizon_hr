@@ -3,6 +3,7 @@ using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.Services.Interfaces;
 using Horizon_HR.Models;
+using Horizon_HR.Dtos.PagedResult;
 
 namespace Horizon_HR.Services.Implementations
 {
@@ -19,11 +20,23 @@ namespace Horizon_HR.Services.Implementations
             _logger = logger;
         }
 
-        public async Task<IEnumerable<PositionDto>> GetAllPositionsAsync()
+        public async Task<PagedResult<PositionDto>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter)
         {
-            var positions = await _positionRepository.GetAllPositionsAsync();
+            var pagedPositions = await _positionRepository.GetAllPositionsAsync(pageNumber, pageSize, filter);
+            var pagedPositionsDto = new PagedResult<PositionDto>
+            {
+                Items = _mapper.Map<IEnumerable<PositionDto>>(pagedPositions.Items),
+                TotalItems = pagedPositions.TotalItems,
+                PageNumber = pagedPositions.PageNumber,
+                PageSize = pagedPositions.PageSize
+            };
 
-            return _mapper.Map<IEnumerable<PositionDto>>(positions);
+            return pagedPositionsDto;
+
+
+            //return _mapper.Map<IEnumerable<PositionDto>>(positions);
+
+
         }
 
         public async Task<PositionDto> CreatePositionAsync(CreatePositionDto createPositionDto)

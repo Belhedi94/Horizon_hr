@@ -1,7 +1,6 @@
-﻿using Azure.Core.GeoJson;
-using Horizon_HR.Dtos.ApiResponse;
+﻿using Horizon_HR.Dtos.ApiResponse;
+using Horizon_HR.Dtos.PagedResult;
 using Horizon_HR.Dtos.Positions;
-using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,18 +22,24 @@ namespace Horizon_HR.Controllers
         /// </summary>
         /// <returns>A list of all positions.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllPositionsAsync()
+        public async Task<IActionResult> GetAllPositionsAsync(int pageNumber = 1, int pageSize = 10, string filter = null)
         {
-            var positions = await _positionService.GetAllPositionsAsync();
-            if (!positions.Any())
-                return Ok(new ApiResponse<IEnumerable<PositionDto>>
+            var positions = await _positionService.GetAllPositionsAsync(pageNumber, pageSize, filter);
+            if (!positions.Items.Any())
+                return Ok(new ApiResponse<PagedResult<PositionDto>>
                 {
                     Status = 404,
                     Message = "No positions found.",
-                    Data = Enumerable.Empty<PositionDto>()
+                    Data = new PagedResult<PositionDto>
+                    {
+                        Items = Enumerable.Empty<PositionDto>(),
+                        TotalItems = 0,
+                        PageNumber = pageNumber,
+                        PageSize = pageSize
+                    }
                 });
 
-            return Ok(new ApiResponse<IEnumerable<PositionDto>>
+            return Ok(new ApiResponse<PagedResult<PositionDto>>
             {
                 Status = 200,
                 Message = "Positions retrieved successfully.",
@@ -56,7 +61,7 @@ namespace Horizon_HR.Controllers
 
             var newPosition = await _positionService.CreatePositionAsync(createPositionDto);
 
-            return Ok (new ApiResponse<PositionDto>
+            return Ok(new ApiResponse<PositionDto>
             {
                 Status = 201,
                 Message = "Position created successfully.",

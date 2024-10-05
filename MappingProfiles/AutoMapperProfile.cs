@@ -46,7 +46,8 @@ namespace Horizon_HR.MappingProfiles
 
             CreateMap<Department, DepartmentDto>();
             CreateMap<CreateDepartmentDto, Department>();
-            CreateMap<UpdateDepartmentDto, Department>();
+            CreateMap<UpdateDepartmentDto, Department>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Position, PositionDto>();
             CreateMap<CreatePositionDto, Position>();

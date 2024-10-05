@@ -1,13 +1,15 @@
-﻿using Horizon_HR.Dtos.Departments;
+﻿using Horizon_HR.Dtos.PagedResult;
+using Horizon_HR.Dtos.Departments;
+using Horizon_HR.Models;
 
 namespace Horizon_HR.Repositories.Interfaces
 {
     public interface IDepartmentRepository
     {
-        Task<IEnumerable<DepartmentDto>> GetAllDepartmentsAsync();
-        Task CreateDepartmentAsync(CreateDepartmentDto createDepartmentDto);
-        Task<DepartmentDto> GetDepartmentByIdAsync(Guid id);
-        Task UpdateDepartmentAsync(Guid id, UpdateDepartmentDto updateDepartmentDto);
+        Task<PagedResult<Department>> GetAllDepartmentsAsync(int pageNumber, int pageSize, string filter);
+        Task<Department> CreateDepartmentAsync(Department department);
+        Task<Department> GetDepartmentByIdAsync(Guid id);
+        Task<Department> UpdateDepartmentAsync(Guid id, UpdateDepartmentDto updateDepartmentDto);
         Task DeleteDepartmentAsync(Guid id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Horizon_HR.AppDataContext;
+using Horizon_HR.Dtos.PagedResult;
 using Horizon_HR.Dtos.Departments;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
@@ -20,31 +21,38 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
         }
 
-        public async Task<IEnumerable<DepartmentDto>> GetAllDepartmentsAsync()
+        public async Task<PagedResult<Department>> GetAllDepartmentsAsync(int pageNumber, int pageSize, string filter)
         {
-            var departments = await _context.Departments.ToListAsync();
-            return _mapper.Map<IEnumerable<DepartmentDto>>(departments);
+            var query = _context.Departments.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(p => p.Name.Contains(filter) || p.Description.Contains(filter));
+
+            var totalCount = await query.CountAsync();
+
+            var departments = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResult<Department>
+            {
+                Items = departments,
+                TotalItems = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
 
-        public async Task CreateDepartmentAsync(CreateDepartmentDto createDepartmentDto)
+        public async Task<Department> CreateDepartmentAsync(Department department)
         {
-            var department = _mapper.Map<Department>(createDepartmentDto);
-            _context.Add(department);
+            await _context.Departments.AddAsync(department);
             await _context.SaveChangesAsync();
+
+            return department;
         }
 
-        public async Task UpdateDepartmentAsync(Guid id, UpdateDepartmentDto updateDepartmentDto)
-        {
-            var department = await _context.Departments.FindAsync(id);
-            if (department == null)
-                throw new Exception("Department not found");
-
-            _mapper.Map(updateDepartmentDto, department);
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<DepartmentDto> GetDepartmentByIdAsync(Guid id)
+        public async Task<Department> GetDepartmentByIdAsync(Guid id)
         {
             var department = await _context.Departments.FindAsync(id);
             if (department == null)
@@ -53,12 +61,25 @@ namespace Horizon_HR.Repositories.Implementations
                 throw new Exception("Department not found");
             }
 
-            return _mapper.Map<DepartmentDto>(department);
+            return department;
+        }
+
+        public async Task<Department> UpdateDepartmentAsync(Guid id, UpdateDepartmentDto updateDepartmentDto)
+        {
+            var department = await _context.Departments.FindAsync(id);
+            if (department == null)
+                throw new Exception("Department not found");
+
+            _mapper.Map(updateDepartmentDto, department);
+
+            await _context.SaveChangesAsync();
+
+            return department;
         }
 
         public async Task DeleteDepartmentAsync(Guid id)
         {
-            var department = await _context.Departments.FindAsync(id);
+            var department = await GetDepartmentByIdAsync(id);
             if (department == null)
             {
                 _logger.LogWarning($"Department with ID {id} not found.");
