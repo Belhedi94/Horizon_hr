@@ -1,5 +1,8 @@
-﻿using Horizon_HR.Dtos.Teams;
+﻿using Horizon_HR.Dtos.ApiResponse;
+using Horizon_HR.Dtos.PagedResult;
+using Horizon_HR.Dtos.Teams;
 using Horizon_HR.Repositories.Interfaces;
+using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Horizon_HR.Controllers
@@ -8,11 +11,13 @@ namespace Horizon_HR.Controllers
     [ApiController]
     public class TeamsController : ControllerBase
     {
-        private readonly ITeamRepository _teamServices;
+        private readonly ITeamRepository _teamRepository;
+        private readonly ITeamService _teamService;
 
-        public TeamsController(ITeamRepository teamServices)
+        public TeamsController(ITeamRepository teamRepository, ITeamService teamService)
         {
-            _teamServices = teamServices;
+            _teamRepository = teamRepository;
+            _teamService = teamService;
         }
 
         /// <summary>
@@ -28,7 +33,7 @@ namespace Horizon_HR.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _teamServices.CreateTeamAsync(createTeamDto);
+            await _teamRepository.CreateTeamAsync(createTeamDto);
 
             return Ok(new {message = "Team created successfully."});
         }
@@ -45,7 +50,7 @@ namespace Horizon_HR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _teamServices.UpdateTeamAsync(id, updateTeamDto);
+            await _teamRepository.UpdateTeamAsync(id, updateTeamDto);
 
             return Ok(new { message = "Team updated successfully." });
         }
@@ -55,13 +60,29 @@ namespace Horizon_HR.Controllers
         /// </summary>
         /// <returns>A list of all teams.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllTeamsAsync()
+        public async Task<IActionResult> GetAllTeamsAsync(int pageNumber = 1, int pageSize = 10, string filter = null)
         {
-            var teams = await _teamServices.GetAllTeamsAsync();
-            if (!teams.Any())
-                return Ok(new { message = "No teams found", data = Enumerable.Empty<TeamDto>() });
+            var teams = await _teamService.GetAllTeamsAsync(pageNumber, pageSize, filter);
+            if (!teams.Items.Any())
+                return Ok(new ApiResponse<PagedResult<TeamDto>>
+                {
+                    Status = 404,
+                    Message = "No teams found.",
+                    Data = new PagedResult<TeamDto>
+                    {
+                        Items = Enumerable.Empty<TeamDto>(),
+                        TotalItems = 0,
+                        PageNumber = pageNumber,
+                        PageSize = pageSize
+                    }
+                });
 
-            return Ok(new { message = "Teams retrieved successfully", data = teams });
+            return Ok(new ApiResponse<PagedResult<TeamDto>>
+            {
+                Status = 200,
+                Message = "Teams retrieved successfully.",
+                Data = teams
+            });
 
         }
 
@@ -73,7 +94,7 @@ namespace Horizon_HR.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTeamByIdAsync(Guid id)
         {
-            var team = await _teamServices.GetTeamByIdAsync(id);
+            var team = await _teamRepository.GetTeamByIdAsync(id);
             return Ok(new { message = "Team retrieved successfully.", data = team });
         }
 
@@ -85,7 +106,7 @@ namespace Horizon_HR.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTeamAsync(Guid id)
         {
-            await _teamServices.DeleteTeamAsync(id);
+            await _teamRepository.DeleteTeamAsync(id);
             return Ok(new { message = "Team deleted successfully." });
         }
     }

@@ -42,7 +42,8 @@ namespace Horizon_HR.MappingProfiles
 
             CreateMap<Team, TeamDto>();
             CreateMap<CreateTeamDto, Team>();
-            CreateMap<UpdateTeamDto, Team>();
+            CreateMap<UpdateTeamDto, Team>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Department, DepartmentDto>();
             CreateMap<CreateDepartmentDto, Department>();

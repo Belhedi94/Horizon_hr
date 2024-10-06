@@ -27,6 +27,7 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddLogging();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();

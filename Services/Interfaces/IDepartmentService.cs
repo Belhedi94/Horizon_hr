@@ -5,7 +5,7 @@ namespace Horizon_HR.Services.Interfaces
 {
     public interface IDepartmentService
     {
-        Task<PagedResult<DepartmentDto>> GetAllDepartmentsAsync(int pageNumber, int pageSize, string filter);
+        Task<PagedResult<DepartmentDto>> GetAllDepartmentsAsync(int pageNumber, int pageSize, string filter, bool usePagination);
         Task<DepartmentDto> CreateDepartmentAsync(CreateDepartmentDto createDepartmentDto);
         Task<DepartmentDto> GetDepartmentByIdAsync(Guid id);
         Task<DepartmentDto> UpdateDepartmentAsync(Guid id, UpdateDepartmentDto updateDepartmentDto);

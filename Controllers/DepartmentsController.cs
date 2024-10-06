@@ -22,9 +22,9 @@ namespace Horizon_HR.Controllers
         /// </summary>
         /// <returns>A list of all departments.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllDepartmentsAsync(int pageNumber = 1, int pageSize = 10, string filter = null)
+        public async Task<IActionResult> GetAllDepartmentsAsync(int pageNumber = 1, int pageSize = 10, string filter = null, bool usePagination = true)
         {
-            var departments = await _departmentService.GetAllDepartmentsAsync(pageNumber, pageSize, filter);
+            var departments = await _departmentService.GetAllDepartmentsAsync(pageNumber, pageSize, filter, usePagination);
             if (!departments.Items.Any())
                 return Ok(new ApiResponse<PagedResult<DepartmentDto>>
                 {
@@ -81,7 +81,7 @@ namespace Horizon_HR.Controllers
 
             return Ok(new ApiResponse<DepartmentDto>
             {
-                Status = 201,
+                Status = 200,
                 Message = "Department retrieved successfully.",
                 Data = department
             });
@@ -104,7 +104,7 @@ namespace Horizon_HR.Controllers
 
             return Ok(new ApiResponse<DepartmentDto>
             {
-                Status = 201,
+                Status = 200,
                 Message = "Department updated successfully.",
                 Data = updatedDepartment
             });
@@ -123,7 +123,7 @@ namespace Horizon_HR.Controllers
 
             return Ok(new ApiResponse<DepartmentDto>
             {
-                Status = 201,
+                Status = 200,
                 Message = "Department deleted successfully.",
                 Data = { }
             });

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Horizon_HR.AppDataContext;
+using Horizon_HR.Dtos.PagedResult;
 using Horizon_HR.Dtos.Teams;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
@@ -20,10 +21,27 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
         }
 
-        public async Task<IEnumerable<TeamDto>> GetAllTeamsAsync()
+        public async Task<PagedResult<Team>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter)
         {
-            var teams = await _context.Teams.ToListAsync();
-            return _mapper.Map<IEnumerable<TeamDto>>(teams);
+            var query = _context.Teams.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(p => p.Name.Contains(filter) || p.Description.Contains(filter));
+
+            var totalCount = await query.CountAsync();
+
+            var teams = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResult<Team>
+            {
+                Items = teams,
+                TotalItems = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
 
         public async Task CreateTeamAsync(CreateTeamDto createTeamDto)
@@ -46,7 +64,10 @@ namespace Horizon_HR.Repositories.Implementations
 
         public async Task<TeamDto> GetTeamByIdAsync(Guid id)
         {
-            var team = await _context.Teams.FindAsync(id);
+            var team = await _context.Teams
+                .Include(t => t.Department)
+                .FirstAsync(t => t.Id == id);
+
             if (team == null)
             {
                 _logger.LogWarning($"Team with ID {id} not found.");

@@ -6,7 +6,7 @@ namespace Horizon_HR.Repositories.Interfaces
 {
     public interface IDepartmentRepository
     {
-        Task<PagedResult<Department>> GetAllDepartmentsAsync(int pageNumber, int pageSize, string filter);
+        Task<PagedResult<Department>> GetAllDepartmentsAsync(int pageNumber, int pageSize, string filter, bool usePagination);
         Task<Department> CreateDepartmentAsync(Department department);
         Task<Department> GetDepartmentByIdAsync(Guid id);
         Task<Department> UpdateDepartmentAsync(Guid id, UpdateDepartmentDto updateDepartmentDto);

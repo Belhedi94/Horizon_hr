@@ -81,7 +81,7 @@ namespace Horizon_HR.Controllers
 
             return Ok(new ApiResponse<PositionDto>
             {
-                Status = 201,
+                Status = 200,
                 Message = "Position retrieved successfully.",
                 Data = position
             });
@@ -104,7 +104,7 @@ namespace Horizon_HR.Controllers
 
             return Ok(new ApiResponse<PositionDto>
             {
-                Status = 201,
+                Status = 200,
                 Message = "Position updated successfully.",
                 Data = updatedPosition
             });
@@ -123,7 +123,7 @@ namespace Horizon_HR.Controllers
 
             return Ok(new ApiResponse<PositionDto>
             {
-                Status = 201,
+                Status = 200,
                 Message = "Position deleted successfully.",
                 Data = {}
             });
