@@ -62,25 +62,20 @@ namespace Horizon_HR.Controllers
                     
                     var userIdAsString = decodedToken.Claims.First(c => c.Type == "userId").Value;
                     Guid userId = Guid.Parse(userIdAsString);
-                    Console.WriteLine(userId);
                     var userData = await _userRepository.GetUserByIdAsync(userId);
                     
                     if (userData == null)
                         throw new Exception("User not found");
 
+                    userData.RefreshToken = result.RefreshToken;
+                    userData.Expiration = result.Expiration;
 
                     return Ok(new
                     {
                         message = "User logged in successfully.",
-                        data = new
-                        {
-                            status = 200,
-                            user = userData,
-                            refreshToken = result.RefreshToken,
-                            expiration = result.Expiration
-                        }
-                    } 
-                        );
+                        status = 200,
+                        data = userData
+                    });
 
             }
                 else

@@ -66,6 +66,7 @@ namespace Horizon_HR.MappingProfiles
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.Now))
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+            CreateMap<LeaveBalance, LeaveBalanceDto>();
             CreateMap<LeaveBalance, CreateLeaveBalanceDto>();
             CreateMap<CreateLeaveBalanceDto, LeaveBalance>();
             CreateMap<UpdateLeaveBalanceDto, LeaveBalance>()

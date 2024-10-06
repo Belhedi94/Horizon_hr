@@ -6,7 +6,5 @@
 
         public double Sick { get; set; }
 
-        public Guid LeaveBalanceId { get; set; }
-
     }
 }

@@ -22,6 +22,8 @@ namespace Horizon_HR.Dtos.Users
         public string Gender { get; set; }
         public string MaritalStatus { get; set; }
         public string ProfileImage { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime Expiration { get; set; }
         public EmploymentDetailsDto EmploymentDetails { get; set; }
         public BankAccountDto BankAccount { get; set; }
     }
