@@ -60,7 +60,8 @@ namespace Horizon_HR.Controllers
                     var handler = new JwtSecurityTokenHandler();
                     var decodedToken = handler.ReadJwtToken(token);
                     
-                    var userIdAsString = decodedToken.Claims.First(c => c.Type == "userId").Value;
+                    var userIdAsString = decodedToken.Claims.First(t => t.Type == "userId").Value;
+                    var role = decodedToken.Claims.First(t => t.Type == "roles").Value;
                     Guid userId = Guid.Parse(userIdAsString);
                     var userData = await _userRepository.GetUserByIdAsync(userId);
                     
@@ -69,6 +70,7 @@ namespace Horizon_HR.Controllers
 
                     userData.RefreshToken = result.RefreshToken;
                     userData.Expiration = result.Expiration;
+                    userData.Role = role;
 
                     return Ok(new
                     {
