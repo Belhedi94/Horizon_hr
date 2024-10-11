@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Horizon_HR.Dtos.BankAccount;
 using Horizon_HR.Dtos.LeaveBalance;
 using Horizon_HR.Dtos.PagedResult;
 using Horizon_HR.Dtos.Users;
@@ -7,7 +6,6 @@ using Horizon_HR.Models;
 using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Net;
@@ -159,9 +157,10 @@ namespace Horizon_HR.Services.Implementations
             {
                 if (user.BankAccountId != null)
                 {
-                    var bankAccount = await _context.BankAccounts.FindAsync(user.BankAccountId);
+                    var bankAccount = await _bankAccountService.GetBankAccountByIdAsync(user.BankAccountId.Value);
                     if (bankAccount != null)
-                        _context.BankAccounts.Remove(bankAccount);
+                        await _bankAccountService.DeleteBankAccountAsync(user.BankAccountId.Value);
+
                     user.BankAccountId = null;
                 }
             }
@@ -179,7 +178,28 @@ namespace Horizon_HR.Services.Implementations
 
             user.UpdatedAt = DateTime.UtcNow;
 
-            await _context.SaveChangesAsync();
+            var updatedUser = await _userRepository.UpdateUserAsync(user);
+
+            return _mapper.Map<UserDto>(updatedUser);
+        }
+
+        public async Task DeleteUserAsync(Guid id)
+        {
+            var user = await GetUserByIdAsync(id);
+            if (user == null)
+            {
+                _logger.LogWarning($"User with ID {id} not found.");
+                throw new Exception("User not found");
+            }
+
+            var profileImage = user.ProfileImage;
+            if (!string.IsNullOrEmpty(profileImage))
+                _fileStorageService.DeleteFile(profileImage);
+
+            var userEntity = _mapper.Map<User>(user);
+
+            await _userRepository.DeleteUserAsync(userEntity);
+
         }
     }
 }

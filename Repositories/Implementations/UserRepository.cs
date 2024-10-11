@@ -1,18 +1,8 @@
 ﻿using AutoMapper;
 using Horizon_HR.AppDataContext;
-using Horizon_HR.Dtos.Users;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
-using System.Text.Json;
-using System.Net.Http.Headers;
-using System.Net;
-using System.IdentityModel.Tokens.Jwt;
-using Horizon_HR.Dtos.BankAccount;
-using Horizon_HR.Dtos.ResetPassword;
-using Horizon_HR.Services.Interfaces;
-using Horizon_HR.Dtos.LeaveBalance;
 using Horizon_HR.Dtos.PagedResult;
 
 namespace Horizon_HR.Repositories.Implementations
@@ -22,21 +12,12 @@ namespace Horizon_HR.Repositories.Implementations
     {
         private readonly DataBaseContext _context;
         private readonly ILogger<UserRepository> _logger;
-        private readonly IMapper _mapper;
-        private readonly IFileStorageRepository _fileStorageService;
-        private readonly IResetPasswordRepository _resetPasswordRepository;
-        private readonly ILeaveBalanceService _leaveBalanceService;
+       
 
-        public UserRepository(DataBaseContext context, ILogger<UserRepository> logger, IMapper mapper,
-            IFileStorageRepository fileStorageService, IResetPasswordRepository resetPasswordRepository,
-            ILeaveBalanceService leaveBalanceService)
+        public UserRepository(DataBaseContext context, ILogger<UserRepository> logger)
         {
             _context = context;
             _logger = logger;
-            _mapper = mapper;
-            _fileStorageService = fileStorageService;
-            _resetPasswordRepository = resetPasswordRepository;
-            _leaveBalanceService = leaveBalanceService;
         }
 
         public async Task<PagedResult<User>> GetAllUsersAsync(int pageNumber, int pageSize, string filter)
@@ -82,56 +63,6 @@ namespace Horizon_HR.Repositories.Implementations
             return user;
         }
 
-        //public async Task UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
-        //{
-            //var user = await _context.Users
-            //    .Include(u => u.EmploymentDetails)
-            //    .Include(u => u.BankAccount)
-            //    .FirstOrDefaultAsync(u => u.Id == id);
-
-            //if (user == null)
-            //    throw new Exception("User not found");
-
-            //if (updateUserDto.Password != null)
-            //{
-            //    var request = new RequestResetPasswordDto
-            //    {
-            //        Username = updateUserDto.Username,
-            //        NewPassword = updateUserDto.Password
-            //    };
-
-            //    bool result = await _resetPasswordRepository.ResetPassword(request);
-            //}
-
-            //if (updateUserDto.BankAccount != null)
-            //    _mapper.Map(updateUserDto, user);
-            //else
-            //{
-            //    if (user.BankAccountId != null)
-            //    {
-            //        var bankAccount = await _context.BankAccounts.FindAsync(user.BankAccountId);
-            //        if (bankAccount != null)
-            //            _context.BankAccounts.Remove(bankAccount);
-            //        user.BankAccountId = null;
-            //    }
-            //}
-
-            //_mapper.Map(updateUserDto, user);
-
-            //var newProfileImage = updateUserDto.ProfileImage;
-            //if (newProfileImage != null)
-            //{
-            //    var currentProfileImage = user.ProfileImage;
-            //    if (!string.IsNullOrEmpty(currentProfileImage))
-            //        _fileStorageService.DeleteFile(currentProfileImage);
-            //    user.ProfileImage = await _fileStorageService.StoreFileAsync(newProfileImage, "profile_images");
-            //}
-
-            //user.UpdatedAt = DateTime.UtcNow;
-
-            //await _context.SaveChangesAsync();
-        //}
-
         public async Task<User> GetUserByIdAsync(Guid id)
         {
 
@@ -150,28 +81,25 @@ namespace Horizon_HR.Repositories.Implementations
 
         }
 
-        public async Task DeleteUserAsync(Guid id)
+        public async Task<User> UpdateUserAsync(User user)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var userData = await GetUserByIdAsync(user.Id);
+            if (userData == null)
             {
-                _logger.LogWarning($"User with ID {id} not found.");
-                throw new Exception("User not found");
+                userData = user;
             }
 
-            var profileImage = user.ProfileImage;
-            if (!string.IsNullOrEmpty(profileImage))
-                _fileStorageService.DeleteFile(profileImage);
+            await _context.SaveChangesAsync();
 
+            return userData;
+        }
+
+        public async Task DeleteUserAsync(User user)
+        {
             _context.Users.Remove(user);
 
             await _context.SaveChangesAsync();
 
-        }
-
-        public Task<User> UpdateUserAsync(Guid id, User user)
-        {
-            
         }
     }
 }

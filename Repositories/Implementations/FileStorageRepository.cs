@@ -32,12 +32,14 @@ namespace Horizon_HR.Repositories.Implementations
 
         public void DeleteFile(string fileName)
         {
-            var filePath = Path.Combine(_environment.WebRootPath, fileName);
-            if (File.Exists(filePath))
-                File.Delete(filePath);
-            else
-                throw new FileNotFoundException($"File {fileName} not found.");
-
+            if (fileName != "profile_images/default_employee_avatar.png")
+            {
+                var filePath = Path.Combine(_environment.WebRootPath, fileName);
+                if (File.Exists(filePath))
+                    File.Delete(filePath);
+                else
+                    throw new FileNotFoundException($"File {fileName} not found.");
+            }
         }
     }
 }

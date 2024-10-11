@@ -26,9 +26,16 @@ namespace Horizon_HR.Services.Implementations
             return _mapper.Map<BankAccountDto>(result);
         }
 
-        public Task<BankAccountDto> FindBankAccountByIdAsync(Guid bankAccountId)
+        public async Task<BankAccountDto> GetBankAccountByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var bankAccount = await _bankAccountRepository.GetBankAccountByIdAsync(id);
+
+            return _mapper.Map<BankAccountDto>(bankAccount);
+        }
+
+        public async Task DeleteBankAccountAsync(Guid id)
+        {
+            await _bankAccountRepository.DeleteBankAccountAsync(id);
         }
     }
 }

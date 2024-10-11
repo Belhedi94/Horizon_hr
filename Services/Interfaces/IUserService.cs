@@ -9,5 +9,6 @@ namespace Horizon_HR.Services.Interfaces
         Task<UserDto> CreateUserAsync(CreateUserDto createUserDto);
         Task<UserDto> GetUserByIdAsync(Guid id);
         Task<UserDto> UpdateUserAsync(Guid id, UpdateUserDto updateUserDto);
+        Task DeleteUserAsync(Guid id);
     }
 }

@@ -5,6 +5,7 @@ namespace Horizon_HR.Services.Interfaces
     public interface IBankAccountService
     {
         Task<BankAccountDto> CreateBankAccountAsync(CreateBankAccountDto createBankAccountDto);
-        Task<BankAccountDto> FindBankAccountByIdAsync(Guid bankAccountId);
+        Task<BankAccountDto> GetBankAccountByIdAsync(Guid bankAccountId);
+        Task DeleteBankAccountAsync(Guid bankAccountId);
     }
 }

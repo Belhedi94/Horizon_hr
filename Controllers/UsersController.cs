@@ -1,9 +1,6 @@
 ﻿using Horizon_HR.Dtos.ApiResponse;
 using Horizon_HR.Dtos.PagedResult;
-using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Dtos.Users;
-using Horizon_HR.Repositories.Interfaces;
-using Horizon_HR.Services.Implementations;
 using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,12 +10,10 @@ namespace Horizon_HR.Controllers
     [Route("api/users/")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
         private readonly IUserService _userService;
 
-        public UsersController(IUserRepository userRepository, IUserService uSerService)
+        public UsersController(IUserService uSerService)
         {
-            _userRepository = userRepository;
             _userService = uSerService;
         }
 
@@ -122,8 +117,14 @@ namespace Horizon_HR.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserAsync(Guid id)
         {
-            await _userRepository.DeleteUserAsync(id);
-            return Ok(new { message = "User deleted successfully." });
+            await _userService.DeleteUserAsync(id);
+
+            return Ok(new ApiResponse<UserDto>
+            {
+                Status = 200,
+                Message = "Employee deleted successfully.",
+                Data = { }
+            });
         }
     }
 }

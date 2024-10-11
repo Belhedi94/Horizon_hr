@@ -18,6 +18,7 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<User, UserDto>()
                 .ForMember(dest => dest.EmploymentDetails, opt => opt.MapFrom(src => src.EmploymentDetails))
                 .ForMember(dest => dest.BankAccount, opt => opt.MapFrom(src => src.BankAccount));
+            //CreateMap<UserDto, User>();
             CreateMap<CreateUserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
