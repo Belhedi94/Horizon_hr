@@ -2,6 +2,8 @@
 {
     public class BankAccountDto
     {
+        public Guid Id { get; set; }
+
         public string BankName { get; set; }
 
         public string AccountNumber { get; set; }

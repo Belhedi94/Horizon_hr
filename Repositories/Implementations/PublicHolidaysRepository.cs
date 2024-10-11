@@ -1,5 +1,4 @@
 ﻿using Horizon_HR.AppDataContext;
-using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,15 +17,15 @@ namespace Horizon_HR.Repositories.Implementations
             IEnumerable<DateTime> publicHolidays;
             if (endDate == null)
                 publicHolidays = await _context.PublicHolidays
-                    .Where(p => p.Date == startDate)
-                    .Select(p => p.Date)
+                    .Where(p => p.StartDate == startDate)
+                    .Select(p => p.StartDate)
                     .ToListAsync();
 
             else
                 publicHolidays = await _context.PublicHolidays
-                    .Where(p => p.Date >= startDate)
-                    .Where(p => p.Date <= endDate)
-                    .Select(p => p.Date)
+                    .Where(p => p.StartDate >= startDate)
+                    .Where(p => p.StartDate <= endDate)
+                    .Select(p => p.StartDate)
                     .ToListAsync();
 
             return publicHolidays;

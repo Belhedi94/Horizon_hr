@@ -33,6 +33,7 @@ namespace Horizon_HR.Repositories.Implementations
             var teams = await query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
+                .Include(t => t.Department)
                 .ToListAsync();
 
             return new PagedResult<Team>

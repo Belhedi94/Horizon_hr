@@ -13,7 +13,7 @@ using Horizon_HR.Dtos.BankAccount;
 using Horizon_HR.Dtos.ResetPassword;
 using Horizon_HR.Services.Interfaces;
 using Horizon_HR.Dtos.LeaveBalance;
-
+using Horizon_HR.Dtos.PagedResult;
 
 namespace Horizon_HR.Repositories.Implementations
 {
@@ -39,142 +39,100 @@ namespace Horizon_HR.Repositories.Implementations
             _leaveBalanceService = leaveBalanceService;
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        public async Task<PagedResult<User>> GetAllUsersAsync(int pageNumber, int pageSize, string filter)
         {
-            var users = await _context.Users.ToListAsync();
-            return _mapper.Map<IEnumerable<UserDto>>(users);
-        }
+            var query = _context.Users.AsQueryable();
 
-        public async Task CreateUserAsync(CreateUserDto createUserDto)
-        {
-            var user = _mapper.Map<User>(createUserDto);
-            var role = new String[] { "hrmanager_admin" };
-            var payload = new
-            {
-                userName = createUserDto.Username,
-                password = createUserDto.Password,
-                roles = role,
-                appSource = GlobalVariables.AppSource
-            };
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(u => u.FirstName.Contains(filter) ||
+                u.LastName.Contains(filter) ||
+                u.Username.Contains(filter) ||
+                u.Status.Contains(filter) ||
+                u.PersonalEmail.Contains(filter) ||
+                u.ProfessionalEmail.Contains(filter) ||
+                u.ProfessionalEmail.Contains(filter) ||
+                u.PersonalPhone.Contains(filter) ||
+                u.Cin.Contains(filter) ||
+                u.CnssRegistrationNumber.Contains(filter) ||
+                u.Address.Contains(filter));
 
+            var totalCount = await query.CountAsync();
 
-            var jsonPayload = JsonSerializer.Serialize(payload);
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://20.199.23.144:8080");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync("/api/Account/Register", content);
-
-                if (response.StatusCode == HttpStatusCode.Created)
-                {
-                    var responseString = await response.Content.ReadAsStringAsync();
-                    var options = new JsonSerializerOptions
-                    {
-                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                    };
-                    var result = JsonSerializer.Deserialize<ExternalApiResponse>(responseString, options);
-
-                    if (user.ProfileImage != null)
-                        user.ProfileImage = await _fileStorageService.StoreFileAsync(createUserDto.ProfileImage, "profile_images");
-                    else
-                        user.ProfileImage = "profile_images/default_employee_avatar.png";
-
-                    var token = result.Token;
-                    var handler = new JwtSecurityTokenHandler();
-                    var decodedToken = handler.ReadJwtToken(token);
-
-                    CreateBankAccountDto bankAccountData;
-                    if (createUserDto.BankAccount != null)
-                    {
-                        bankAccountData = createUserDto.BankAccount;
-                        var bankAccountEntity = _mapper.Map<BankAccount>(bankAccountData);
-                        _context.Add(bankAccountEntity);
-                        await _context.SaveChangesAsync();
-                        
-                        var bankAccountId = bankAccountEntity.Id;
-                        user.BankAccountId = bankAccountId;
-                        
-                    }
-
-                    var userId = decodedToken.Claims.First(c => c.Type == "userId").Value;
-                    user.Id = Guid.Parse(userId);
-                    _context.Add(user);
-                    await _context.SaveChangesAsync();
-
-                    var newLeaveBalance = new CreateLeaveBalanceDto
-                    {
-                        Annual = 0,
-                        Sick = 10,
-                        UserId = user.Id
-                    };
-
-                    await _leaveBalanceService.CreateUserLeaveBalanceAsync(newLeaveBalance);
-
-
-                }
-                else
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("Error Response: " + errorContent);
-                    throw new Exception($"Failed to create user: {errorContent}");
-                }
-            }
-        }
-
-        public async Task UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
-        {
-            var user = await _context.Users
+            var users = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .Include(u => u.EmploymentDetails)
                 .Include(u => u.BankAccount)
-                .FirstOrDefaultAsync(u => u.Id == id);
+                .ToListAsync();
 
-            if (user == null)
-                throw new Exception("User not found");
-
-            if (updateUserDto.Password != null)
+            return new PagedResult<User>
             {
-                var request = new RequestResetPasswordDto
-                {
-                    Username = updateUserDto.Username,
-                    NewPassword = updateUserDto.Password
-                };
-
-                bool result = await _resetPasswordRepository.ResetPassword(request);
-            }
-
-            if (updateUserDto.BankAccount != null)
-                _mapper.Map(updateUserDto, user);
-            else
-            {
-                if (user.BankAccountId != null)
-                {
-                    var bankAccount = await _context.BankAccounts.FindAsync(user.BankAccountId);
-                    if (bankAccount != null)
-                        _context.BankAccounts.Remove(bankAccount);
-                    user.BankAccountId = null;
-                }
-            }
-
-            _mapper.Map(updateUserDto, user);
-
-            var newProfileImage = updateUserDto.ProfileImage;
-            if (newProfileImage != null)
-            {
-                var currentProfileImage = user.ProfileImage;
-                if (!string.IsNullOrEmpty(currentProfileImage))
-                    _fileStorageService.DeleteFile(currentProfileImage);
-                user.ProfileImage = await _fileStorageService.StoreFileAsync(newProfileImage, "profile_images");
-            }
-
-            user.UpdatedAt = DateTime.UtcNow;
-
-            await _context.SaveChangesAsync();
+                Items = users,
+                TotalItems = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
 
-        public async Task<UserDto> GetUserByIdAsync(Guid id)
+        public async Task<User> CreateUserAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        //public async Task UpdateUserAsync(Guid id, UpdateUserDto updateUserDto)
+        //{
+            //var user = await _context.Users
+            //    .Include(u => u.EmploymentDetails)
+            //    .Include(u => u.BankAccount)
+            //    .FirstOrDefaultAsync(u => u.Id == id);
+
+            //if (user == null)
+            //    throw new Exception("User not found");
+
+            //if (updateUserDto.Password != null)
+            //{
+            //    var request = new RequestResetPasswordDto
+            //    {
+            //        Username = updateUserDto.Username,
+            //        NewPassword = updateUserDto.Password
+            //    };
+
+            //    bool result = await _resetPasswordRepository.ResetPassword(request);
+            //}
+
+            //if (updateUserDto.BankAccount != null)
+            //    _mapper.Map(updateUserDto, user);
+            //else
+            //{
+            //    if (user.BankAccountId != null)
+            //    {
+            //        var bankAccount = await _context.BankAccounts.FindAsync(user.BankAccountId);
+            //        if (bankAccount != null)
+            //            _context.BankAccounts.Remove(bankAccount);
+            //        user.BankAccountId = null;
+            //    }
+            //}
+
+            //_mapper.Map(updateUserDto, user);
+
+            //var newProfileImage = updateUserDto.ProfileImage;
+            //if (newProfileImage != null)
+            //{
+            //    var currentProfileImage = user.ProfileImage;
+            //    if (!string.IsNullOrEmpty(currentProfileImage))
+            //        _fileStorageService.DeleteFile(currentProfileImage);
+            //    user.ProfileImage = await _fileStorageService.StoreFileAsync(newProfileImage, "profile_images");
+            //}
+
+            //user.UpdatedAt = DateTime.UtcNow;
+
+            //await _context.SaveChangesAsync();
+        //}
+
+        public async Task<User> GetUserByIdAsync(Guid id)
         {
 
             var user = await _context.Users
@@ -188,7 +146,7 @@ namespace Horizon_HR.Repositories.Implementations
                 throw new Exception("User not found");
             }
 
-            return _mapper.Map<UserDto>(user);
+            return user;
 
         }
 
@@ -209,6 +167,11 @@ namespace Horizon_HR.Repositories.Implementations
 
             await _context.SaveChangesAsync();
 
+        }
+
+        public Task<User> UpdateUserAsync(Guid id, User user)
+        {
+            
         }
     }
 }

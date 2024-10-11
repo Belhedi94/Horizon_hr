@@ -1,5 +1,10 @@
-﻿using Horizon_HR.Dtos.Users;
+﻿using Horizon_HR.Dtos.ApiResponse;
+using Horizon_HR.Dtos.PagedResult;
+using Horizon_HR.Dtos.Positions;
+using Horizon_HR.Dtos.Users;
 using Horizon_HR.Repositories.Interfaces;
+using Horizon_HR.Services.Implementations;
+using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Horizon_HR.Controllers
@@ -9,10 +14,43 @@ namespace Horizon_HR.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserRepository userRepository, IUserService uSerService)
         {
             _userRepository = userRepository;
+            _userService = uSerService;
+        }
+
+        /// <summary>
+        /// Retrieves all users.
+        /// </summary>
+        /// <returns>A list of all users.</returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsersAsync(int pageNumber = 1, int pageSize = 10, string filter = null)
+        {
+            var users = await _userService.GetAllUsersAsync(pageNumber, pageSize, filter);
+            if (!users.Items.Any())
+                return Ok(new ApiResponse<PagedResult<UserDto>>
+                {
+                    Status = 404,
+                    Message = "No users found.",
+                    Data = new PagedResult<UserDto>
+                    {
+                        Items = Enumerable.Empty<UserDto>(),
+                        TotalItems = 0,
+                        PageNumber = pageNumber,
+                        PageSize = pageSize
+                    }
+                });
+
+            return Ok(new ApiResponse<PagedResult<UserDto>>
+            {
+                Status = 200,
+                Message = "Employees retrieved successfully.",
+                Data = users
+            });
+
         }
 
         /// <summary>
@@ -25,31 +63,15 @@ namespace Horizon_HR.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            try
+
+            var newUser = await _userService.CreateUserAsync(createUserDto);
+
+            return Ok(new ApiResponse<UserDto>
             {
-                await _userRepository.CreateUserAsync(createUserDto);
-                return Ok(new { message = "Employee created successfully." });
-        }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "An error occured when creating the employee.", details = ex.Message});
-            }
-
-        }
-
-        /// <summary>
-        /// Retrieves all users.
-        /// </summary>
-        /// <returns>A list of all users.</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetAllUsersAsync()
-        {
-            var users = await _userRepository.GetAllUsersAsync();
-            if (!users.Any())
-                return Ok(new { message = "No users found", data = Enumerable.Empty<UserDto>()} );
-
-            return Ok(new { message = "Users retrieved successfully", data = users });
-          
+                Status = 201,
+                Message = "Employee created successfully.",
+                Data = newUser
+            });
         }
 
         /// <summary>
@@ -64,9 +86,14 @@ namespace Horizon_HR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _userRepository.UpdateUserAsync(id, updateUserDto);
+            var updatedUser = await _userService.UpdateUserAsync(id, updateUserDto);
 
-            return Ok(new { message = "User updated successfully." });
+            return Ok(new ApiResponse<UserDto>
+            {
+                Status = 200,
+                Message = "Employee updated successfully.",
+                Data = updatedUser
+            });
         }
 
         /// <summary>
@@ -77,8 +104,14 @@ namespace Horizon_HR.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(Guid id)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            return Ok(new { message = "User retrieved successfully.", data = user });
+            var user = await _userService.GetUserByIdAsync(id);
+
+            return Ok(new ApiResponse<UserDto>
+            {
+                Status = 200,
+                Message = "Employee retrieved successfully.",
+                Data = user
+            });
         }
 
         /// <summary>

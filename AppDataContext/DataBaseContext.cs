@@ -31,14 +31,18 @@ namespace Horizon_HR.AppDataContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PublicHoliday>().HasData(
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 1, 1), Description = "New year's Day" },
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 3, 20), Description = "Independence Day" },
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 4, 9), Description = "Martyrs' Day" },
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 5, 1), Description = "Labour Day" },
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 7, 25), Description = "Republic Day" },
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 8, 13), Description = "Women's Day" },
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 10, 15), Description = "Evacuation Day" },
-                new PublicHoliday { Id = Guid.NewGuid(), Date = new DateTime(2024, 12, 18), Description = "Revolution Day" }
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 1, 1), Description = "New year's Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 3, 20), Description = "Independence Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 4, 9), Description = "Martyrs' Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 5, 1), Description = "Labour Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 7, 25), Description = "Republic Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 8, 13), Description = "Women's Day", Type = "Unpaid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 10, 15), Description = "Evacuation Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 12, 18), Description = "Revolution Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 01, 01), Description = "Eid al-Adha", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 01, 01), Description = "Eid al-Fitr", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 01, 01), Description = "Islamic New Year", Type = "Unpaid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 01, 01), Description = "Mawlid al-Nabi", Type = "Paid leave" }
                 );
 
             modelBuilder.Entity<User>()
@@ -78,16 +82,16 @@ namespace Horizon_HR.AppDataContext
                 .WithOne(e => e.User)
                 .HasForeignKey<EmploymentDetails>(e => e.UserId);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.BankAccount)
+                .WithOne(b => b.User)
+                .HasForeignKey<User>(u => u.BankAccountId);
+
             modelBuilder.Entity<Team>()
                 .HasOne(t => t.Department)
                 .WithMany(d => d.Teams)
                 .HasForeignKey(t => t.DepartmentId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.BankAccount)
-                .WithOne(b => b.User)
-                .HasForeignKey<User>(u => u.BankAccountId);
 
             modelBuilder.Entity<EmploymentDetails>()
                 .HasOne(e => e.Team)

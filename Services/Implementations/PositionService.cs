@@ -33,10 +33,6 @@ namespace Horizon_HR.Services.Implementations
 
             return pagedPositionsDto;
 
-
-            //return _mapper.Map<IEnumerable<PositionDto>>(positions);
-
-
         }
 
         public async Task<PositionDto> CreatePositionAsync(CreatePositionDto createPositionDto)

@@ -1,6 +1,7 @@
 ﻿using Horizon_HR.Dtos.Login;
 using Horizon_HR.Repositories.Implementations;
 using Horizon_HR.Repositories.Interfaces;
+using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
@@ -16,8 +17,9 @@ namespace Horizon_HR.Controllers
 
         private readonly HttpClient _httpClient;
         private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public LoginController(HttpClient httpClient, IUserRepository userRepository)
+        public LoginController(HttpClient httpClient, IUserRepository userRepository, IUserService userService)
         {
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri("http://20.199.23.144:8080");
@@ -63,7 +65,7 @@ namespace Horizon_HR.Controllers
                     var userIdAsString = decodedToken.Claims.First(t => t.Type == "userId").Value;
                     var role = decodedToken.Claims.First(t => t.Type == "roles").Value;
                     Guid userId = Guid.Parse(userIdAsString);
-                    var userData = await _userRepository.GetUserByIdAsync(userId);
+                    var userData = await _userService.GetUserByIdAsync(userId);
                     
                     if (userData == null)
                         throw new Exception("User not found");

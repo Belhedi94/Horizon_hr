@@ -27,44 +27,49 @@ namespace Horizon_HR.Services.Implementations
 
         public async Task<Result<LeaveRequest>> SubmitLeaveRequestAsync(CreateLeaveRequestDto createLeaveRequestDto)
         {
-            var userId = createLeaveRequestDto.UserId;
+            var type = createLeaveRequestDto.Type;
             var daysTaken = 0.0;
             var remainingBalance = 0.0;
-
+            var userId = createLeaveRequestDto.UserId;
             var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
-            var isHalfDay = createLeaveRequestDto.IsHalfDay;
-            var startDate = DateTime.Parse(createLeaveRequestDto.StartDate);
-            DateTime? endDate = null;
-            remainingBalance = createLeaveRequestDto.Type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
-
-            if (!string.IsNullOrEmpty(createLeaveRequestDto.EndDate))
-                endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
-            if (!isHalfDay)
+            if (type != "Exceptional")
             {
-                daysTaken = await CalculateLeaveDaysAsync(startDate, endDate);
-                if (daysTaken > remainingBalance)
-                    return Result<LeaveRequest>.Failure("Insufficient leave balance");
+                var isHalfDay = createLeaveRequestDto.IsHalfDay;
+                var startDate = DateTime.Parse(createLeaveRequestDto.StartDate);
+                DateTime? endDate = null;
+                remainingBalance = type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
+
+                if (!string.IsNullOrEmpty(createLeaveRequestDto.EndDate))
+                    endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
+                if (!isHalfDay)
+                {
+                    daysTaken = await CalculateLeaveDaysAsync(startDate, endDate);
+                    if (daysTaken > remainingBalance)
+                        return Result<LeaveRequest>.Failure("Insufficient leave balance");
+                }
+                else
+                {
+                    if (endDate != null)
+                        return Result<LeaveRequest>.Failure("Date range is not acceptable for half days type");
+
+                    var publicHoliday = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
+                    if (!publicHoliday.Any() && DayOfWeek.Saturday != startDate.DayOfWeek && DayOfWeek.Sunday != startDate.DayOfWeek)
+                        daysTaken = 0.5;
+
+                }
+
+                if (daysTaken == 0.0)
+                    return Result<LeaveRequest>.Failure("Please verify your selection, you can't choose a date which corresponds to public holiday/weekend");
             }
-            else
-            {
-                if (endDate != null)
-                    return Result<LeaveRequest>.Failure("Date range is not acceptable for half days type");
-
-                var publicHoliday = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
-                if (!publicHoliday.Any() && DayOfWeek.Saturday != startDate.DayOfWeek && DayOfWeek.Sunday != startDate.DayOfWeek)
-                    daysTaken = 0.5;
-
-            }
-
-            if (daysTaken == 0.0)
-                return Result<LeaveRequest>.Failure("Please verify your selection, you can't choose a date which corresponds to public holiday/weekend");
+            
 
             var leaveRequest = _mapper.Map<LeaveRequest>(createLeaveRequestDto);
             leaveRequest.UpdatedAt = DateTime.Now;
-            leaveRequest.Status = "Draft";
+            leaveRequest.Status = "Waiting for validation";
             await _leaveRequestRepository.SubmitLeaveRequestAsync(leaveRequest);
 
-            await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, createLeaveRequestDto.Type, remainingBalance, daysTaken);
+            if (type != "Exceptional")
+                await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, remainingBalance, daysTaken);
 
 
             return Result<LeaveRequest>.Success(leaveRequest);
