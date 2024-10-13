@@ -21,7 +21,7 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
         }
 
-        public async Task<PagedResult<Position>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter)
+        public async Task<PagedResult<Position>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter, bool usePagination)
         {
             var query = _context.Positions.AsQueryable();
 
@@ -30,10 +30,14 @@ namespace Horizon_HR.Repositories.Implementations
 
             var totalCount = await query.CountAsync();
 
-            var positions = await query
+            if (usePagination)
+            {
+                query = query
                 .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+                .Take(pageSize);
+            }
+
+            var positions = await query.ToListAsync();
 
             return new PagedResult<Position>
             {

@@ -4,6 +4,7 @@ using Horizon_HR.AppDataContext;
 using Microsoft.EntityFrameworkCore;
 using Horizon_HR.Dtos.LeaveRequest;
 using AutoMapper;
+using Horizon_HR.Dtos.PagedResult;
 
 namespace Horizon_HR.Repositories.Implementations
 {
@@ -18,6 +19,36 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
             _context = context;
             _mapper = mapper;
+        }
+
+        public async Task<PagedResult<LeaveRequest>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize, string filter, bool usePagination)
+        {
+            var query = _context.LeaveRequests.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(l => l.Type.Contains(filter) || l.Reason.Contains(filter) || l.Status.Contains(filter));
+
+            var totalCount = await query.CountAsync();
+
+            if (usePagination)
+            {
+                query = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
+            }
+
+            var leaveRequests = await query
+                .Include(l => l.User)
+                    .ThenInclude(u => u.LeaveBalance)
+                .ToListAsync();
+
+            return new PagedResult<LeaveRequest>
+            {
+                Items = leaveRequests,
+                TotalItems = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
 
         public async Task SubmitLeaveRequestAsync(LeaveRequest leaveRequest)
@@ -42,15 +73,6 @@ namespace Horizon_HR.Repositories.Implementations
                 .ToListAsync();
 
             return leaveRequest;
-        }
-
-        public async Task<IEnumerable<LeaveRequestDto>> GetAllLeaveRequestsAsync()
-        {
-            var leaveRequests = await _context.LeaveRequests
-                .Include(l => l.User)
-                .ToListAsync();
-
-            return _mapper.Map<IEnumerable<LeaveRequestDto>>(leaveRequests);
         }
 
         public async Task<LeaveRequest> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)

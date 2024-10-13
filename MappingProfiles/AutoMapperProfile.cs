@@ -18,7 +18,7 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<User, UserDto>()
                 .ForMember(dest => dest.EmploymentDetails, opt => opt.MapFrom(src => src.EmploymentDetails))
                 .ForMember(dest => dest.BankAccount, opt => opt.MapFrom(src => src.BankAccount));
-            //CreateMap<UserDto, User>();
+            CreateMap<UserDto, User>();
             CreateMap<CreateUserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
@@ -34,10 +34,12 @@ namespace Horizon_HR.MappingProfiles
 
 
             CreateMap<EmploymentDetails, EmploymentDetailsDto>();
+            CreateMap<EmploymentDetailsDto, EmploymentDetails>();
             CreateMap<EmploymentDetailsCreationDto, EmploymentDetails>();
             CreateMap<EmploymentDetailsUpdateDto, EmploymentDetails>();
 
             CreateMap<BankAccount, BankAccountDto>();
+            CreateMap<BankAccountDto, BankAccount>();
             CreateMap<CreateBankAccountDto, BankAccount>();
             CreateMap<UpdateBankAccountDto, BankAccount>();
 
@@ -65,7 +67,24 @@ namespace Horizon_HR.MappingProfiles
 
             CreateMap<UpdateLeaveRequestDto, LeaveRequest>()
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.Now))
-                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember, destMember) =>
+                {
+                    // Only map if the source value is not null
+                    // For booleans and other value types, you can further refine the condition as needed
+                    if (srcMember == null)
+                    {
+                        return false; // Do not map if the source member is null
+                    }
+
+                    // Specifically handle DateTime to prevent overwriting with default values
+                    if (srcMember is DateTime date && date == default(DateTime))
+                    {
+                        return false; // Do not map default DateTime values (0001-01-01)
+                    }
+
+                    return true; // Otherwise, allow the mapping
+                }));
+            //.ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<LeaveBalance, LeaveBalanceDto>();
             CreateMap<LeaveBalance, CreateLeaveBalanceDto>();

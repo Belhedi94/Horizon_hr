@@ -21,7 +21,7 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
         }
 
-        public async Task<PagedResult<Team>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter)
+        public async Task<PagedResult<Team>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter, bool usePagination)
         {
             var query = _context.Teams.AsQueryable();
 
@@ -30,11 +30,15 @@ namespace Horizon_HR.Repositories.Implementations
 
             var totalCount = await query.CountAsync();
 
-            var teams = await query
+            if (usePagination)
+            {
+                query = query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .Include(t => t.Department)
-                .ToListAsync();
+                .Include(t => t.Department);
+            }
+
+            var teams = await query.ToListAsync();
 
             return new PagedResult<Team>
             {

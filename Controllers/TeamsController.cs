@@ -21,6 +21,37 @@ namespace Horizon_HR.Controllers
         }
 
         /// <summary>
+        /// Retrieves all teams.
+        /// </summary>
+        /// <returns>A list of all teams.</returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllTeamsAsync(int pageNumber = 1, int pageSize = 10, string filter = null, bool usePagination = true)
+        {
+            var teams = await _teamService.GetAllTeamsAsync(pageNumber, pageSize, filter, usePagination);
+            if (!teams.Items.Any())
+                return Ok(new ApiResponse<PagedResult<TeamDto>>
+                {
+                    Status = 404,
+                    Message = "No teams found.",
+                    Data = new PagedResult<TeamDto>
+                    {
+                        Items = Enumerable.Empty<TeamDto>(),
+                        TotalItems = 0,
+                        PageNumber = pageNumber,
+                        PageSize = pageSize
+                    }
+                });
+
+            return Ok(new ApiResponse<PagedResult<TeamDto>>
+            {
+                Status = 200,
+                Message = "Teams retrieved successfully.",
+                Data = teams
+            });
+
+        }
+
+        /// <summary>
         /// Creates a new team.
         /// </summary>
         /// <param name="createTeamDto">The data transfer object containing team information.</param>
@@ -53,37 +84,6 @@ namespace Horizon_HR.Controllers
             await _teamRepository.UpdateTeamAsync(id, updateTeamDto);
 
             return Ok(new { message = "Team updated successfully." });
-        }
-
-        /// <summary>
-        /// Retrieves all teams.
-        /// </summary>
-        /// <returns>A list of all teams.</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetAllTeamsAsync(int pageNumber = 1, int pageSize = 10, string filter = null)
-        {
-            var teams = await _teamService.GetAllTeamsAsync(pageNumber, pageSize, filter);
-            if (!teams.Items.Any())
-                return Ok(new ApiResponse<PagedResult<TeamDto>>
-                {
-                    Status = 404,
-                    Message = "No teams found.",
-                    Data = new PagedResult<TeamDto>
-                    {
-                        Items = Enumerable.Empty<TeamDto>(),
-                        TotalItems = 0,
-                        PageNumber = pageNumber,
-                        PageSize = pageSize
-                    }
-                });
-
-            return Ok(new ApiResponse<PagedResult<TeamDto>>
-            {
-                Status = 200,
-                Message = "Teams retrieved successfully.",
-                Data = teams
-            });
-
         }
 
         /// <summary>

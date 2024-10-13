@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Horizon_HR.Dtos.LeaveRequest;
+using Horizon_HR.Dtos.PagedResult;
 using Horizon_HR.Models;
 using Horizon_HR.Repositories.Interfaces;
 using Horizon_HR.Services.Common;
@@ -65,7 +66,7 @@ namespace Horizon_HR.Services.Implementations
 
             var leaveRequest = _mapper.Map<LeaveRequest>(createLeaveRequestDto);
             leaveRequest.UpdatedAt = DateTime.Now;
-            leaveRequest.Status = "Waiting for validation";
+            leaveRequest.Status = "Pending";
             await _leaveRequestRepository.SubmitLeaveRequestAsync(leaveRequest);
 
             if (type != "Exceptional")
@@ -118,11 +119,19 @@ namespace Horizon_HR.Services.Implementations
 
         }
 
-        public async Task<Result<IEnumerable<LeaveRequestDto>>> GetAllLeaveRequestsAsync()
+        public async Task<PagedResult<LeaveRequestDto>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize, string filter, bool usePagintion)
         {
-            var leaveRequests = await _leaveRequestRepository.GetAllLeaveRequestsAsync();
+            var pagedLeaveRequests = await _leaveRequestRepository.GetAllLeaveRequestsAsync(pageNumber, pageSize, filter, usePagintion);
+            var pagedLeaveRequestsDto = new PagedResult<LeaveRequestDto>
+            {
+                Items = _mapper.Map<IEnumerable<LeaveRequestDto>>(pagedLeaveRequests.Items),
+                TotalItems = pagedLeaveRequests.TotalItems,
+                PageNumber = pagedLeaveRequests.PageNumber,
+                PageSize = pagedLeaveRequests.PageSize
+            };
 
-            return Result<IEnumerable<LeaveRequestDto>>.Success(leaveRequests);
+            return pagedLeaveRequestsDto;
+
         }
 
         public async Task<Result<LeaveRequestDto>> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
@@ -133,5 +142,7 @@ namespace Horizon_HR.Services.Implementations
             return Result<LeaveRequestDto>.Success(result);
 
         }
+
+        
     }
 }

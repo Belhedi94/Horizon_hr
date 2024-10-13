@@ -1,4 +1,7 @@
-﻿namespace Horizon_HR.Dtos.EmploymentDetails
+﻿using Horizon_HR.Dtos.Positions;
+using Horizon_HR.Dtos.Teams;
+
+namespace Horizon_HR.Dtos.EmploymentDetails
 {
     public class EmploymentDetailsDto
     {
@@ -8,7 +11,9 @@
         public string ProbationPeriod { get; set; }
         public decimal Salary { get; set; }
         public string EmploymentType { get; set; }
-        public Guid TeamId { get; set; }
-        public Guid PositionId { get; set; }
+        public TeamDto Team { get; set; }
+        public PositionDto Position { get; set; }
+        //public Guid TeamId { get; set; }
+        //public Guid PositionId { get; set; }
     }
 }

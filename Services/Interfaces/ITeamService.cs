@@ -5,6 +5,6 @@ namespace Horizon_HR.Services.Interfaces
 {
     public interface ITeamService
     {
-        Task<PagedResult<TeamDto>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter);
+        Task<PagedResult<TeamDto>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter, bool usePagination);
     }
 }

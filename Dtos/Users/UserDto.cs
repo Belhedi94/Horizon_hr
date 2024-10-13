@@ -1,5 +1,6 @@
 ﻿using Horizon_HR.Dtos.BankAccount;
 using Horizon_HR.Dtos.EmploymentDetails;
+using Horizon_HR.Dtos.LeaveBalance;
 
 namespace Horizon_HR.Dtos.Users
 
@@ -26,5 +27,6 @@ namespace Horizon_HR.Dtos.Users
         public DateTime Expiration { get; set; }
         public EmploymentDetailsDto EmploymentDetails { get; set; }
         public BankAccountDto BankAccount { get; set; }
+        public LeaveBalanceDto LeaveBalance { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Horizon_HR.Dtos.LeaveRequest
+﻿namespace Horizon_HR.Dtos.LeaveRequest
 {
     public class UpdateLeaveRequestDto
     {

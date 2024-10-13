@@ -55,7 +55,7 @@ namespace Horizon_HR.Services.Implementations
         public async Task<UserDto> CreateUserAsync(CreateUserDto createUserDto)
         {
             var user = _mapper.Map<User>(createUserDto);
-            var role = new String[] { "hrmanager_admin" };
+            var role = new String[] { "employee" };
             var payload = new
             {
                 userName = createUserDto.Username,
@@ -185,7 +185,7 @@ namespace Horizon_HR.Services.Implementations
 
         public async Task DeleteUserAsync(Guid id)
         {
-            var user = await GetUserByIdAsync(id);
+            var user = await _userRepository.GetUserByIdAsync(id);
             if (user == null)
             {
                 _logger.LogWarning($"User with ID {id} not found.");
@@ -196,9 +196,8 @@ namespace Horizon_HR.Services.Implementations
             if (!string.IsNullOrEmpty(profileImage))
                 _fileStorageService.DeleteFile(profileImage);
 
-            var userEntity = _mapper.Map<User>(user);
-
-            await _userRepository.DeleteUserAsync(userEntity);
+           
+            await _userRepository.DeleteUserAsync(user);
 
         }
     }

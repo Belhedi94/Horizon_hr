@@ -16,16 +16,15 @@ namespace Horizon_HR.Controllers
     {
 
         private readonly HttpClient _httpClient;
-        private readonly IUserRepository _userRepository;
         private readonly IUserService _userService;
 
-        public LoginController(HttpClient httpClient, IUserRepository userRepository, IUserService userService)
+        public LoginController(HttpClient httpClient, IUserService userService)
         {
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri("http://20.199.23.144:8080");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _userRepository = userRepository;
+            _userService = userService;
 
         }
         /// <summary>
@@ -76,7 +75,7 @@ namespace Horizon_HR.Controllers
 
                     return Ok(new
                     {
-                        message = "User logged in successfully.",
+                        message = "Employee logged in successfully.",
                         status = 200,
                         data = userData
                     });

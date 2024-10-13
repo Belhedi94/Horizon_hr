@@ -19,9 +19,9 @@ namespace Horizon_HR.Services.Implementations
             _logger = logger;
         }
 
-        public async Task<PagedResult<TeamDto>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter)
+        public async Task<PagedResult<TeamDto>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter, bool usePagination)
         {
-            var pagedTeams = await _teamRepository.GetAllTeamsAsync(pageNumber, pageSize, filter);
+            var pagedTeams = await _teamRepository.GetAllTeamsAsync(pageNumber, pageSize, filter, usePagination);
             var pagedTeamsDto = new PagedResult<TeamDto>
             {
                 Items = _mapper.Map<IEnumerable<TeamDto>>(pagedTeams.Items),

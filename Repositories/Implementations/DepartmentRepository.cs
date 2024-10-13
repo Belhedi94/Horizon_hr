@@ -37,11 +37,6 @@ namespace Horizon_HR.Repositories.Implementations
                 .Take(pageSize);
             }
 
-            //var departments = await query
-            //    .Skip((pageNumber - 1) * pageSize)
-            //    .Take(pageSize)
-            //    .ToListAsync();
-
             var departments = await query.ToListAsync();
 
             return new PagedResult<Department>

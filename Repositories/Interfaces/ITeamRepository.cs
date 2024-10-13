@@ -6,7 +6,7 @@ namespace Horizon_HR.Repositories.Interfaces
 {
     public interface ITeamRepository
     {
-        Task<PagedResult<Team>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter);
+        Task<PagedResult<Team>> GetAllTeamsAsync(int pageNumber, int pageSize, string filter, bool usePagination = true);
         Task CreateTeamAsync(CreateTeamDto createTeamDto);
         Task<TeamDto> GetTeamByIdAsync(Guid id);
         Task UpdateTeamAsync(Guid id, UpdateTeamDto updateTeamDto);

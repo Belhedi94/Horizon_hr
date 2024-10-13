@@ -43,6 +43,10 @@ namespace Horizon_HR.Repositories.Implementations
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Include(u => u.EmploymentDetails)
+                    .ThenInclude(ed => ed.Team)
+                        .ThenInclude(t => t.Department)
+                .Include(u => u.EmploymentDetails)
+                    .ThenInclude(ed => ed.Position)
                 .Include(u => u.BankAccount)
                 .ToListAsync();
 
@@ -68,6 +72,10 @@ namespace Horizon_HR.Repositories.Implementations
 
             var user = await _context.Users
                 .Include(u => u.EmploymentDetails)
+                    .ThenInclude(ed => ed.Position)
+                .Include(u => u.EmploymentDetails)
+                    .ThenInclude(ed => ed.Team)
+                        .ThenInclude(t => t.Department)
                 .Include(u => u.BankAccount)
                 .FirstOrDefaultAsync(u => u.Id == id);
 

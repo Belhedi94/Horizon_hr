@@ -6,7 +6,7 @@ namespace Horizon_HR.Repositories.Interfaces
 {
     public interface IPositionRepository
     {
-        Task<PagedResult<Position>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter);
+        Task<PagedResult<Position>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter, bool usePagintion = true);
         Task<Position> CreatePositionAsync(Position position);
         Task<Position> GetPositionByIdAsync(Guid id);
         Task<Position> UpdatePositionAsync(Guid id, UpdatePositionDto updatePositionDto);
