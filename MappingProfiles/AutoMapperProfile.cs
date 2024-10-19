@@ -8,6 +8,7 @@ using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Dtos.BankAccount;
 using Horizon_HR.Dtos.LeaveRequest;
 using Horizon_HR.Dtos.LeaveBalance;
+using Horizon_HR.Dtos.DocumentRequest;
 
 namespace Horizon_HR.MappingProfiles
 {
@@ -91,6 +92,13 @@ namespace Horizon_HR.MappingProfiles
             CreateMap<CreateLeaveBalanceDto, LeaveBalance>();
             CreateMap<UpdateLeaveBalanceDto, LeaveBalance>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<CreateDocumentRequestDto, DocumentRequest>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+
+            CreateMap<DocumentRequest, DocumentRequestDto>();
+            CreateMap<UpdateDocumentRequestDto, DocumentRequest>();
 
 
         }

@@ -44,6 +44,8 @@ builder.Services.AddScoped<ILeaveBalanceRepository, LeaveBalanceRepository>();
 builder.Services.AddScoped<ILeaveBalanceService, LeaveBalanceService>();
 builder.Services.AddScoped<IPublicHolidaysRepository, PublicHolidaysRepository>();
 builder.Services.AddScoped<IPublicHolidaysService, PublicHolidaysService>();
+builder.Services.AddScoped<IDocumentRequestRepository, DocumentRequestRepository>();
+builder.Services.AddScoped<IDocumentRequestService, DocumentRequestService>();
 
 builder.Services.AddCors(options =>
 {

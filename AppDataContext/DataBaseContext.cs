@@ -22,6 +22,7 @@ namespace Horizon_HR.AppDataContext
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<PublicHoliday> PublicHolidays { get; set; }
         public DbSet<LeaveBalance> LeaveBalances { get; set; }
+        public DbSet<DocumentRequest> DocumentRequests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -77,6 +78,10 @@ namespace Horizon_HR.AppDataContext
                 .ToTable("leave_balances")
                 .HasKey(l => l.Id);
 
+            modelBuilder.Entity<DocumentRequest>()
+                .ToTable("document_requests")
+                .HasKey(d => d.Id);
+
             modelBuilder.Entity<User>()
                 .HasOne(u => u.EmploymentDetails)
                 .WithOne(e => e.User)
@@ -86,6 +91,11 @@ namespace Horizon_HR.AppDataContext
                 .HasOne(u => u.BankAccount)
                 .WithOne(b => b.User)
                 .HasForeignKey<User>(u => u.BankAccountId);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.DocumentRequests)
+                .WithOne(d => d.User)
+                .HasForeignKey(d => d.UserId);
 
             modelBuilder.Entity<Team>()
                 .HasOne(t => t.Department)
