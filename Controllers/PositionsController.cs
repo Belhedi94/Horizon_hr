@@ -22,9 +22,10 @@ namespace Horizon_HR.Controllers
         /// </summary>
         /// <returns>A list of all positions.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllPositionsAsync(int pageNumber = 1, int pageSize = 10, string filter = null, bool usePagintion = true)
+        public async Task<IActionResult> GetAllPositionsAsync(int pageNumber = 1, int pageSize = 10, string filter = null,
+            bool usePagination = true)
         {
-            var positions = await _positionService.GetAllPositionsAsync(pageNumber, pageSize, filter, usePagintion);
+            var positions = await _positionService.GetAllPositionsAsync(pageNumber, pageSize, filter, usePagination);
             if (!positions.Items.Any())
                 return Ok(new ApiResponse<PagedResult<PositionDto>>
                 {

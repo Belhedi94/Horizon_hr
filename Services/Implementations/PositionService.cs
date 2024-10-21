@@ -20,9 +20,11 @@ namespace Horizon_HR.Services.Implementations
             _logger = logger;
         }
 
-        public async Task<PagedResult<PositionDto>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter, bool usePagintion)
+        public async Task<PagedResult<PositionDto>> GetAllPositionsAsync(int pageNumber, int pageSize,
+            string filter, bool usePagination)
         {
-            var pagedPositions = await _positionRepository.GetAllPositionsAsync(pageNumber, pageSize, filter, usePagintion);
+            var pagedPositions = await _positionRepository.GetAllPositionsAsync(pageNumber, pageSize, filter,
+                usePagination);
             var pagedPositionsDto = new PagedResult<PositionDto>
             {
                 Items = _mapper.Map<IEnumerable<PositionDto>>(pagedPositions.Items),

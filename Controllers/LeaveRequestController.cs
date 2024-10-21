@@ -1,7 +1,6 @@
 ﻿using Horizon_HR.Dtos.ApiResponse;
 using Horizon_HR.Dtos.LeaveRequest;
 using Horizon_HR.Dtos.PagedResult;
-using Horizon_HR.Dtos.Positions;
 using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,9 +22,11 @@ namespace Horizon_HR.Controllers
         /// </summary>
         /// <returns>A list of all leave requests.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllLeaveRequestsAsync(int pageNumber = 1, int pageSize = 10, string filter = null, bool usePagintion = true)
+        public async Task<IActionResult> GetAllLeaveRequestsAsync(int pageNumber = 1, int pageSize = 10,
+            string filter = null, bool usePagination = true, bool forDashboard = false)
         {
-            var leaveRequests = await _leaveRequestService.GetAllLeaveRequestsAsync(pageNumber, pageSize, filter, usePagintion);
+            var leaveRequests = await _leaveRequestService.GetAllLeaveRequestsAsync(pageNumber, pageSize,
+                filter, usePagination, forDashboard);
             if (!leaveRequests.Items.Any())
                 return Ok(new ApiResponse<PagedResult<LeaveRequestDto>>
                 {

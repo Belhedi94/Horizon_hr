@@ -53,6 +53,14 @@ namespace Horizon_HR.Services.Implementations
 
         public async Task<DocumentRequestDto> UpdateDocumentRequestAsync(Guid id, UpdateDocumentRequestDto updateDocumentRequestDto)
         {
+            var now = DateTime.UtcNow;
+            updateDocumentRequestDto.UpdatedAt = now;
+            var oldDocumentRequest = await GetDocumentRequestByIdAsync(id);
+            if (oldDocumentRequest != null)
+            {
+                if (oldDocumentRequest.Status != updateDocumentRequestDto.Status)
+                    updateDocumentRequestDto.ProcessedAt = now;
+            }
             var updatedDocumentRequest = await _documentRequestRepository.UpdateDocumentRequestAsync(id, updateDocumentRequestDto);
 
             return _mapper.Map<DocumentRequestDto>(updatedDocumentRequest);

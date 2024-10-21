@@ -9,6 +9,7 @@ using Horizon_HR.Dtos.BankAccount;
 using Horizon_HR.Dtos.LeaveRequest;
 using Horizon_HR.Dtos.LeaveBalance;
 using Horizon_HR.Dtos.DocumentRequest;
+using Horizon_HR.Dtos.JobOffer;
 
 namespace Horizon_HR.MappingProfiles
 {
@@ -85,7 +86,6 @@ namespace Horizon_HR.MappingProfiles
 
                     return true; // Otherwise, allow the mapping
                 }));
-            //.ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<LeaveBalance, LeaveBalanceDto>();
             CreateMap<LeaveBalance, CreateLeaveBalanceDto>();
@@ -99,6 +99,26 @@ namespace Horizon_HR.MappingProfiles
 
             CreateMap<DocumentRequest, DocumentRequestDto>();
             CreateMap<UpdateDocumentRequestDto, DocumentRequest>();
+            CreateMap<UpdateDocumentRequestDto, DocumentRequest>()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.Now))
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember, destMember) =>
+                {
+                    if (srcMember == null)
+                    {
+                        return false;
+                    }
+
+                    if (srcMember is DateTime date && date == default(DateTime))
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }));
+
+            CreateMap<JobOffer, JobOfferDto>();
+            CreateMap<CreateJobOfferDto, JobOffer>();
+            CreateMap<UpdateJobOfferDto, JobOffer>();
 
 
         }

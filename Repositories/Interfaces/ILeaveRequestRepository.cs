@@ -6,7 +6,8 @@ namespace Horizon_HR.Repositories.Interfaces
 {
     public interface ILeaveRequestRepository
     {
-        Task<PagedResult<LeaveRequest>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize, string filter, bool usePagintion = true);
+        Task<PagedResult<LeaveRequest>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize,
+            string filter, bool usePagination, bool forDashboard);
         Task SubmitLeaveRequestAsync(LeaveRequest leaveRequest);
         Task <IEnumerable<LeaveRequest>> GetLeaveRequestsByUserAsync(Guid userId);
         Task<LeaveRequest> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto);

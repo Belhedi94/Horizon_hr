@@ -21,26 +21,47 @@ namespace Horizon_HR.Repositories.Implementations
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<LeaveRequest>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize, string filter, bool usePagination)
+        public async Task<PagedResult<LeaveRequest>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize,
+            string filter, bool usePagination, bool forDashboard)
         {
-            var query = _context.LeaveRequests.AsQueryable();
+            IEnumerable<LeaveRequest> leaveRequests;
+            int totalCount = 0;
 
-            if (!string.IsNullOrEmpty(filter))
-                query = query.Where(l => l.Type.Contains(filter) || l.Reason.Contains(filter) || l.Status.Contains(filter));
-
-            var totalCount = await query.CountAsync();
-
-            if (usePagination)
+            if (forDashboard)
             {
-                query = query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize);
+                leaveRequests = await _context.LeaveRequests
+                    .OrderByDescending(l => l.CreatedAt)
+                    .Take(5)
+                    .ToListAsync();
+
+                totalCount = await _context.LeaveRequests.CountAsync();
+
+            }
+            else
+            {
+                var query = _context.LeaveRequests.AsQueryable();
+
+                if (!string.IsNullOrEmpty(filter))
+                    query = query.Where(l => l.Type.Contains(filter)
+                    || l.Reason.Contains(filter)
+                    || l.Status.Contains(filter));
+
+                totalCount = await query.CountAsync();
+
+                if (usePagination)
+                {
+                    query = query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize);
+                }
+
+                leaveRequests = await query
+                    .Include(l => l.User)
+                        .ThenInclude(u => u.LeaveBalance)
+                    .ToListAsync();
             }
 
-            var leaveRequests = await query
-                .Include(l => l.User)
-                    .ThenInclude(u => u.LeaveBalance)
-                .ToListAsync();
+            
 
             return new PagedResult<LeaveRequest>
             {

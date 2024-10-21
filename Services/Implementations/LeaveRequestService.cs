@@ -17,7 +17,8 @@ namespace Horizon_HR.Services.Implementations
         private readonly IMapper _mapper;
 
         public LeaveRequestService(ILeaveRequestRepository leaveRequestRepository,
-            ILogger<LeaveRequest> logger, IMapper mapper, ILeaveBalanceService leaveBalanceService, IPublicHolidaysService publicHolidaysService)
+            ILogger<LeaveRequest> logger, IMapper mapper, ILeaveBalanceService leaveBalanceService,
+            IPublicHolidaysService publicHolidaysService)
         {
             _leaveRequestRepository = leaveRequestRepository;
             _leaveBalanceService = leaveBalanceService;
@@ -119,9 +120,11 @@ namespace Horizon_HR.Services.Implementations
 
         }
 
-        public async Task<PagedResult<LeaveRequestDto>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize, string filter, bool usePagintion)
+        public async Task<PagedResult<LeaveRequestDto>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize,
+            string filter, bool usePagination, bool forDashboard)
         {
-            var pagedLeaveRequests = await _leaveRequestRepository.GetAllLeaveRequestsAsync(pageNumber, pageSize, filter, usePagintion);
+            var pagedLeaveRequests = await _leaveRequestRepository.GetAllLeaveRequestsAsync(pageNumber, pageSize,
+                filter, usePagination, forDashboard);
             var pagedLeaveRequestsDto = new PagedResult<LeaveRequestDto>
             {
                 Items = _mapper.Map<IEnumerable<LeaveRequestDto>>(pagedLeaveRequests.Items),

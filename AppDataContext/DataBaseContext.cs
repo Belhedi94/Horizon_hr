@@ -23,6 +23,7 @@ namespace Horizon_HR.AppDataContext
         public DbSet<PublicHoliday> PublicHolidays { get; set; }
         public DbSet<LeaveBalance> LeaveBalances { get; set; }
         public DbSet<DocumentRequest> DocumentRequests { get; set; }
+        public DbSet<JobOffer> JobOffers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -80,6 +81,10 @@ namespace Horizon_HR.AppDataContext
 
             modelBuilder.Entity<DocumentRequest>()
                 .ToTable("document_requests")
+                .HasKey(d => d.Id);
+
+            modelBuilder.Entity<JobOffer>()
+                .ToTable("job_offers")
                 .HasKey(d => d.Id);
 
             modelBuilder.Entity<User>()

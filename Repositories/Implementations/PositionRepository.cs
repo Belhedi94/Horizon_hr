@@ -21,7 +21,8 @@ namespace Horizon_HR.Repositories.Implementations
             _logger = logger;
         }
 
-        public async Task<PagedResult<Position>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter, bool usePagination)
+        public async Task<PagedResult<Position>> GetAllPositionsAsync(int pageNumber, int pageSize, string filter,
+            bool usePagination)
         {
             var query = _context.Positions.AsQueryable();
 

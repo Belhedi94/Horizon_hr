@@ -46,6 +46,8 @@ builder.Services.AddScoped<IPublicHolidaysRepository, PublicHolidaysRepository>(
 builder.Services.AddScoped<IPublicHolidaysService, PublicHolidaysService>();
 builder.Services.AddScoped<IDocumentRequestRepository, DocumentRequestRepository>();
 builder.Services.AddScoped<IDocumentRequestService, DocumentRequestService>();
+builder.Services.AddScoped<IJobOfferRepository, JobOfferRepository>();
+builder.Services.AddScoped<IJobOfferService, JobOfferService>();
 
 builder.Services.AddCors(options =>
 {
