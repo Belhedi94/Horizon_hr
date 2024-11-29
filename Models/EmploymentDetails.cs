@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Horizon_HR.Models
@@ -28,6 +29,7 @@ namespace Horizon_HR.Models
 
         [Column("salary")]
         [Required]
+        [Precision(18,2)]
         public decimal Salary { get; set; }
 
         [Column("employment_type")]
@@ -47,6 +49,12 @@ namespace Horizon_HR.Models
 
         [Column("position_id")]
         public Guid PositionId { get; set; }
+
+        [Column("created_at")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("updated_at")]
+        public DateTime UpdatedAt { get; set; }
 
         public Position Position { get; set; }
     }

@@ -22,7 +22,8 @@ namespace Horizon_HR.Controllers
         /// </summary>
         /// <returns>A list of all job offers.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllJobOffersAsync(int pageNumber = 1, int pageSize = 10, string filter = null, bool usePagination = true)
+        public async Task<IActionResult> GetAllJobOffersAsync(int pageNumber = 1, int pageSize = 10,
+            string filter = null, bool usePagination = true)
         {
             var jobOffers = await _jobOfferService.GetAllJobOffersAsync(pageNumber, pageSize, filter, usePagination);
             if (!jobOffers.Items.Any())

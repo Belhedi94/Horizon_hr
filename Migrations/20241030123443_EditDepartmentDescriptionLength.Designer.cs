@@ -4,6 +4,7 @@ using Horizon_HR.AppDataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Horizon_HR.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241030123443_EditDepartmentDescriptionLength")]
+    partial class EditDepartmentDescriptionLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,10 +75,6 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -86,10 +85,6 @@ namespace Horizon_HR.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
-
-                    b.Property<DateTime>("updatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -153,10 +148,6 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("contract_type");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
-
                     b.Property<string>("EmploymentType")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -182,17 +173,12 @@ namespace Horizon_HR.Migrations
                         .HasColumnName("probation_period");
 
                     b.Property<decimal>("Salary")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("salary");
 
                     b.Property<Guid>("TeamId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("team_id");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier")
@@ -264,10 +250,6 @@ namespace Horizon_HR.Migrations
                     b.Property<double>("Annual")
                         .HasColumnType("float")
                         .HasColumnName("annual");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
 
                     b.Property<double>("Sick")
                         .HasColumnType("float")
@@ -349,13 +331,10 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
-
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("description");
 
                     b.Property<string>("Title")
@@ -363,10 +342,6 @@ namespace Horizon_HR.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("title");
-
-                    b.Property<DateTime>("updatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -380,30 +355,24 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("description");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("end_date");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("start_date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("type");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -412,8 +381,8 @@ namespace Horizon_HR.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b857b1f7-07d0-4265-b3c4-0c8776c07f6d"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9075),
+                            Id = new Guid("c1bcf4c3-9725-4d71-8f83-f33c8ca7396e"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(589),
                             Description = "New year's Day",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -421,8 +390,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("09c579d4-319a-46cb-9a24-8bb69edd5971"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9113),
+                            Id = new Guid("5fe3ce75-267e-4f35-98a7-68e96bb14828"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(632),
                             Description = "Independence Day",
                             StartDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -430,8 +399,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("08ab7404-503d-43de-8b1b-8e6400873b8d"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9115),
+                            Id = new Guid("4dc1e4ed-2796-4af8-bd5c-a329370c2a5b"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(635),
                             Description = "Martyrs' Day",
                             StartDate = new DateTime(2024, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -439,8 +408,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2583015d-55bb-4f89-ad04-117def55420d"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9117),
+                            Id = new Guid("bf0b0bcf-5444-40f0-9df7-f666d0155192"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(649),
                             Description = "Labour Day",
                             StartDate = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -448,8 +417,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c983e4be-31e6-401c-ba66-f73036e0ebb6"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9136),
+                            Id = new Guid("b86864c6-a2a7-492a-bc65-96936ab32cfd"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(651),
                             Description = "Republic Day",
                             StartDate = new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -457,8 +426,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("47bdd7b3-3a0b-4ed3-b831-9357739954c9"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9138),
+                            Id = new Guid("3ecdd573-3f5c-4a52-bf59-689d6e79f4be"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(653),
                             Description = "Women's Day",
                             StartDate = new DateTime(2024, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Unpaid leave",
@@ -466,8 +435,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("750bb312-0599-43f8-916b-b8aa085465a5"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9140),
+                            Id = new Guid("29280d1a-edd3-422f-b63b-2d0d50698bc4"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(655),
                             Description = "Evacuation Day",
                             StartDate = new DateTime(2024, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -475,8 +444,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("96c6a234-891d-44d1-b022-b4f47a12e54a"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9141),
+                            Id = new Guid("e4ae2e7a-54fa-440b-80fc-99f9826535e3"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(657),
                             Description = "Revolution Day",
                             StartDate = new DateTime(2024, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -484,8 +453,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c556fc1f-a5f7-4214-b117-b498d8a879ba"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9143),
+                            Id = new Guid("1c48b057-1b05-4949-bf6a-d901b901e1b2"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(659),
                             Description = "Eid al-Adha",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -493,8 +462,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6cac860b-9681-4505-8f7c-ff77dbae00f0"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9145),
+                            Id = new Guid("1ee1e323-8504-499c-88e6-54104d4cf5d6"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(661),
                             Description = "Eid al-Fitr",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -502,8 +471,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1394c721-bf44-4b1c-b343-3a1ea246e2bc"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9147),
+                            Id = new Guid("4dde751c-86d5-45b0-8089-55bddf4c7037"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(663),
                             Description = "Islamic New Year",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Unpaid leave",
@@ -511,8 +480,8 @@ namespace Horizon_HR.Migrations
                         },
                         new
                         {
-                            Id = new Guid("59c1614a-5fe3-4f84-a89b-130ec7b1b0c5"),
-                            CreatedAt = new DateTime(2024, 11, 29, 8, 28, 56, 478, DateTimeKind.Local).AddTicks(9148),
+                            Id = new Guid("32d8b176-e630-4ac0-ba4a-5cb610f88b6b"),
+                            CreatedAt = new DateTime(2024, 10, 30, 13, 34, 42, 676, DateTimeKind.Local).AddTicks(667),
                             Description = "Mawlid al-Nabi",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
@@ -527,17 +496,14 @@ namespace Horizon_HR.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
-
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("department_id");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
@@ -545,10 +511,6 @@ namespace Horizon_HR.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 

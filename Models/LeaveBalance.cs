@@ -14,11 +14,14 @@ namespace Horizon_HR.Models
         [Column("sick")]
         public double Sick { get; set; }
 
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; }
-
         [Column("user_id")]
         public Guid UserId { get; set; }
+
+        [Column("created_at")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("updated_at")]
+        public DateTime UpdatedAt { get; set; }
 
         public User User { get; set; }
     }

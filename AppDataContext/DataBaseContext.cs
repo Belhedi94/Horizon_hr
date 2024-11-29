@@ -105,20 +105,17 @@ namespace Horizon_HR.AppDataContext
             modelBuilder.Entity<Team>()
                 .HasOne(t => t.Department)
                 .WithMany(d => d.Teams)
-                .HasForeignKey(t => t.DepartmentId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(t => t.DepartmentId);
 
             modelBuilder.Entity<EmploymentDetails>()
                 .HasOne(e => e.Team)
                 .WithMany(t => t.EmploymentsDetails)
-                .HasForeignKey(e => e.TeamId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(e => e.TeamId);
 
             modelBuilder.Entity<EmploymentDetails>()
                 .HasOne(e => e.Position)
                 .WithMany(p => p.EmploymentsDetails)
-                .HasForeignKey(e => e.PositionId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(e => e.PositionId);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.LeaveRequests)

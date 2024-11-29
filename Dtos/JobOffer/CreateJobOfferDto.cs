@@ -16,8 +16,5 @@ namespace Horizon_HR.Dtos.JobOffer
         [Required]
         public string EmploymentType { get; set; }
 
-        [Required]
-        public string Status { get; set; }
-
     }
 }

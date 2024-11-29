@@ -16,8 +16,13 @@ namespace Horizon_HR.Models
 
         [Column("description")]
         [Required]
-        [StringLength(50)]
         public string Description { get; set; }
+
+        [Column("created_at")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("updated_at")]
+        public DateTime updatedAt { get; set; }
 
         public ICollection<Team> Teams { get; set; }
     }

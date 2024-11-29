@@ -37,6 +37,7 @@ namespace Horizon_HR.Services.Implementations
         public async Task<JobOfferDto> CreateJobOfferAsync(CreateJobOfferDto createJobOfferDto)
         {
             var jobOffer = _mapper.Map<JobOffer>(createJobOfferDto);
+            jobOffer.Status = "Draft";
             var newJobOffer = await _jobOfferRepository.CreateJobOfferAsync(jobOffer);
 
             return _mapper.Map<JobOfferDto>(newJobOffer);

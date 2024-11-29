@@ -79,7 +79,7 @@ namespace Horizon_HR.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; }
 
         public EmploymentDetails EmploymentDetails { get; set; }
 
