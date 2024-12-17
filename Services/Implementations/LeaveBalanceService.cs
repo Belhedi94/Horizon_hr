@@ -24,6 +24,11 @@ namespace Horizon_HR.Services.Implementations
             return leaveBalance;
         }
 
+        public async Task<LeaveBalance> GetLeaveBalanceByIdAsync(Guid id)
+        {
+            return await _leaveBalanceRepository.GetLeaveBalanceByIdAsync(id);
+        }
+
         public async Task<LeaveBalanceDto> GetLeaveBalanceDtoByUserAsync(Guid userId)
         {
             var leaveBalance = await _leaveBalanceRepository.GetLeaveBalanceByUserAsync(userId);
@@ -39,13 +44,14 @@ namespace Horizon_HR.Services.Implementations
 
         }
 
-        public async Task UpdateLeaveBalanceAsync(Guid id, string type, double actualBalance, double takenDays)
+        public async Task UpdateLeaveBalanceAsync(Guid id, string type, double takenDays)
         {
-            UpdateLeaveBalanceDto updateLeaveBalanceDto = new();
+            var leaveBalance = await _leaveBalanceRepository.GetLeaveBalanceByIdAsync(id);
+            var updateLeaveBalanceDto = _mapper.Map<UpdateLeaveBalanceDto>(leaveBalance);
             if (type == "Annual")
-                updateLeaveBalanceDto.Annual = actualBalance - takenDays;
+                updateLeaveBalanceDto.Annual -= takenDays;
             else
-                updateLeaveBalanceDto.Sick = actualBalance - takenDays;
+                updateLeaveBalanceDto.Sick -= takenDays;
 
             updateLeaveBalanceDto.UpdatedAt = DateTime.Now;
 

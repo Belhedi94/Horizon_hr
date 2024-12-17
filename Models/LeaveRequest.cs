@@ -24,6 +24,9 @@ namespace Horizon_HR.Models
         [Column("end_date")]
         public DateTime? EndDate { get; set; }
 
+        [Column("days_taken")]
+        public float DaysTaken { get; set; }
+
         [Required]
         [Column("is_half_day")]
         public bool IsHalfDay { get; set; }

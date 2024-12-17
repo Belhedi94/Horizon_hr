@@ -45,6 +45,11 @@ namespace Horizon_HR.Repositories.Implementations
             return leaveBalance;
         }
 
+        public async Task<LeaveBalance> GetLeaveBalanceByIdAsync(Guid id)
+        {
+            return await _context.LeaveBalances.FindAsync(id);
+        }
+
 
         public async Task UpdateLeaveBalanceAsync(Guid id, UpdateLeaveBalanceDto updatedLeaveBalanceDto)
         {

@@ -7,6 +7,7 @@ namespace Horizon_HR.Repositories.Interfaces
     {
         Task<LeaveBalance> CreateUserLeaveBalanceAsync(LeaveBalance leaveBalance);
         Task<LeaveBalance> GetLeaveBalanceByUserAsync(Guid userId);
+        Task<LeaveBalance> GetLeaveBalanceByIdAsync(Guid id);
         Task UpdateLeaveBalanceAsync(Guid id, UpdateLeaveBalanceDto updateLeaveBalanceDto);
     }
 }

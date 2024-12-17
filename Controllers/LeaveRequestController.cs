@@ -64,7 +64,18 @@ namespace Horizon_HR.Controllers
                 return BadRequest(result.ErrorMessage);
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetLeaveRequestByIdAsync(Guid id)
+        {
+            var result = await _leaveRequestService.GetLeaveRequestByIdAsync(id);
+
+            if (result.IsSuccess)
+                return Ok(result.Data);
+            else
+                return NotFound(result.ErrorMessage);
+        }
+
+        [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetLeaveRequestsByUserAsync(Guid userId)
         {
             var result = await _leaveRequestService.GetLeaveRequestsByUserAsync(userId);

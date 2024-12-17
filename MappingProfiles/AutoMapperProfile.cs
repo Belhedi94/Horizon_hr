@@ -89,6 +89,7 @@ namespace Horizon_HR.MappingProfiles
 
             CreateMap<LeaveBalance, LeaveBalanceDto>();
             CreateMap<LeaveBalance, CreateLeaveBalanceDto>();
+            CreateMap<LeaveBalance, UpdateLeaveBalanceDto>();
             CreateMap<CreateLeaveBalanceDto, LeaveBalance>();
             CreateMap<UpdateLeaveBalanceDto, LeaveBalance>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));

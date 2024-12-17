@@ -30,7 +30,7 @@ namespace Horizon_HR.Services.Implementations
         public async Task<Result<LeaveRequest>> SubmitLeaveRequestAsync(CreateLeaveRequestDto createLeaveRequestDto)
         {
             var type = createLeaveRequestDto.Type;
-            var daysTaken = 0.0;
+            float daysTaken = 0;
             var remainingBalance = 0.0;
             var userId = createLeaveRequestDto.UserId;
             var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
@@ -55,23 +55,24 @@ namespace Horizon_HR.Services.Implementations
                         return Result<LeaveRequest>.Failure("Date range is not acceptable for half days type");
 
                     var publicHoliday = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
-                    if (!publicHoliday.Any() && DayOfWeek.Saturday != startDate.DayOfWeek && DayOfWeek.Sunday != startDate.DayOfWeek)
-                        daysTaken = 0.5;
+                    if (!publicHoliday.Any() && DayOfWeek.Saturday != startDate.DayOfWeek &&
+                        DayOfWeek.Sunday != startDate.DayOfWeek)
+                        daysTaken = 0.5f;
 
                 }
 
                 if (daysTaken == 0.0)
                     return Result<LeaveRequest>.Failure("Please verify your selection, you can't choose a date which corresponds to public holiday/weekend");
             }
-            
 
+            createLeaveRequestDto.DaysTaken = daysTaken;
             var leaveRequest = _mapper.Map<LeaveRequest>(createLeaveRequestDto);
             leaveRequest.UpdatedAt = DateTime.Now;
             leaveRequest.Status = "Pending";
             await _leaveRequestRepository.SubmitLeaveRequestAsync(leaveRequest);
 
-            if (type != "Exceptional")
-                await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, remainingBalance, daysTaken);
+            //if (type != "Exceptional")
+            //    await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, remainingBalance, daysTaken);
 
 
             return Result<LeaveRequest>.Success(leaveRequest);
@@ -116,8 +117,18 @@ namespace Horizon_HR.Services.Implementations
             }
             else
                 return Result<IEnumerable<LeaveRequestDto>>.Failure("No leave requests saved for this user");
+        }
 
-
+        public async Task<Result<LeaveRequestDto>> GetLeaveRequestByIdAsync(Guid id)
+        {
+            var leaveRequest = await _leaveRequestRepository.GetLeaveRequestByIdAsync(id);
+            if (leaveRequest != null)
+            {
+                var result = _mapper.Map<LeaveRequestDto>(leaveRequest);
+                return Result<LeaveRequestDto>.Success(result);
+            }
+            else
+                return Result<LeaveRequestDto>.Failure("No leave request saved for this id");
         }
 
         public async Task<PagedResult<LeaveRequestDto>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize,
@@ -139,7 +150,16 @@ namespace Horizon_HR.Services.Implementations
 
         public async Task<Result<LeaveRequestDto>> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
         {
-            var leaveRequest = await _leaveRequestRepository.UpdateLeaveRequestAsync(id, updateLeaveRequestDto);
+            var leaveRequest = await _leaveRequestRepository.GetLeaveRequestByIdAsync(id);
+            var type = leaveRequest.Type;
+            var userId = leaveRequest.UserId;
+            var daysTaken = leaveRequest.DaysTaken;
+            var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
+
+            if (type != "Exceptional")
+                await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, daysTaken);
+
+            leaveRequest = await _leaveRequestRepository.UpdateLeaveRequestAsync(id, updateLeaveRequestDto);
             var result = _mapper.Map<LeaveRequestDto>(leaveRequest);
             
             return Result<LeaveRequestDto>.Success(result);

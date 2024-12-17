@@ -19,6 +19,9 @@ namespace Horizon_HR.Dtos.LeaveRequest
         public bool IsHalfDay { get; set; }
 
         [Required]
+        public float DaysTaken { get; set; }
+
+        [Required]
         public string Reason { get; set; }
     }
 }

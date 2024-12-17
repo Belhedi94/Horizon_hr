@@ -10,6 +10,7 @@ namespace Horizon_HR.Repositories.Interfaces
             string filter, bool usePagination, bool forDashboard);
         Task SubmitLeaveRequestAsync(LeaveRequest leaveRequest);
         Task <IEnumerable<LeaveRequest>> GetLeaveRequestsByUserAsync(Guid userId);
+        Task <LeaveRequest> GetLeaveRequestByIdAsync(Guid id);
         Task<LeaveRequest> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto);
     }
 }

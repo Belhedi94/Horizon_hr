@@ -10,6 +10,8 @@
 
         public bool IsHalfDay { get; set; }
 
+        public float DaysTaken { get; set; }
+
         public string? Reason { get; set; }
 
         public string Status { get; set; }
