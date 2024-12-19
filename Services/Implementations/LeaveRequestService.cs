@@ -27,11 +27,11 @@ namespace Horizon_HR.Services.Implementations
             _logger = logger;
         }
 
-        public async Task<Result<LeaveRequest>> SubmitLeaveRequestAsync(CreateLeaveRequestDto createLeaveRequestDto)
+        public async Task<(Result<LeaveRequest>? ValidationResult, float daysTaken)> ValidateLeaveRequest(
+            CreateLeaveRequestDto createLeaveRequestDto)
         {
+            var daysTaken = 0f;
             var type = createLeaveRequestDto.Type;
-            float daysTaken = 0;
-            var remainingBalance = 0.0;
             var userId = createLeaveRequestDto.UserId;
             var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
             if (type != "Exceptional")
@@ -39,7 +39,7 @@ namespace Horizon_HR.Services.Implementations
                 var isHalfDay = createLeaveRequestDto.IsHalfDay;
                 var startDate = DateTime.Parse(createLeaveRequestDto.StartDate);
                 DateTime? endDate = null;
-                remainingBalance = type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
+                var remainingBalance = type == "Annual" ? leaveBalance.Annual : leaveBalance.Sick;
 
                 if (!string.IsNullOrEmpty(createLeaveRequestDto.EndDate))
                     endDate = DateTime.Parse(createLeaveRequestDto.EndDate);
@@ -47,12 +47,20 @@ namespace Horizon_HR.Services.Implementations
                 {
                     daysTaken = await CalculateLeaveDaysAsync(startDate, endDate);
                     if (daysTaken > remainingBalance)
-                        return Result<LeaveRequest>.Failure("Insufficient leave balance");
+                        return (new Result<LeaveRequest>()
+                        {
+                            IsSuccess = false,
+                            ErrorMessage = "Insufficient leave balance."
+                        }, daysTaken);
                 }
                 else
                 {
                     if (endDate != null)
-                        return Result<LeaveRequest>.Failure("Date range is not acceptable for half days type");
+                        return (new Result<LeaveRequest>()
+                        {
+                            IsSuccess = false,
+                            ErrorMessage = "Date range is not acceptable for half days type"
+                        }, daysTaken);
 
                     var publicHoliday = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
                     if (!publicHoliday.Any() && DayOfWeek.Saturday != startDate.DayOfWeek &&
@@ -62,18 +70,34 @@ namespace Horizon_HR.Services.Implementations
                 }
 
                 if (daysTaken == 0.0)
-                    return Result<LeaveRequest>.Failure("Please verify your selection, you can't choose a date which corresponds to public holiday/weekend");
+                    return (new Result<LeaveRequest>()
+                    {
+                        IsSuccess = false,
+                        ErrorMessage = "Please verify your selection, you can't choose a date which corresponds to public holiday/weekend."
+                    }, daysTaken);
             }
 
+            return (null, daysTaken);
+        }
+
+        public async Task<Result<LeaveRequest>> SubmitLeaveRequestAsync(CreateLeaveRequestDto createLeaveRequestDto)
+        {
+            var (validationResult, daysTaken) = await ValidateLeaveRequest(createLeaveRequestDto);
+            
+            if (validationResult != null)
+                return validationResult;
+
             createLeaveRequestDto.DaysTaken = daysTaken;
+            var status = "Pending";
+            var type = createLeaveRequestDto.Type;
+            var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(createLeaveRequestDto.UserId);
+            if (type != "Exceptional")
+                await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, daysTaken, status);
+
             var leaveRequest = _mapper.Map<LeaveRequest>(createLeaveRequestDto);
             leaveRequest.UpdatedAt = DateTime.Now;
-            leaveRequest.Status = "Pending";
+            leaveRequest.Status = status;
             await _leaveRequestRepository.SubmitLeaveRequestAsync(leaveRequest);
-
-            //if (type != "Exceptional")
-            //    await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, remainingBalance, daysTaken);
-
 
             return Result<LeaveRequest>.Success(leaveRequest);
 
@@ -152,12 +176,15 @@ namespace Horizon_HR.Services.Implementations
         {
             var leaveRequest = await _leaveRequestRepository.GetLeaveRequestByIdAsync(id);
             var type = leaveRequest.Type;
-            var userId = leaveRequest.UserId;
-            var daysTaken = leaveRequest.DaysTaken;
-            var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(userId);
+            var status = updateLeaveRequestDto.Status;
+            if (type != "Exceptional" && status == "Rejected")
+            {
+                var daysTaken = leaveRequest.DaysTaken;
+                var leaveBalance = await _leaveBalanceService.GetLeaveBalanceByUserAsync(leaveRequest.UserId);
 
-            if (type != "Exceptional")
-                await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, daysTaken);
+                await _leaveBalanceService.UpdateLeaveBalanceAsync(leaveBalance.Id, type, daysTaken, status);
+
+            }
 
             leaveRequest = await _leaveRequestRepository.UpdateLeaveRequestAsync(id, updateLeaveRequestDto);
             var result = _mapper.Map<LeaveRequestDto>(leaveRequest);

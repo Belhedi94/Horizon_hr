@@ -69,6 +69,7 @@ namespace Horizon_HR.MappingProfiles
 
             CreateMap<UpdateLeaveRequestDto, LeaveRequest>()
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dest => dest.DaysTaken, opt => opt.Ignore())
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember, destMember) =>
                 {
                     // Only map if the source value is not null

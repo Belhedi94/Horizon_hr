@@ -4,6 +4,7 @@ using Horizon_HR.AppDataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Horizon_HR.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241217141356_AddDefaultTimeToUpdatedAtColumnPublicHoliday")]
+    partial class AddDefaultTimeToUpdatedAtColumnPublicHoliday
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -293,62 +296,51 @@ namespace Horizon_HR.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnOrder(1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
-                        .HasColumnName("created_at")
-                        .HasColumnOrder(10);
+                        .HasColumnName("created_at");
 
                     b.Property<float>("DaysTaken")
                         .HasColumnType("real")
-                        .HasColumnName("days_taken")
-                        .HasColumnOrder(7);
+                        .HasColumnName("days_taken");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("end_date")
-                        .HasColumnOrder(6);
+                        .HasColumnName("end_date");
 
                     b.Property<bool>("IsHalfDay")
                         .HasColumnType("bit")
-                        .HasColumnName("is_half_day")
-                        .HasColumnOrder(4);
+                        .HasColumnName("is_half_day");
 
                     b.Property<string>("Reason")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("reason")
-                        .HasColumnOrder(8);
+                        .HasColumnName("reason");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("start_date")
-                        .HasColumnOrder(5);
+                        .HasColumnName("start_date");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("status")
-                        .HasColumnOrder(9);
+                        .HasColumnName("status");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("type")
-                        .HasColumnOrder(3);
+                        .HasColumnName("type");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
-                        .HasColumnName("updated_at")
-                        .HasColumnOrder(11);
+                        .HasColumnName("updated_at");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("user_id")
-                        .HasColumnOrder(2);
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -427,111 +419,111 @@ namespace Horizon_HR.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e701b9e7-4662-4b58-ac8c-867e99520214"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3310),
+                            Id = new Guid("c3ee442e-4aa9-4d35-a63a-ad5619ec5487"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1767),
                             Description = "New year's Day",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3326)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1779)
                         },
                         new
                         {
-                            Id = new Guid("612002d0-85ee-4b55-84b5-e7e357fd4273"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3352),
+                            Id = new Guid("785dc4b4-bd2d-4973-afd7-200ed006f9e2"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1805),
                             Description = "Independence Day",
                             StartDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3352)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1806)
                         },
                         new
                         {
-                            Id = new Guid("2318c4f1-9b09-4c9f-8166-82dca339b115"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3383),
+                            Id = new Guid("8acf749e-320f-42ef-9c59-cafbd73a9bb6"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1808),
                             Description = "Martyrs' Day",
                             StartDate = new DateTime(2024, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3383)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1808)
                         },
                         new
                         {
-                            Id = new Guid("fe33b16d-3335-42aa-ac2f-202c0370f4a7"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3385),
+                            Id = new Guid("a7d4cac5-c940-4c88-b9bb-abf51721005b"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1809),
                             Description = "Labour Day",
                             StartDate = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3386)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1810)
                         },
                         new
                         {
-                            Id = new Guid("54c2eaeb-ef16-402a-911d-be06fb72a01a"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3387),
+                            Id = new Guid("2e871f4e-e0b8-4687-a9be-deb0d6e5dd55"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1811),
                             Description = "Republic Day",
                             StartDate = new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3388)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1812)
                         },
                         new
                         {
-                            Id = new Guid("7dafc947-fddd-4cb9-b2d0-77f94815a0bd"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3389),
+                            Id = new Guid("3ef373a9-2f4e-4b88-a080-2f8551b50297"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1813),
                             Description = "Women's Day",
                             StartDate = new DateTime(2024, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Unpaid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3389)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1814)
                         },
                         new
                         {
-                            Id = new Guid("7fd03df6-c50f-44a4-b33b-18c0c80d965f"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3391),
+                            Id = new Guid("64baedd5-3fae-4af0-81e1-299fad551bbb"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1815),
                             Description = "Evacuation Day",
                             StartDate = new DateTime(2024, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3391)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1815)
                         },
                         new
                         {
-                            Id = new Guid("6c585894-b27b-4e99-b375-55a937137520"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3393),
+                            Id = new Guid("51117737-b7f8-4fcc-a35b-482c066c947e"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1828),
                             Description = "Revolution Day",
                             StartDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3393)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1829)
                         },
                         new
                         {
-                            Id = new Guid("9d5409fd-7a18-4f50-98d2-6838ed40abe3"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3408),
+                            Id = new Guid("3ab71d0a-b50b-4e1a-8ac9-7dbc02390532"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1830),
                             Description = "Eid al-Adha",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3408)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1831)
                         },
                         new
                         {
-                            Id = new Guid("fcb5755d-daf9-4f33-bab1-bd2ddc2e696d"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3410),
+                            Id = new Guid("facbe0fc-a7f8-4ad9-8500-c3c6189bc554"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1832),
                             Description = "Eid al-Fitr",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3410)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1833)
                         },
                         new
                         {
-                            Id = new Guid("020a72f6-a9b4-4888-bcc4-4a14fa8e7be6"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3412),
+                            Id = new Guid("6fb63e2e-789b-4174-9835-b3e7b0d936e4"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1834),
                             Description = "Islamic New Year",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Unpaid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3412)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1834)
                         },
                         new
                         {
-                            Id = new Guid("2c815c2d-bf1e-4bb1-a362-6dd9b1bb4fce"),
-                            CreatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3414),
+                            Id = new Guid("57a08e69-8895-4c8e-a019-112811ca2f10"),
+                            CreatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1836),
                             Description = "Mawlid al-Nabi",
                             StartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = "Paid leave",
-                            UpdatedAt = new DateTime(2024, 12, 18, 10, 26, 21, 266, DateTimeKind.Local).AddTicks(3414)
+                            UpdatedAt = new DateTime(2024, 12, 17, 15, 13, 55, 710, DateTimeKind.Local).AddTicks(1836)
                         });
                 });
 

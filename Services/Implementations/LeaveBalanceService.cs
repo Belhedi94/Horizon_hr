@@ -44,14 +44,26 @@ namespace Horizon_HR.Services.Implementations
 
         }
 
-        public async Task UpdateLeaveBalanceAsync(Guid id, string type, double takenDays)
+        public async Task UpdateLeaveBalanceAsync(Guid id, string type, double takenDays, string status)
         {
             var leaveBalance = await _leaveBalanceRepository.GetLeaveBalanceByIdAsync(id);
             var updateLeaveBalanceDto = _mapper.Map<UpdateLeaveBalanceDto>(leaveBalance);
+            string[] statuses = { "Approved", "Pending" };
             if (type == "Annual")
-                updateLeaveBalanceDto.Annual -= takenDays;
+            {
+                if (statuses.Contains(status))
+                    updateLeaveBalanceDto.Annual -= takenDays;
+                else
+                    updateLeaveBalanceDto.Annual += takenDays;
+            }
+
             else
-                updateLeaveBalanceDto.Sick -= takenDays;
+            {
+                if (statuses.Contains(status))
+                    updateLeaveBalanceDto.Sick -= takenDays;
+                else
+                    updateLeaveBalanceDto.Sick += takenDays;
+            }
 
             updateLeaveBalanceDto.UpdatedAt = DateTime.Now;
 

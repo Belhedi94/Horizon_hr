@@ -104,7 +104,7 @@ namespace Horizon_HR.Repositories.Implementations
 
         public async Task<LeaveRequest> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
         {
-            var leaveRequest = await _context.LeaveRequests.FirstOrDefaultAsync(l => l.Id == id);
+            var leaveRequest = await _context.LeaveRequests.FindAsync(id);
             _mapper.Map(updateLeaveRequestDto, leaveRequest);
 
             await _context.SaveChangesAsync();

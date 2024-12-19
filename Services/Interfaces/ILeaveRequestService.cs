@@ -9,6 +9,7 @@ namespace Horizon_HR.Services.Interfaces
     {
         Task<PagedResult<LeaveRequestDto>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize,
             string filter, bool usePagination, bool forDashboard);
+        Task<(Result<LeaveRequest>? ValidationResult, float daysTaken)> ValidateLeaveRequest(CreateLeaveRequestDto createLeaveRequestDto);
         Task<Result<LeaveRequest>> SubmitLeaveRequestAsync(CreateLeaveRequestDto createLeaveRequestDto);
         Task<int> CalculateLeaveDaysAsync(DateTime startDate, DateTime? endDate);
         Task<Result<IEnumerable<LeaveRequestDto>>> GetLeaveRequestsByUserAsync(Guid userId);

@@ -53,7 +53,7 @@ namespace Horizon_HR.Repositories.Implementations
 
         public async Task UpdateLeaveBalanceAsync(Guid id, UpdateLeaveBalanceDto updatedLeaveBalanceDto)
         {
-            var leaveBalance = await _context.LeaveBalances.FirstOrDefaultAsync(l => l.Id == id);
+            var leaveBalance = await _context.LeaveBalances.FindAsync(id);
 
             if (!updatedLeaveBalanceDto.Annual.HasValue)
                 updatedLeaveBalanceDto.Annual = leaveBalance.Annual;

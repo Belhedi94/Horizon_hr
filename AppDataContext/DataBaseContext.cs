@@ -40,7 +40,7 @@ namespace Horizon_HR.AppDataContext
                 new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 7, 25), Description = "Republic Day", Type = "Paid leave" },
                 new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 8, 13), Description = "Women's Day", Type = "Unpaid leave" },
                 new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 10, 15), Description = "Evacuation Day", Type = "Paid leave" },
-                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 12, 18), Description = "Revolution Day", Type = "Paid leave" },
+                new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 12, 17), Description = "Revolution Day", Type = "Paid leave" },
                 new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 01, 01), Description = "Eid al-Adha", Type = "Paid leave" },
                 new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 01, 01), Description = "Eid al-Fitr", Type = "Paid leave" },
                 new PublicHoliday { Id = Guid.NewGuid(), StartDate = new DateTime(2024, 01, 01), Description = "Islamic New Year", Type = "Unpaid leave" },

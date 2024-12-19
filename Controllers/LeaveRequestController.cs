@@ -1,6 +1,7 @@
 ﻿using Horizon_HR.Dtos.ApiResponse;
 using Horizon_HR.Dtos.LeaveRequest;
 using Horizon_HR.Dtos.PagedResult;
+using Horizon_HR.Models;
 using Horizon_HR.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,6 +51,11 @@ namespace Horizon_HR.Controllers
 
         }
 
+        /// <summary>
+        /// Submit a new leave request.
+        /// </summary>
+        /// <param name="createLeaveRequestDto">The data transfer object containing leave request data.</param>
+        /// <returns>A status message indicating the result of the operation.</returns>
         [HttpPost]
         public async Task<IActionResult> SubmitLeaveRequest(CreateLeaveRequestDto createLeaveRequestDto)
         {
@@ -59,9 +65,19 @@ namespace Horizon_HR.Controllers
             var result = await _leaveRequestService.SubmitLeaveRequestAsync(createLeaveRequestDto);
 
             if (result.IsSuccess)
-                return Created();
+                return Ok(new ApiResponse<LeaveRequest>
+                {
+                    Status = 201,
+                    Message = "Leave request submitted successfully.",
+                    Data = result.Data
+                });
             else
-                return BadRequest(result.ErrorMessage);
+                return BadRequest(new ApiResponse<LeaveRequest>
+                {
+                    Status = 400,
+                    Message = result.ErrorMessage,
+                    Data = result.Data
+                });
         }
 
         [HttpGet("{id}")]
