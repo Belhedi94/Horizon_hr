@@ -9,11 +9,11 @@ namespace Horizon_HR.Controllers
 {
     [ApiController]
     [Route("api/requests/leaves/")]
-    public class LeaveRequestController : ControllerBase
+    public class LeaveRequestsController : ControllerBase
     {
         private readonly ILeaveRequestService _leaveRequestService;
 
-        public LeaveRequestController(ILeaveRequestService leaveRequestService)
+        public LeaveRequestsController(ILeaveRequestService leaveRequestService)
         {
             _leaveRequestService = leaveRequestService;
         }
@@ -55,7 +55,11 @@ namespace Horizon_HR.Controllers
         /// Submit a new leave request.
         /// </summary>
         /// <param name="createLeaveRequestDto">The data transfer object containing leave request data.</param>
-        /// <returns>A status message indicating the result of the operation.</returns>
+        /// <returns>
+        /// An API response object with the following possible outcomes:
+        /// - **201 Created**: The leave request was successfully submitted. The response includes the submitted leave request details.
+        /// - **400 Bad Request**: The request failed due to validation errors or insufficient leave balance. The response includes the error message.
+        /// </returns>
         [HttpPost]
         public async Task<IActionResult> SubmitLeaveRequest(CreateLeaveRequestDto createLeaveRequestDto)
         {
@@ -75,33 +79,78 @@ namespace Horizon_HR.Controllers
                 return BadRequest(new ApiResponse<LeaveRequest>
                 {
                     Status = 400,
-                    Message = result.ErrorMessage,
+                    Message = result.Message,
                     Data = result.Data
                 });
         }
 
+        /// <summary>
+        /// Get leave request by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>
+        /// An API response object with the following possible outcomes:
+        /// - **200 Created**: The leave request was successfully retrieved. The response includes the requested leave request details.
+        /// - **404 Not found**: The request failed due to non-existence of the leave request.
+        /// </returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLeaveRequestByIdAsync(Guid id)
         {
             var result = await _leaveRequestService.GetLeaveRequestByIdAsync(id);
 
             if (result.IsSuccess)
-                return Ok(result.Data);
+                return Ok(new ApiResponse<LeaveRequestDto>()
+                {
+                    Status = 200,
+                    Message = result.Message,
+                    Data = result.Data
+                });
             else
-                return NotFound(result.ErrorMessage);
+                return NotFound(new ApiResponse<LeaveRequestDto>()
+                {
+                    Status = 404,
+                    Message = result.Message
+                });
         }
 
+        /// <summary>
+        /// Get leave request by user id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>
+        /// An API response object with the following possible outcomes:
+        /// - **200 Created**: The leave request was successfully retrieved. The response includes the requested leave request details.
+        /// - **404 Not found**: The request failed due to non-existence of the leave request.
+        /// </returns>
         [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetLeaveRequestsByUserAsync(Guid userId)
         {
             var result = await _leaveRequestService.GetLeaveRequestsByUserAsync(userId);
 
             if (result.IsSuccess)
-                return Ok(result.Data);
+                return Ok(new ApiResponse<IEnumerable<LeaveRequestDto>>()
+                {
+                    Status = 200,
+                    Message = result.Message,
+                    Data = result.Data
+                });
             else
-                return NotFound(result.ErrorMessage);
+                return NotFound(new ApiResponse<LeaveRequestDto>()
+                {
+                    Status = 404,
+                    Message = result.Message
+                });
         }
 
+        /// <summary>
+        /// Update leave request
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updateLeaveRequestDto"></param>
+        /// <returns>
+        /// - **200 Created**: The leave request was successfully updated. The response includes the updated leave request details.
+        /// - **404 Not found**: The request failed due to non-existence of the leave request. 
+        /// </returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateLeaveRequestsAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
         {
@@ -111,9 +160,18 @@ namespace Horizon_HR.Controllers
             var result = await _leaveRequestService.UpdateLeaveRequestAsync(id, updateLeaveRequestDto);
 
             if (result.IsSuccess)
-                return Ok(result.Data);
+                return Ok(new ApiResponse<LeaveRequestDto>()
+                {
+                    Status = 200,
+                    Message = result.Message,
+                    Data = result.Data
+                });
             else
-                return NotFound(result.ErrorMessage);
+                return NotFound(new ApiResponse<LeaveRequestDto>()
+                {
+                    Status = 404,
+                    Message = result.Message
+                });
         }
     }
 }

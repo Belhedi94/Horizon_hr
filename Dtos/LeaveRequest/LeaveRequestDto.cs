@@ -26,6 +26,8 @@ namespace Horizon_HR.Dtos.LeaveRequest
 
         public DateTime CreatedAt { get; set; }
 
+        public DateTime UpdatedAt { get; set; }
+
         public UserDto User { get; set; }
     }
 }

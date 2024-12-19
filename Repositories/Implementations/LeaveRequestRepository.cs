@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Horizon_HR.Dtos.LeaveRequest;
 using AutoMapper;
 using Horizon_HR.Dtos.PagedResult;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Horizon_HR.Repositories.Implementations
 {
@@ -95,16 +94,16 @@ namespace Horizon_HR.Repositories.Implementations
 
         public async Task<IEnumerable<LeaveRequest>> GetLeaveRequestsByUserAsync(Guid userId)
         {
-            var leaveRequest = await _context.LeaveRequests
+            return await _context.LeaveRequests
                 .Where(l => l.UserId == userId)
                 .ToListAsync();
-
-            return leaveRequest;
         }
 
         public async Task<LeaveRequest> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
         {
             var leaveRequest = await _context.LeaveRequests.FindAsync(id);
+            if (leaveRequest == null)
+                return null;
             _mapper.Map(updateLeaveRequestDto, leaveRequest);
 
             await _context.SaveChangesAsync();

@@ -50,7 +50,7 @@ namespace Horizon_HR.Services.Implementations
                         return (new Result<LeaveRequest>()
                         {
                             IsSuccess = false,
-                            ErrorMessage = "Insufficient leave balance."
+                            Message = "Insufficient leave balance."
                         }, daysTaken);
                 }
                 else
@@ -59,7 +59,7 @@ namespace Horizon_HR.Services.Implementations
                         return (new Result<LeaveRequest>()
                         {
                             IsSuccess = false,
-                            ErrorMessage = "Date range is not acceptable for half days type"
+                            Message = "Date range is not acceptable for half days type"
                         }, daysTaken);
 
                     var publicHoliday = await _publicHolidaysService.GetPublicHolidaysBetweenGivenDaysAsync(startDate, null);
@@ -73,7 +73,7 @@ namespace Horizon_HR.Services.Implementations
                     return (new Result<LeaveRequest>()
                     {
                         IsSuccess = false,
-                        ErrorMessage = "Please verify your selection, you can't choose a date which corresponds to public holiday/weekend."
+                        Message = "Please verify your selection, you can't choose a date which corresponds to public holiday/weekend."
                     }, daysTaken);
             }
 
@@ -99,7 +99,12 @@ namespace Horizon_HR.Services.Implementations
             leaveRequest.Status = status;
             await _leaveRequestRepository.SubmitLeaveRequestAsync(leaveRequest);
 
-            return Result<LeaveRequest>.Success(leaveRequest);
+            return new Result<LeaveRequest>()
+            {
+                IsSuccess = true,
+                Message = "Leave request submitted successfully.",
+                Data = leaveRequest
+            };
 
         }
 
@@ -137,10 +142,20 @@ namespace Horizon_HR.Services.Implementations
             if (leaveRequests != null && leaveRequests.Any())
             {
                 var result = _mapper.Map<IEnumerable<LeaveRequestDto>>(leaveRequests);
-                return Result<IEnumerable<LeaveRequestDto>>.Success(result);
+
+                return new Result<IEnumerable<LeaveRequestDto>>()
+                {
+                    IsSuccess = true,
+                    Message = $"Leave requests for the user id : {userId} retrieved successfully.",
+                    Data = result
+                };
             }
             else
-                return Result<IEnumerable<LeaveRequestDto>>.Failure("No leave requests saved for this user");
+                return new Result<IEnumerable<LeaveRequestDto>>()
+                {
+                    IsSuccess = false,
+                    Message = $"No leave requests for the user id : {userId} are saved in our records."
+                };
         }
 
         public async Task<Result<LeaveRequestDto>> GetLeaveRequestByIdAsync(Guid id)
@@ -149,10 +164,19 @@ namespace Horizon_HR.Services.Implementations
             if (leaveRequest != null)
             {
                 var result = _mapper.Map<LeaveRequestDto>(leaveRequest);
-                return Result<LeaveRequestDto>.Success(result);
+                return new Result<LeaveRequestDto>()
+                {
+                    IsSuccess = true,
+                    Message = $"Leave request under id : {id} retrived successfully",
+                    Data = result
+                };
             }
             else
-                return Result<LeaveRequestDto>.Failure("No leave request saved for this id");
+                return new Result<LeaveRequestDto>()
+                {
+                    IsSuccess = false,
+                    Message = $"No leave request under the id {id}"
+                };
         }
 
         public async Task<PagedResult<LeaveRequestDto>> GetAllLeaveRequestsAsync(int pageNumber, int pageSize,
@@ -175,6 +199,13 @@ namespace Horizon_HR.Services.Implementations
         public async Task<Result<LeaveRequestDto>> UpdateLeaveRequestAsync(Guid id, UpdateLeaveRequestDto updateLeaveRequestDto)
         {
             var leaveRequest = await _leaveRequestRepository.GetLeaveRequestByIdAsync(id);
+            if (leaveRequest == null)
+                return new Result<LeaveRequestDto>()
+                {
+                    IsSuccess = false,
+                    Message = $"No leave request was found with the id : {id}"
+                };
+
             var type = leaveRequest.Type;
             var status = updateLeaveRequestDto.Status;
             if (type != "Exceptional" && status == "Rejected")
@@ -188,8 +219,13 @@ namespace Horizon_HR.Services.Implementations
 
             leaveRequest = await _leaveRequestRepository.UpdateLeaveRequestAsync(id, updateLeaveRequestDto);
             var result = _mapper.Map<LeaveRequestDto>(leaveRequest);
-            
-            return Result<LeaveRequestDto>.Success(result);
+
+            return new Result<LeaveRequestDto>()
+            {
+                IsSuccess = true,
+                Message = $"Leave request under the id : {id} is updated successfully.",
+                Data = result
+            };
 
         }
 
